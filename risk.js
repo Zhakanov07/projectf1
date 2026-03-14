@@ -127,13 +127,11 @@ document.addEventListener('DOMContentLoaded', () => {
             map[key].push(r);
         });
 
-        // Corner cell
+        // Row 1: empty corner + 3 impact headers
         const corner = document.createElement('div');
         corner.className = 'matrix-corner';
-        corner.innerHTML = '<span class="axis-label-y">Probability</span><span class="axis-label-x">Impact &rarr;</span>';
         matrixGrid.appendChild(corner);
 
-        // Header row (impact labels)
         levels.forEach(l => {
             const h = document.createElement('div');
             h.className = 'matrix-header';
@@ -141,9 +139,8 @@ document.addEventListener('DOMContentLoaded', () => {
             matrixGrid.appendChild(h);
         });
 
-        // Data rows (probability from high to low)
+        // Rows 2-4: probability label + 3 cells (high to low)
         [...levels].reverse().forEach(prob => {
-            // Row label
             const rl = document.createElement('div');
             rl.className = 'matrix-row-label';
             rl.textContent = prob;

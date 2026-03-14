@@ -181,32 +181,9 @@
     margin: 0 auto;
 }
 
-/* Corner cell — axis labels */
+/* Corner cell */
 .matrix-corner {
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-end;
-    padding: 8px 10px 6px 8px;
-    position: relative;
-}
-.matrix-corner .axis-label-x {
-    font-size: 0.7rem;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    white-space: nowrap;
-}
-.matrix-corner .axis-label-y {
-    position: absolute;
-    left: 6px;
-    top: 50%;
-    transform: translateY(-50%) rotate(-90deg);
-    font-size: 0.7rem;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    white-space: nowrap;
-    transform-origin: center center;
+    display: block;
 }
 
 /* Header cells (impact labels at top) */
@@ -218,7 +195,6 @@
     color: var(--text-heading);
     text-transform: uppercase;
     letter-spacing: 0.04em;
-    border-bottom: 2px solid rgba(255,255,255,0.08);
 }
 
 /* Row label (probability on the left) */
@@ -232,7 +208,6 @@
     justify-content: flex-end;
     text-transform: uppercase;
     letter-spacing: 0.04em;
-    border-right: 2px solid rgba(255,255,255,0.08);
     min-height: 100px;
 }
 
