@@ -108,9 +108,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /* ---------- RENDER RISK MATRIX ---------- */
-    const matrixGrid = document.getElementById('riskMatrix');
-    if (matrixGrid) {
+    const matrixTable = document.getElementById('riskMatrix');
+    if (matrixTable) {
         const levels = ['Low', 'Medium', 'High'];
+        const probRows = ['High', 'Medium', 'Low'];  // top to bottom
         const zoneClass = (p, i) => {
             const s = levelMap[p] * levelMap[i];
             if (s >= 6) return 'zone-critical';
@@ -119,7 +120,6 @@ document.addEventListener('DOMContentLoaded', () => {
             return 'zone-low';
         };
 
-        // Build map: "prob-impact" -> [risks]
         const map = {};
         risks.forEach(r => {
             const key = r.probability + '-' + r.impact;
@@ -127,28 +127,34 @@ document.addEventListener('DOMContentLoaded', () => {
             map[key].push(r);
         });
 
-        // Row 1: empty corner + 3 impact headers
-        const corner = document.createElement('div');
-        corner.className = 'matrix-corner';
-        matrixGrid.appendChild(corner);
+        // Colgroup for fixed label column
+        matrixTable.innerHTML = '<colgroup><col class="col-label"><col class="col-label"><col class="col-cell"><col class="col-cell"><col class="col-cell"></colgroup>';
 
-        levels.forEach(l => {
-            const h = document.createElement('div');
-            h.className = 'matrix-header';
-            h.textContent = l;
-            matrixGrid.appendChild(h);
-        });
+        // Header row: corner(probability) + empty + Low / Medium / High
+        const thead = matrixTable.createTHead();
+        const hr = thead.insertRow();
+        hr.innerHTML = '<td></td><td></td>' + levels.map(l => '<th class="matrix-col-header">' + l + '</th>').join('');
 
-        // Rows 2-4: probability label + 3 cells (high to low)
-        [...levels].reverse().forEach(prob => {
-            const rl = document.createElement('div');
-            rl.className = 'matrix-row-label';
-            rl.textContent = prob;
-            matrixGrid.appendChild(rl);
-
+        // Body rows
+        const tbody = matrixTable.createTBody();
+        probRows.forEach((prob, idx) => {
+            const tr = tbody.insertRow();
+            // First column: vertical "PROBABILITY" label spanning all 3 rows (only on first row)
+            if (idx === 0) {
+                const tdAxis = tr.insertCell();
+                tdAxis.className = 'matrix-corner-cell';
+                tdAxis.rowSpan = 3;
+                tdAxis.innerHTML = '<span class="axis-y">Probability</span>';
+            }
+            // Row header: HIGH / MEDIUM / LOW
+            const thRow = document.createElement('th');
+            thRow.className = 'matrix-row-header';
+            thRow.textContent = prob;
+            tr.appendChild(thRow);
+            // 3 data cells
             levels.forEach(impact => {
-                const cell = document.createElement('div');
-                cell.className = 'matrix-cell ' + zoneClass(prob, impact);
+                const td = tr.insertCell();
+                td.className = 'matrix-cell ' + zoneClass(prob, impact);
                 const key = prob + '-' + impact;
                 if (map[key]) {
                     map[key].forEach(r => {
@@ -156,12 +162,16 @@ document.addEventListener('DOMContentLoaded', () => {
                         chip.className = 'matrix-risk-chip';
                         chip.textContent = r.id;
                         chip.title = r.description;
-                        cell.appendChild(chip);
+                        td.appendChild(chip);
                     });
                 }
-                matrixGrid.appendChild(cell);
             });
         });
+
+        // Footer row: impact label
+        const tfoot = matrixTable.createTFoot();
+        const fr = tfoot.insertRow();
+        fr.innerHTML = '<td></td><td></td><td colspan="3" class="matrix-impact-label">Impact</td>';
     }
 
     /* ---------- RENDER OVERVIEW STATS ---------- */
