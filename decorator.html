@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decorator Pattern &mdash; Grand Prix Motors</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="decorator.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>if(sessionStorage.getItem('pt-navigating'))document.documentElement.classList.add('pt-arriving');</script>
+</head>
+<body>
+    <div class="page-transition" id="pageTransition"><div class="pt-bg"></div><div class="pt-fg"></div><div class="pt-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M4 4v16" stroke="#fff" stroke-width="2" stroke-linecap="round"/><path d="M4 4c3 0 4 2 8 2s5-2 8-2v10c-3 0-4 2-8 2s-5-2-8-2" fill="url(#ptG)" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/><defs><linearGradient id="ptG" x1="4" y1="4" x2="20" y2="14"><stop offset="0%" stop-color="#6366f1"/><stop offset="100%" stop-color="#3b82f6"/></linearGradient></defs></svg></div></div>
+    <nav class="topnav" id="topnav">
+        <div class="topnav-inner">
+            <a href="index.html" class="topnav-logo">
+                <img src="logo-opt.webp" alt="F1 Motors" class="logo-img" width="48" height="48">
+            </a>
+            <div class="topnav-search">
+                <div class="search-box">
+                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    <input type="text" id="searchInput" class="search-input" placeholder="Find a car, team or year..." autocomplete="off">
+                    <div class="search-results" id="searchResults"></div>
+                </div>
+            </div>
+            <div class="topnav-links" id="topnavLinks">
+                <a href="index.html" class="topnav-link">Home</a>
+                <a href="products.html" class="topnav-link">Catalog</a>
+                <a href="charter.html" class="topnav-link">About</a>
+                <a href="patterns.html" class="topnav-link active">Patterns</a>
+                <a href="planning.html" class="topnav-link">Planning</a>
+            </div>
+            <button class="topnav-toggle" id="topnavToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+        </div>
+    </nav>
+
+    <div class="scroll-progress" id="scrollProgress"></div>
+    <button class="back-to-top" id="backToTop" aria-label="Back to top"></button>
+
+    <div class="page-hero">
+        <h1> Decorator Pattern</h1>
+        <p>Structural Design Pattern &mdash; F1 Car Upgrade Builder</p>
+    </div>
+
+    <main>
+        <!-- Section 1: Pattern Explanation -->
+        <section class="section" id="pattern-explanation">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">01</span>
+                    <h2>What is the Decorator Pattern?</h2>
+                    <p class="section-desc">A structural design pattern that lets you dynamically add new behaviours to objects by wrapping them in special decorator objects, without altering the original class.</p>
+                </div>
+
+                <div class="dec-overview">
+                    <!-- F1 Analogy FIRST -->
+                    <div class="pattern-card-dec">
+                        <h3> F1 Upgrade Analogy</h3>
+                        <p>In our demo, a <strong>base F1 car</strong> is the Component. Each upgrade is a Decorator that wraps the car and modifies its specs:</p>
+                        <ul>
+                            <li> <strong>DRS System</strong> &mdash; +15 km/h top speed</li>
+                            <li> <strong>Hybrid Boost</strong> &mdash; +50 HP, +12 kg</li>
+                            <li> <strong>Lightweight Chassis</strong> &mdash; &minus;30 kg</li>
+                            <li> <strong>Aero Package</strong> &mdash; +8 km/h downforce</li>
+                            <li> <strong>Slick Tyres</strong> &mdash; +5 km/h grip</li>
+                            <li> <strong>KERS Recovery</strong> &mdash; +30 HP, +8 kg</li>
+                        </ul>
+                    </div>
+
+                    <!-- Key Concepts SECOND -->
+                    <div class="pattern-card-dec">
+                        <h3> Key Concepts</h3>
+                        <ul>
+                            <li><code>Component</code> &mdash; defines the interface for objects that can have responsibilities added dynamically</li>
+                            <li><code>ConcreteComponent</code> &mdash; the original object being decorated (e.g. base F1 car)</li>
+                            <li><code>Decorator</code> &mdash; abstract wrapper that holds a reference to a Component and delegates calls</li>
+                            <li><code>ConcreteDecorator</code> &mdash; adds specific behaviour (e.g. DRS, Hybrid Boost, Aero Package)</li>
+                            <li>Decorators are <strong>stackable</strong> &mdash; multiple can wrap the same object</li>
+                        </ul>
+                    </div>
+
+                    <!-- UML Diagram -->
+                    <div class="pattern-card-dec">
+                        <h3> UML Structure</h3>
+                        <div class="uml-box-dec">
+┌──────────────────────────┐
+│    &laquo;Component&raquo;           │
+│       BaseCar             │
+├──────────────────────────┤
+│ + getDescription()        │
+│ + getTopSpeed()           │
+│ + getHorsepower()         │
+│ + getWeight()             │
+│ + getPrice()              │
+└─────────┬────────────────┘
+          │ extends
+  ┌───────┴───────────┐
+  │                   │
+  ▼                   ▼
+┌────────────┐  ┌────────────────────┐
+│ FerrariSF23│  │   CarDecorator     │
+│ RedBullRB19│  │ - _car: BaseCar    │
+│ McLarenMCL │  ├────────────────────┤
+│ MercedesW11│  │ delegates to _car  │
+└────────────┘  └────────┬───────────┘
+                         │ extends
+           ┌─────────────┼──────────────┐
+           │             │              │
+      ┌────▼────┐  ┌────▼─────┐  ┌────▼──────┐
+      │DRSUpgrd │  │HybridBst │  │AeroPackage│
+      │+15 km/h │  │+50 HP    │  │+8 km/h    │
+      └─────────┘  └──────────┘  └───────────┘</div>
+                    </div>
+
+                    <!-- Code Snippet -->
+                    <div class="pattern-card-dec">
+                        <h3> Core Implementation</h3>
+                        <div class="code-preview-box"><pre><span class="kw">class</span> <span class="fn">BaseCar</span> {
+  <span class="fn">getTopSpeed</span>()   { <span class="kw">return</span> <span class="num">0</span>; }
+  <span class="fn">getHorsepower</span>() { <span class="kw">return</span> <span class="num">0</span>; }
+}
+
+<span class="kw">class</span> <span class="fn">FerrariSF23</span> <span class="kw">extends</span> <span class="fn">BaseCar</span> {
+  <span class="fn">getTopSpeed</span>()   { <span class="kw">return</span> <span class="num">340</span>; }
+  <span class="fn">getHorsepower</span>() { <span class="kw">return</span> <span class="num">1000</span>; }
+}
+
+<span class="cm">// Base Decorator wraps a BaseCar</span>
+<span class="kw">class</span> <span class="fn">CarDecorator</span> <span class="kw">extends</span> <span class="fn">BaseCar</span> {
+  <span class="fn">constructor</span>(car) { <span class="kw">this</span>._car = car; }
+  <span class="fn">getTopSpeed</span>()   { <span class="kw">return this</span>._car.<span class="fn">getTopSpeed</span>(); }
+}
+
+<span class="cm">// Concrete Decorator</span>
+<span class="kw">class</span> <span class="fn">DRSUpgrade</span> <span class="kw">extends</span> <span class="fn">CarDecorator</span> {
+  <span class="fn">getTopSpeed</span>() {
+    <span class="kw">return this</span>._car.<span class="fn">getTopSpeed</span>() + <span class="num">15</span>;
+  }
+}
+
+<span class="cm">// Usage: stack decorators</span>
+<span class="kw">let</span> car = <span class="kw">new</span> <span class="fn">FerrariSF23</span>();
+car = <span class="kw">new</span> <span class="fn">DRSUpgrade</span>(car);
+car.<span class="fn">getTopSpeed</span>(); <span class="cm">// → 355</span></pre></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Interactive Demo -->
+        <section class="section section-alt" id="interactive-demo">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">02</span>
+                    <h2>Interactive Car Upgrade Builder</h2>
+                    <p class="section-desc">Choose a base car, then apply decorator upgrades to dynamically modify its specs. Watch the wrapping chain build in real time!</p>
+                </div>
+
+                <!-- Car Selector -->
+                <h4 style="color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:1px;font-size:.8rem;margin-bottom:4px;"> Select Base Car (Component)</h4>
+                <div class="car-select-grid" id="carSelect">
+                    <button class="car-select-btn active" data-car="ferrari" style="--car-color:#e10600;">
+                        <span class="car-emoji"></span>
+                        <strong>Ferrari SF-23</strong>
+                        <span class="car-label">340 km/h &bull; 1000 HP</span>
+                    </button>
+                    <button class="car-select-btn" data-car="redbull" style="--car-color:#1e3a8a;">
+                        <span class="car-emoji"></span>
+                        <strong>Red Bull RB19</strong>
+                        <span class="car-label">350 km/h &bull; 1020 HP</span>
+                    </button>
+                    <button class="car-select-btn" data-car="mclaren" style="--car-color:#ff8000;">
+                        <span class="car-emoji"></span>
+                        <strong>McLaren MCL60</strong>
+                        <span class="car-label">338 km/h &bull; 990 HP</span>
+                    </button>
+                    <button class="car-select-btn" data-car="mercedes" style="--car-color:#00d2be;">
+                        <span class="car-emoji"></span>
+                        <strong>Mercedes W11</strong>
+                        <span class="car-label">362 km/h &bull; 1050 HP</span>
+                    </button>
+                </div>
+
+                <!-- Upgrade Buttons -->
+                <h4 style="color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:1px;font-size:.8rem;margin-top:24px;margin-bottom:4px;"> Toggle Upgrades (Decorators)</h4>
+                <div class="upgrade-grid" id="upgradePanel">
+                    <button class="upgrade-btn" data-upgrade="drs" style="--upgrade-color:#ef4444;">
+                        <span class="up-icon"></span>
+                        <div class="up-info"><span class="up-name">DRS System</span><span class="up-desc">+15 km/h top speed</span></div>
+                    </button>
+                    <button class="upgrade-btn" data-upgrade="hybrid" style="--upgrade-color:#eab308;">
+                        <span class="up-icon"></span>
+                        <div class="up-info"><span class="up-name">Hybrid Boost</span><span class="up-desc">+50 HP, +12 kg</span></div>
+                    </button>
+                    <button class="upgrade-btn" data-upgrade="lightweight" style="--upgrade-color:#22d3ee;">
+                        <span class="up-icon"></span>
+                        <div class="up-info"><span class="up-name">Lightweight Chassis</span><span class="up-desc">&minus;30 kg weight</span></div>
+                    </button>
+                    <button class="upgrade-btn" data-upgrade="aero" style="--upgrade-color:#6366f1;">
+                        <span class="up-icon"></span>
+                        <div class="up-info"><span class="up-name">Aero Package</span><span class="up-desc">+8 km/h downforce</span></div>
+                    </button>
+                    <button class="upgrade-btn" data-upgrade="slick" style="--upgrade-color:#f59e0b;">
+                        <span class="up-icon"></span>
+                        <div class="up-info"><span class="up-name">Slick Tyres</span><span class="up-desc">+5 km/h grip</span></div>
+                    </button>
+                    <button class="upgrade-btn" data-upgrade="kers" style="--upgrade-color:#22c55e;">
+                        <span class="up-icon"></span>
+                        <div class="up-info"><span class="up-name">KERS Recovery</span><span class="up-desc">+30 HP, +8 kg</span></div>
+                    </button>
+                </div>
+
+                <div class="demo-actions">
+                    <button class="demo-action-btn" id="resetUpgrades"> Reset All</button>
+                    <button class="demo-action-btn" id="randomBuild"> Random Build</button>
+                </div>
+
+                <!-- Specs + Chain side-by-side -->
+                <div class="decorator-demo">
+                    <!-- Left: Spec Display -->
+                    <div class="spec-panel">
+                        <div class="spec-panel-title"> Car Specifications</div>
+                        <div id="specDisplay">
+                            <!-- Rendered by decorator.js -->
+                        </div>
+                    </div>
+
+                    <!-- Right: Chain Visualization -->
+                    <div class="chain-panel">
+                        <div class="chain-panel-title"> Decorator Wrapping Chain</div>
+                        <div id="upgradeChain">
+                            <!-- Rendered by decorator.js -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Live Code Preview -->
+                <h4 style="color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:1px;font-size:.8rem;margin-top:24px;margin-bottom:4px;"> Live Code (updates as you click)</h4>
+                <div class="code-preview-box">
+                    <pre id="codePreview"><!-- Rendered by decorator.js --></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: How It Works -->
+        <section class="section" id="how-it-works">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">03</span>
+                    <h2>How the Pattern Works Step by Step</h2>
+                    <p class="section-desc">The decorator chain processes method calls through all wrappers.</p>
+                </div>
+
+                <div class="dec-overview">
+                    <div class="pattern-card-dec">
+                        <h3>1&#8419; Create Base Component</h3>
+                        <p>You start with a <code>FerrariSF23</code> &mdash; a concrete component with base stats: 340 km/h, 1000 HP, 798 kg.</p>
+                    </div>
+                    <div class="pattern-card-dec">
+                        <h3>2&#8419; Wrap with Decorator</h3>
+                        <p><code>new DRSUpgrade(car)</code> creates a decorator that holds a reference to the original car and overrides <code>getTopSpeed()</code> to add +15.</p>
+                    </div>
+                    <div class="pattern-card-dec">
+                        <h3>3&#8419; Stack More Decorators</h3>
+                        <p><code>new HybridBoost(car)</code> wraps the already-decorated car. Each decorator delegates non-overridden methods to the inner object.</p>
+                    </div>
+                    <div class="pattern-card-dec">
+                        <h3>4&#8419; Transparent to Client</h3>
+                        <p>The client calls <code>car.getTopSpeed()</code> on the outermost wrapper. The call propagates through the chain, each decorator adding its modification.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Benefits -->
+        <section class="section section-alt" id="benefits">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">04</span>
+                    <h2>Benefits of the Decorator Pattern</h2>
+                    <p class="section-desc">Why this pattern is powerful for extensibility.</p>
+                </div>
+                <div class="dec-overview">
+                    <div class="pattern-card-dec">
+                        <h3> Single Responsibility</h3>
+                        <p>Each decorator has exactly one responsibility: add DRS, add Hybrid, etc. The base car class stays clean and unchanged.</p>
+                    </div>
+                    <div class="pattern-card-dec">
+                        <h3> Open/Closed Principle</h3>
+                        <p>New upgrades can be added as new decorator classes without modifying existing car or decorator code.</p>
+                    </div>
+                    <div class="pattern-card-dec">
+                        <h3> Runtime Composition</h3>
+                        <p>Unlike inheritance (which is static), decorators can be added and combined at runtime in any order, creating flexible configurations.</p>
+                    </div>
+                    <div class="pattern-card-dec">
+                        <h3> Real-World Usage</h3>
+                        <p>Java I/O streams (BufferedReader wraps FileReader), middleware in Express.js, Python's <code>@decorator</code> syntax, React Higher-Order Components.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Decorator vs Inheritance -->
+        <section class="section" id="comparison">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">05</span>
+                    <h2>Decorator vs Inheritance</h2>
+                    <p class="section-desc">Why wrapping beats subclassing for flexible extensions.</p>
+                </div>
+                <div class="card" style="overflow-x:auto;">
+                    <table class="charter-table">
+                        <thead>
+                            <tr>
+                                <th>Criteria</th>
+                                <th>Inheritance</th>
+                                <th>Decorator Pattern </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Flexibility</td>
+                                <td>Static &mdash; fixed at compile time</td>
+                                <td>Dynamic &mdash; compose at runtime</td>
+                            </tr>
+                            <tr>
+                                <td>Combinations</td>
+                                <td>Exponential class explosion</td>
+                                <td>Any combination of decorators</td>
+                            </tr>
+                            <tr>
+                                <td>Adding features</td>
+                                <td>New subclass for each combo</td>
+                                <td>New decorator class only</td>
+                            </tr>
+                            <tr>
+                                <td>Removing features</td>
+                                <td>Impossible without new class</td>
+                                <td>Simply unwrap decorator</td>
+                            </tr>
+                            <tr>
+                                <td>Example (6 upgrades)</td>
+                                <td>64 subclasses (2&#8310;)</td>
+                                <td>6 decorator classes</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <h3>Grand Prix Motors</h3>
+                    <p>Exclusive Formula 1 Car Dealer</p>
+                    <p>&#169; 2026 Grand Prix Motors. All rights reserved.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="products.html">Catalog</a>
+                    <a href="charter.html">About</a>
+                    <a href="patterns.html">Patterns</a>
+                    <a href="planning.html">Planning</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p> Grand Prix Motors &mdash; Feel the Speed. Own the Legend.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="script.js" defer></script>
+    <script src="decorator.js" defer></script>
+</body>
+</html>

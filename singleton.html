@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Singleton Pattern &mdash; Grand Prix Motors</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="singleton.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>if(sessionStorage.getItem('pt-navigating'))document.documentElement.classList.add('pt-arriving');</script>
+</head>
+<body>
+    <div class="page-transition" id="pageTransition"><div class="pt-bg"></div><div class="pt-fg"></div><div class="pt-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M4 4v16" stroke="#fff" stroke-width="2" stroke-linecap="round"/><path d="M4 4c3 0 4 2 8 2s5-2 8-2v10c-3 0-4 2-8 2s-5-2-8-2" fill="url(#ptG)" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/><defs><linearGradient id="ptG" x1="4" y1="4" x2="20" y2="14"><stop offset="0%" stop-color="#6366f1"/><stop offset="100%" stop-color="#3b82f6"/></linearGradient></defs></svg></div></div>
+    <nav class="topnav" id="topnav">
+        <div class="topnav-inner">
+            <a href="index.html" class="topnav-logo">
+                <img src="logo-opt.webp" alt="F1 Motors" class="logo-img" width="48" height="48">
+            </a>
+            <div class="topnav-search">
+                <div class="search-box">
+                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    <input type="text" id="searchInput" class="search-input" placeholder="Find a car, team or year..." autocomplete="off">
+                    <div class="search-results" id="searchResults"></div>
+                </div>
+            </div>
+            <div class="topnav-links" id="topnavLinks">
+                <a href="index.html" class="topnav-link">Home</a>
+                <a href="products.html" class="topnav-link">Catalog</a>
+                <a href="charter.html" class="topnav-link">About</a>
+                <a href="patterns.html" class="topnav-link active">Patterns</a>
+                <a href="planning.html" class="topnav-link">Planning</a>
+            </div>
+            <button class="topnav-toggle" id="topnavToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+        </div>
+    </nav>
+
+    <div class="scroll-progress" id="scrollProgress"></div>
+    <button class="back-to-top" id="backToTop" aria-label="Back to top"></button>
+
+    <div class="page-hero">
+        <h1>Singleton Pattern</h1>
+        <p>Creational Design Pattern &mdash; F1 Race Director Control Centre</p>
+    </div>
+
+    <main>
+        <!-- Section 1: Pattern Explanation -->
+        <section class="section" id="pattern-explanation">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">01</span>
+                    <h2>What is the Singleton Pattern?</h2>
+                    <p class="section-desc">A creational design pattern that ensures a class has only one instance and provides a global point of access to it &mdash; like a single Race Director who controls the entire Grand Prix.</p>
+                </div>
+
+                <div class="sin-overview">
+                    <!-- F1 Analogy FIRST -->
+                    <div class="pattern-card-sin">
+                        <h3>&#127937; F1 Race Director Analogy</h3>
+                        <p>In Formula 1, there is exactly <strong>one Race Director</strong> per Grand Prix. Every team, marshal, and broadcast refers to the same person. If two directors existed, conflicting flags and penalties would cause chaos.</p>
+                        <ul>
+                            <li>&#128308; <strong>Race Director</strong> &mdash; decides flags, safety cars, penalties</li>
+                            <li>&#128225; <strong>Timing System</strong> &mdash; one master clock for all teams</li>
+                            <li>&#127897;&#65039; <strong>Radio Channel</strong> &mdash; single broadcast frequency for race control</li>
+                            <li>&#9729;&#65039; <strong>Weather Station</strong> &mdash; one official feed for the entire circuit</li>
+                        </ul>
+                        <p>Each of these is a real-world Singleton &mdash; only one instance makes sense, and everyone shares it.</p>
+                    </div>
+
+                    <!-- Key Concepts SECOND -->
+                    <div class="pattern-card-sin">
+                        <h3>&#128218; Key Concepts</h3>
+                        <ul>
+                            <li><code>Singleton</code> &mdash; the class itself, which stores its sole instance in a static field</li>
+                            <li><code>getInstance()</code> &mdash; the public static method that returns the one instance (creating it on first call)</li>
+                            <li><code>Private constructor</code> &mdash; prevents external code from using <code>new</code></li>
+                            <li><strong>Lazy initialisation</strong> &mdash; the instance is created only when first requested</li>
+                            <li><strong>Global access point</strong> &mdash; any part of the application can reach the singleton</li>
+                        </ul>
+                    </div>
+
+                    <!-- UML Diagram -->
+                    <div class="pattern-card-sin">
+                        <h3>&#128202; UML Structure</h3>
+                        <div class="uml-box-sin">
+&#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;
+&#9474;          Singleton                  &#9474;
+&#9500;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9508;
+&#9474; - static _instance: Singleton    &#9474;
+&#9474; - state: object                  &#9474;
+&#9500;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9508;
+&#9474; + static getInstance(): Singleton&#9474;
+&#9474; + getState()                      &#9474;
+&#9474; + setState(data)                  &#9474;
+&#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;
+
+  Client A &#9472;&#9472;&#9472;&#9488;
+                &#9500;&#9472;&#9472;&#9654; getInstance() &#9472;&#9654; same object
+  Client B &#9472;&#9472;&#9472;&#9496;</div>
+                    </div>
+
+                    <!-- Code Snippet LAST -->
+                    <div class="pattern-card-sin">
+                        <h3>&#128187; Core Implementation</h3>
+                        <div class="code-preview-box"><pre><span class="cm">// Singleton: only one Race Director exists</span>
+<span class="kw">class</span> <span class="fn">RaceDirector</span> {
+  <span class="kw">static</span> _instance = <span class="kw">null</span>;
+
+  <span class="fn">constructor</span>() {
+    <span class="kw">if</span> (RaceDirector._instance)
+      <span class="kw">return</span> RaceDirector._instance;
+    <span class="kw">this</span>.flags = [];
+    RaceDirector._instance = <span class="kw">this</span>;
+  }
+
+  <span class="kw">static</span> <span class="fn">getInstance</span>() {
+    <span class="kw">if</span> (!RaceDirector._instance)
+      <span class="kw">new</span> <span class="fn">RaceDirector</span>();
+    <span class="kw">return</span> RaceDirector._instance;
+  }
+}
+
+<span class="cm">// Both variables reference the SAME object</span>
+<span class="kw">const</span> a = RaceDirector.<span class="fn">getInstance</span>();
+<span class="kw">const</span> b = RaceDirector.<span class="fn">getInstance</span>();
+a === b; <span class="cm">// &#8594; true</span></pre></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Interactive Demo -->
+        <section class="section section-alt" id="interactive-demo">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">02</span>
+                    <h2>Interactive Race Director Console</h2>
+                    <p class="section-desc">Multiple &ldquo;clients&rdquo; (Team Principals, Marshals, Broadcast) all access the same Race Director singleton. Every action mutates shared state &mdash; proving there is only one instance.</p>
+                </div>
+
+                <!-- Client Selector -->
+                <h4 style="color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:1px;font-size:.8rem;margin-bottom:4px;">&#128101; Access Singleton As&hellip;</h4>
+                <div class="client-select-grid" id="clientSelect">
+                    <button class="client-select-btn active" data-client="principal" style="--cli-color:#e10600;">
+                        <span class="cli-emoji">&#128084;</span>
+                        <strong>Team Principal</strong>
+                        <span class="cli-label">Requests flags &amp; penalties</span>
+                    </button>
+                    <button class="client-select-btn" data-client="marshal" style="--cli-color:#eab308;">
+                        <span class="cli-emoji">&#128681;</span>
+                        <strong>Track Marshal</strong>
+                        <span class="cli-label">Reports incidents</span>
+                    </button>
+                    <button class="client-select-btn" data-client="broadcast" style="--cli-color:#3b82f6;">
+                        <span class="cli-emoji">&#128250;</span>
+                        <strong>TV Broadcast</strong>
+                        <span class="cli-label">Reads race status</span>
+                    </button>
+                    <button class="client-select-btn" data-client="steward" style="--cli-color:#22c55e;">
+                        <span class="cli-emoji">&#9878;&#65039;</span>
+                        <strong>Race Steward</strong>
+                        <span class="cli-label">Issues penalties</span>
+                    </button>
+                </div>
+
+                <!-- Action Buttons -->
+                <h4 style="color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:1px;font-size:.8rem;margin-top:24px;margin-bottom:4px;">&#9889; Send Command to Singleton</h4>
+                <div class="action-grid" id="actionPanel">
+                    <button class="action-btn" data-action="green" style="--act-color:#22c55e;">
+                        <span class="act-icon">&#128994;</span>
+                        <span class="act-name">Green Flag</span>
+                    </button>
+                    <button class="action-btn" data-action="yellow" style="--act-color:#eab308;">
+                        <span class="act-icon">&#128993;</span>
+                        <span class="act-name">Yellow Flag</span>
+                    </button>
+                    <button class="action-btn" data-action="red" style="--act-color:#ef4444;">
+                        <span class="act-icon">&#128308;</span>
+                        <span class="act-name">Red Flag</span>
+                    </button>
+                    <button class="action-btn" data-action="safety" style="--act-color:#f59e0b;">
+                        <span class="act-icon">&#128663;</span>
+                        <span class="act-name">Safety Car</span>
+                    </button>
+                    <button class="action-btn" data-action="vsc" style="--act-color:#a855f7;">
+                        <span class="act-icon">&#127988;</span>
+                        <span class="act-name">VSC Deploy</span>
+                    </button>
+                    <button class="action-btn" data-action="chequered" style="--act-color:#ffffff;">
+                        <span class="act-icon">&#127937;</span>
+                        <span class="act-name">Chequered Flag</span>
+                    </button>
+                </div>
+
+                <div class="demo-actions">
+                    <button class="demo-action-btn" id="resetSingleton">&#128260; Reset Singleton</button>
+                    <button class="demo-action-btn" id="verifyBtn">&#128270; Verify Same Instance</button>
+                </div>
+
+                <!-- State Panel + Event Log -->
+                <div class="singleton-demo">
+                    <!-- Left: Singleton State -->
+                    <div class="state-panel">
+                        <div class="state-panel-title">&#127919; Singleton State (shared by all clients)</div>
+                        <div id="stateDisplay">
+                            <div class="state-empty">Interact with the Race Director to see shared state</div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Event Log -->
+                    <div class="log-panel-sin">
+                        <div class="log-panel-title-sin">&#128220; Access Log <span class="log-count-sin" id="logCount">0</span></div>
+                        <div class="log-entries-sin" id="eventLog">
+                            <div class="log-empty-sin">
+                                <div class="log-empty-icon-sin">&#128272;</div>
+                                <p>All clients share one instance &mdash; interact to prove it</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Identity proof -->
+                <div class="identity-proof" id="identityProof" style="display:none;">
+                    <div class="identity-proof-inner">
+                        <span class="identity-icon">&#9989;</span>
+                        <div class="identity-text">
+                            <strong>Same Instance Confirmed!</strong>
+                            <span id="identityDetail"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Live Code -->
+                <h4 style="color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:1px;font-size:.8rem;margin-top:24px;margin-bottom:4px;">&#128187; Live Code (updates as you click)</h4>
+                <div class="code-preview-box">
+                    <pre id="codePreview"><span class="cm">// Click a client, then an action...</span></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: How It Works -->
+        <section class="section" id="how-it-works">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">03</span>
+                    <h2>How the Pattern Works Step by Step</h2>
+                    <p class="section-desc">The singleton guarantees a single shared instance throughout the application lifecycle.</p>
+                </div>
+
+                <div class="sin-overview">
+                    <div class="pattern-card-sin">
+                        <h3>1&#8419; First Request</h3>
+                        <p><strong>Example:</strong> The Team Principal calls <code>RaceDirector.getInstance()</code> at the start of the weekend. No instance exists yet, so the constructor creates one, stores it in the static field, and returns it.</p>
+                    </div>
+                    <div class="pattern-card-sin">
+                        <h3>2&#8419; Subsequent Requests</h3>
+                        <p><strong>Example:</strong> A Marshal calls <code>RaceDirector.getInstance()</code> during the race. The static field already holds the instance, so the exact same object is returned &mdash; no new object created.</p>
+                    </div>
+                    <div class="pattern-card-sin">
+                        <h3>3&#8419; Shared State</h3>
+                        <p><strong>Example:</strong> The Principal sets a Yellow Flag. When Broadcast reads the race status, it sees the yellow flag &mdash; because both are referencing the same singleton object and its state.</p>
+                    </div>
+                    <div class="pattern-card-sin">
+                        <h3>4&#8419; Identity Guarantee</h3>
+                        <p><strong>Example:</strong> <code>principalRef === marshalRef</code> evaluates to <code>true</code>. JavaScript&rsquo;s strict equality proves both variables point to the identical object in memory.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Benefits -->
+        <section class="section section-alt" id="benefits">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">04</span>
+                    <h2>Benefits of the Singleton Pattern</h2>
+                    <p class="section-desc">When and why to use a singleton in your architecture.</p>
+                </div>
+                <div class="sin-overview">
+                    <div class="pattern-card-sin">
+                        <h3>&#128272; Controlled Access</h3>
+                        <p><strong>Example:</strong> Just as only one Race Director can deploy a safety car, the singleton prevents rogue instances from corrupting shared state like databases, caches, or config objects.</p>
+                    </div>
+                    <div class="pattern-card-sin">
+                        <h3>&#128190; Reduced Memory</h3>
+                        <p><strong>Example:</strong> Instead of each F1 team creating its own weather station, they share one. Similarly, singletons avoid duplicating heavy resources like connection pools or thread pools.</p>
+                    </div>
+                    <div class="pattern-card-sin">
+                        <h3>&#128736;&#65039; Global Coordination</h3>
+                        <p><strong>Example:</strong> All marshals see the same flag status because they share one director. In code, loggers, event buses, and app-wide settings benefit from singleton coordination.</p>
+                    </div>
+                    <div class="pattern-card-sin">
+                        <h3>&#127758; Real-World Usage</h3>
+                        <p><strong>Examples:</strong> Java&rsquo;s <code>Runtime.getRuntime()</code>, Python&rsquo;s <code>logging</code> module, Angular&rsquo;s root-scoped services, database connection pools, browser <code>window</code> object.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Singleton vs Global Variable -->
+        <section class="section" id="comparison">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">05</span>
+                    <h2>Singleton vs Global Variable</h2>
+                    <p class="section-desc">Why a controlled singleton beats a plain global.</p>
+                </div>
+                <div class="card" style="overflow-x:auto;">
+                    <table class="charter-table">
+                        <thead>
+                            <tr>
+                                <th>Criteria</th>
+                                <th>Global Variable</th>
+                                <th>Singleton Pattern &#128272;</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Instance control</td>
+                                <td>None &mdash; anyone can overwrite</td>
+                                <td>Strict &mdash; exactly one instance</td>
+                            </tr>
+                            <tr>
+                                <td>Lazy initialisation</td>
+                                <td>Loaded immediately at startup</td>
+                                <td>Created only when first requested</td>
+                            </tr>
+                            <tr>
+                                <td>Encapsulation</td>
+                                <td>State fully exposed</td>
+                                <td>State behind methods</td>
+                            </tr>
+                            <tr>
+                                <td>Testing</td>
+                                <td>Hard to isolate</td>
+                                <td>Can reset/mock the instance</td>
+                            </tr>
+                            <tr>
+                                <td>Thread safety</td>
+                                <td>No guarantees</td>
+                                <td>Can lock during creation</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <h3>Grand Prix Motors</h3>
+                    <p>Exclusive Formula 1 Car Dealer</p>
+                    <p>&#169; 2026 Grand Prix Motors. All rights reserved.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="products.html">Catalog</a>
+                    <a href="charter.html">About</a>
+                    <a href="patterns.html">Patterns</a>
+                    <a href="planning.html">Planning</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Grand Prix Motors &mdash; Feel the Speed. Own the Legend.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="script.js" defer></script>
+    <script src="singleton.js" defer></script>
+</body>
+</html>

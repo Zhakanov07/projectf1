@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Observer Pattern &mdash; Grand Prix Motors</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="observer.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>if(sessionStorage.getItem('pt-navigating'))document.documentElement.classList.add('pt-arriving');</script>
+</head>
+<body>
+    <div class="page-transition" id="pageTransition"><div class="pt-bg"></div><div class="pt-fg"></div><div class="pt-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M4 4v16" stroke="#fff" stroke-width="2" stroke-linecap="round"/><path d="M4 4c3 0 4 2 8 2s5-2 8-2v10c-3 0-4 2-8 2s-5-2-8-2" fill="url(#ptG)" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/><defs><linearGradient id="ptG" x1="4" y1="4" x2="20" y2="14"><stop offset="0%" stop-color="#6366f1"/><stop offset="100%" stop-color="#3b82f6"/></linearGradient></defs></svg></div></div>
+    <nav class="topnav" id="topnav">
+        <div class="topnav-inner">
+            <a href="index.html" class="topnav-logo">
+                <img src="logo-opt.webp" alt="F1 Motors" class="logo-img" width="48" height="48">
+            </a>
+            <div class="topnav-search">
+                <div class="search-box">
+                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    <input type="text" id="searchInput" class="search-input" placeholder="Find a car, team or year..." autocomplete="off">
+                    <div class="search-results" id="searchResults"></div>
+                </div>
+            </div>
+            <div class="topnav-links" id="topnavLinks">
+                <a href="index.html" class="topnav-link">Home</a>
+                <a href="products.html" class="topnav-link">Catalog</a>
+                <a href="charter.html" class="topnav-link">About</a>
+                <a href="patterns.html" class="topnav-link active">Patterns</a>
+                <a href="planning.html" class="topnav-link">Planning</a>
+            </div>
+            <button class="topnav-toggle" id="topnavToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+        </div>
+    </nav>
+
+    <div class="scroll-progress" id="scrollProgress"></div>
+    <button class="back-to-top" id="backToTop" aria-label="Back to top"></button>
+
+    <div class="page-hero">
+        <h1> Observer Pattern</h1>
+        <p>Behavioral Design Pattern &mdash; F1 Race Control Demo</p>
+    </div>
+
+    <main>
+        <!-- Section 1: Pattern Explanation -->
+        <section class="section" id="pattern-explanation">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">01</span>
+                    <h2>What is the Observer Pattern?</h2>
+                    <p class="section-desc">A behavioural design pattern that defines a one-to-many dependency between objects so that when one object (Subject) changes state, all its dependents (Observers) are notified automatically.</p>
+                </div>
+
+                <div class="pattern-overview">
+                    <!-- F1 Analogy FIRST -->
+                    <div class="pattern-card">
+                        <h3> F1 Race Analogy</h3>
+                        <p>In our demo, <strong>Race Control</strong> is the Subject. It emits events like flag changes, weather updates, and safety car deployments. The observers are:</p>
+                        <ul>
+                            <li> <strong>Team Radio</strong> &mdash; receives flags, safety &amp; messages</li>
+                            <li> <strong>Pit Wall</strong> &mdash; receives ALL events (full strategy)</li>
+                            <li> <strong>TV Broadcast</strong> &mdash; receives flags, weather &amp; safety</li>
+                            <li> <strong>Marshal Post</strong> &mdash; receives flag events only</li>
+                        </ul>
+                    </div>
+
+                    <!-- Key Concepts SECOND -->
+                    <div class="pattern-card">
+                        <h3> Key Concepts</h3>
+                        <ul>
+                            <li><code>Subject</code> &mdash; maintains a list of observers and notifies them of state changes</li>
+                            <li><code>Observer</code> &mdash; defines an <code>update()</code> interface that gets called by the Subject</li>
+                            <li><code>subscribe()</code> &mdash; registers an observer for specific events</li>
+                            <li><code>unsubscribe()</code> &mdash; removes an observer from the notification list</li>
+                            <li><code>notify()</code> &mdash; iterates over observers and calls their update method</li>
+                        </ul>
+                    </div>
+
+                    <!-- UML Diagram -->
+                    <div class="pattern-card">
+                        <h3> UML Structure</h3>
+                        <div class="uml-box">
+┌──────────────────────────┐
+│      &laquo;Subject&raquo;           │
+│     EventSubject          │
+├──────────────────────────┤
+│ - observers: Map          │
+├──────────────────────────┤
+│ + subscribe(type, obs)    │
+│ + unsubscribe(type, obs)  │
+│ + notify(type, data)      │
+└──────────┬───────────────┘
+           │ extends
+┌──────────▼───────────────┐
+│     RaceControl           │
+├──────────────────────────┤
+│ + setFlag(flag)           │
+│ + setWeather(weather)     │
+│ + deploySafetyCar(bool)   │
+│ + sendMessage(text)       │
+└──────────────────────────┘
+           │ notifies ──▶  ┌────────────────┐
+           │               │  &laquo;Observer&raquo;    │
+           ├──────────────▶│  TeamRadio      │
+           ├──────────────▶│  PitWall        │
+           ├──────────────▶│  TVBroadcast    │
+           └──────────────▶│  MarshalPost    │
+                           ├────────────────┤
+                           │ + update(t, d)  │
+                           └────────────────┘</div>
+                    </div>
+
+                    <!-- Code Snippet -->
+                    <div class="pattern-card">
+                        <h3> Core Implementation</h3>
+                        <div class="code-block"><pre><span class="kw">class</span> <span class="fn">EventSubject</span> {
+  <span class="fn">constructor</span>(name) {
+    <span class="kw">this</span>._observers = <span class="kw">new</span> <span class="fn">Map</span>();
+  }
+
+  <span class="fn">subscribe</span>(eventType, observer) {
+    <span class="kw">if</span> (!<span class="kw">this</span>._observers.has(eventType))
+      <span class="kw">this</span>._observers.set(eventType, <span class="kw">new</span> <span class="fn">Set</span>());
+    <span class="kw">this</span>._observers.get(eventType).add(observer);
+  }
+
+  <span class="fn">notify</span>(eventType, data) {
+    <span class="kw">for</span> (<span class="kw">const</span> obs <span class="kw">of</span> <span class="kw">this</span>._observers.get(eventType))
+      obs.<span class="fn">update</span>(eventType, data);
+  }
+}
+
+<span class="cm">// Concrete Subject</span>
+<span class="kw">class</span> <span class="fn">RaceControl</span> <span class="kw">extends</span> <span class="fn">EventSubject</span> {
+  <span class="fn">setFlag</span>(flag) {
+    <span class="kw">this</span>.<span class="fn">notify</span>(<span class="str">'flag'</span>, { flag });
+  }
+}
+
+<span class="cm">// Observer</span>
+<span class="kw">class</span> <span class="fn">TeamRadio</span> {
+  <span class="fn">update</span>(eventType, data) {
+    console.<span class="fn">log</span>(<span class="str">`Radio: ${eventType}`</span>, data);
+  }
+}</pre></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Interactive Demo -->
+        <section class="section section-alt" id="interactive-demo">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">02</span>
+                    <h2>Interactive Race Control Demo</h2>
+                    <p class="section-desc">Trigger events from Race Control and watch how each observer reacts in real time. Toggle subscriptions to see the pattern in action!</p>
+                </div>
+
+                <div class="demo-layout">
+                    <!-- Left: Control Panel -->
+                    <div class="control-panel">
+                        <!-- Lap Counter -->
+                        <div class="control-section">
+                            <div class="lap-display" id="lapCounter">Lap 1 / 57</div>
+                            <div style="margin-top:8px;text-align:center;">
+                                <button class="demo-btn" id="advanceLap">&#9654; Next Lap</button>
+                            </div>
+                        </div>
+
+                        <!-- Flags -->
+                        <div class="control-section">
+                            <h4> Track Flags</h4>
+                            <div class="btn-group">
+                                <button class="demo-btn flag-btn event-btn active" data-flag="green" data-event="flag"> Green <span class="count-badge">4</span></button>
+                                <button class="demo-btn flag-btn event-btn" data-flag="yellow" data-event="flag"> Yellow <span class="count-badge">4</span></button>
+                                <button class="demo-btn flag-btn event-btn" data-flag="red" data-event="flag"> Red <span class="count-badge">4</span></button>
+                                <button class="demo-btn flag-btn event-btn" data-flag="checkered" data-event="flag"> Checkered <span class="count-badge">4</span></button>
+                            </div>
+                        </div>
+
+                        <!-- Weather -->
+                        <div class="control-section">
+                            <h4> Weather</h4>
+                            <div class="btn-group">
+                                <button class="demo-btn weather-btn event-btn active" data-weather="dry" data-event="weather"> Dry <span class="count-badge">2</span></button>
+                                <button class="demo-btn weather-btn event-btn" data-weather="rain" data-event="weather"> Rain <span class="count-badge">2</span></button>
+                                <button class="demo-btn weather-btn event-btn" data-weather="mixed" data-event="weather"> Mixed <span class="count-badge">2</span></button>
+                            </div>
+                        </div>
+
+                        <!-- Safety Car -->
+                        <div class="control-section">
+                            <h4> Safety Car</h4>
+                            <div class="btn-group">
+                                <button class="demo-btn sc-btn-on" id="scOn"> Deploy SC</button>
+                                <button class="demo-btn sc-btn-off" id="scOff"> SC In</button>
+                            </div>
+                        </div>
+
+                        <!-- Message -->
+                        <div class="control-section">
+                            <h4> Race Message</h4>
+                            <div class="message-row">
+                                <input type="text" id="messageInput" placeholder="Type a message...">
+                                <button class="demo-btn" id="sendMessage">Send</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Observer Logs -->
+                    <div class="log-panel">
+                        <div class="log-panel-header">
+                            <h3> Observer Logs</h3>
+                            <button class="action-btn" id="clearLogs"> Clear</button>
+                        </div>
+                        <div id="observerLogs">
+                            <div class="empty-logs">
+                                <div class="empty-icon"></div>
+                                <p>Trigger an event from Race Control to see observers react!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Subscription Panel -->
+                <div class="sub-panel-container">
+                    <h3> Observer Subscriptions <span style="font-weight:400;font-size:.85rem;color:rgba(255,255,255,0.5);">&mdash; toggle to subscribe/unsubscribe in real time</span></h3>
+                    <div class="sub-panel" id="subscriptionPanel">
+                        <!-- Rendered by observer.js -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: How It Works -->
+        <section class="section" id="how-it-works">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">03</span>
+                    <h2>How the Pattern Works in This Demo</h2>
+                    <p class="section-desc">Step-by-step flow of an event through the Observer pattern.</p>
+                </div>
+
+                <div class="pattern-overview">
+                    <div class="pattern-card">
+                        <h3>1&#8419; Subject Emits Event</h3>
+                        <p><strong>Race Control</strong> calls <code>setFlag('yellow')</code>, which internally calls <code>notify('flag', { flag: 'yellow', lap: 12 })</code>.</p>
+                    </div>
+                    <div class="pattern-card">
+                        <h3>2&#8419; Observer Map is Checked</h3>
+                        <p>The Subject looks up <code>'flag'</code> in its <code>_observers</code> Map and finds all subscribed observers.</p>
+                    </div>
+                    <div class="pattern-card">
+                        <h3>3&#8419; Each Observer is Notified</h3>
+                        <p>The Subject iterates over the Set and calls <code>observer.update('flag', data)</code> on each one.</p>
+                    </div>
+                    <div class="pattern-card">
+                        <h3>4&#8419; Observers React Independently</h3>
+                        <p>Each observer processes the event in its own way &mdash; Team Radio gives advice, Pit Wall recalculates strategy, TV shows info to viewers, Marshals wave flags.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Benefits -->
+        <section class="section section-alt" id="benefits">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">04</span>
+                    <h2>Benefits of the Observer Pattern</h2>
+                    <p class="section-desc">Why this pattern is used in real-world software and our F1 project.</p>
+                </div>
+                <div class="pattern-overview">
+                    <div class="pattern-card">
+                        <h3> Loose Coupling</h3>
+                        <p>The Subject doesn't need to know the concrete classes of its observers. It only relies on the <code>update()</code> interface, making the system flexible and modular.</p>
+                    </div>
+                    <div class="pattern-card">
+                        <h3> Open/Closed Principle</h3>
+                        <p>New observers can be added without modifying the Subject class. We can add a <code>DataLogger</code> or <code>SocialMedia</code> observer without touching Race Control.</p>
+                    </div>
+                    <div class="pattern-card">
+                        <h3> Dynamic Subscriptions</h3>
+                        <p>Observers can subscribe and unsubscribe at runtime. Toggle checkboxes in the demo above to see this in action!</p>
+                    </div>
+                    <div class="pattern-card">
+                        <h3> Real-World Usage</h3>
+                        <p>Event listeners in DOM (addEventListener), RxJS observables, Vue.js reactivity, Redux store subscriptions, WebSocket message handlers — all use the Observer pattern.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <h3>Grand Prix Motors</h3>
+                    <p>Exclusive Formula 1 Car Dealer</p>
+                    <p>&#169; 2026 Grand Prix Motors. All rights reserved.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="products.html">Catalog</a>
+                    <a href="charter.html">About</a>
+                    <a href="patterns.html">Patterns</a>
+                    <a href="planning.html">Planning</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p> Grand Prix Motors &mdash; Feel the Speed. Own the Legend.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="script.js" defer></script>
+    <script src="observer.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Command Pattern &mdash; Grand Prix Motors</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="command.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>if(sessionStorage.getItem('pt-navigating'))document.documentElement.classList.add('pt-arriving');</script>
+</head>
+<body>
+    <div class="page-transition" id="pageTransition"><div class="pt-bg"></div><div class="pt-fg"></div><div class="pt-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M4 4v16" stroke="#fff" stroke-width="2" stroke-linecap="round"/><path d="M4 4c3 0 4 2 8 2s5-2 8-2v10c-3 0-4 2-8 2s-5-2-8-2" fill="url(#ptG)" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/><defs><linearGradient id="ptG" x1="4" y1="4" x2="20" y2="14"><stop offset="0%" stop-color="#6366f1"/><stop offset="100%" stop-color="#3b82f6"/></linearGradient></defs></svg></div></div>
+    <nav class="topnav" id="topnav">
+        <div class="topnav-inner">
+            <a href="index.html" class="topnav-logo">
+                <img src="logo-opt.webp" alt="F1 Motors" class="logo-img" width="48" height="48">
+            </a>
+            <div class="topnav-search">
+                <div class="search-box">
+                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    <input type="text" id="searchInput" class="search-input" placeholder="Find a car, team or year..." autocomplete="off">
+                    <div class="search-results" id="searchResults"></div>
+                </div>
+            </div>
+            <div class="topnav-links" id="topnavLinks">
+                <a href="index.html" class="topnav-link">Home</a>
+                <a href="products.html" class="topnav-link">Catalog</a>
+                <a href="charter.html" class="topnav-link">About</a>
+                <a href="patterns.html" class="topnav-link active">Patterns</a>
+                <a href="planning.html" class="topnav-link">Planning</a>
+            </div>
+            <button class="topnav-toggle" id="topnavToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+        </div>
+    </nav>
+
+    <div class="scroll-progress" id="scrollProgress"></div>
+    <button class="back-to-top" id="backToTop" aria-label="Back to top"></button>
+
+    <div class="page-hero">
+        <h1>Command Pattern</h1>
+        <p>Behavioural Design Pattern &mdash; F1 Pit Wall Strategy Console</p>
+    </div>
+
+    <main>
+        <!-- Section 1: Pattern Explanation -->
+        <section class="section" id="pattern-explanation">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">01</span>
+                    <h2>What is the Command Pattern?</h2>
+                    <p class="section-desc">A behavioural design pattern that encapsulates a request as an object, letting you parameterize clients, queue requests, log them, and support undoable operations.</p>
+                </div>
+
+                <div class="cmd-overview">
+                    <!-- F1 Analogy FIRST -->
+                    <div class="pattern-card-cmd">
+                        <h3>&#127937; F1 Pit Wall Analogy</h3>
+                        <p>During a race, the <strong>Pit Wall</strong> (invoker) sends strategic commands to the car. Each command is a distinct object that can be executed, queued, or undone:</p>
+                        <ul>
+                            <li>&#128260; <strong>&ldquo;Box Box!&rdquo;</strong> &mdash; pit stop command, can undo by aborting the stop</li>
+                            <li>&#9889; <strong>&ldquo;Deploy ERS&rdquo;</strong> &mdash; energy boost command, reversible by harvesting</li>
+                            <li>&#128168; <strong>&ldquo;DRS Open&rdquo;</strong> &mdash; drag reduction command, undo by closing DRS</li>
+                            <li>&#127793; <strong>&ldquo;Switch to Soft&rdquo;</strong> &mdash; tyre strategy command, undo reverts to previous compound</li>
+                            <li>&#128640; <strong>&ldquo;Push Mode&rdquo;</strong> &mdash; engine mode command, undo returns to normal</li>
+                            <li>&#128295; <strong>&ldquo;Adjust Front Wing&rdquo;</strong> &mdash; aero command, stores previous angle for undo</li>
+                        </ul>
+                        <p>The driver (receiver) executes the command, and the pit wall can <strong>undo</strong> any decision by reverting to the previous state &mdash; crucial in fast-paced racing.</p>
+                    </div>
+
+                    <!-- Key Concepts SECOND -->
+                    <div class="pattern-card-cmd">
+                        <h3>&#128218; Key Concepts</h3>
+                        <ul>
+                            <li><code>Command</code> &mdash; interface declaring <code>execute()</code> and <code>undo()</code></li>
+                            <li><code>ConcreteCommand</code> &mdash; implements the action (e.g. PitStopCommand, DRSCommand)</li>
+                            <li><code>Receiver</code> &mdash; the object that performs the actual work (the F1 car)</li>
+                            <li><code>Invoker</code> &mdash; triggers commands without knowing their internals (the Pit Wall)</li>
+                            <li><strong>Command history</strong> &mdash; stack of executed commands enabling undo/redo</li>
+                            <li><strong>Decoupling</strong> &mdash; invoker doesn&rsquo;t know which receiver or how work is done</li>
+                        </ul>
+                    </div>
+
+                    <!-- UML Diagram -->
+                    <div class="pattern-card-cmd">
+                        <h3>&#128202; UML Structure</h3>
+                        <div class="uml-box-cmd">
+&#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;     &#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;
+&#9474; PitWall        &#9474;     &#9474; &laquo;Command&raquo;      &#9474;
+&#9474; (Invoker)      &#9474;     &#9474; + execute()      &#9474;
+&#9474;                &#9474;&#9472;&#9472;&#9472;&#9472;&#9654;&#9474; + undo()         &#9474;
+&#9474; + executeCmd() &#9474;     &#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9516;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;
+&#9474; + undoLast()   &#9474;              &#9474;
+&#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;     &#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9516;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;
+                         &#9474;           &#9474;
+                    &#9484;&#9472;&#9472;&#9472;&#9472;&#9604;&#9472;&#9472;&#9472;&#9488; &#9484;&#9472;&#9472;&#9604;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;
+                    &#9474;PitStop &#9474; &#9474;DRSCmd  &#9474;
+                    &#9474;Command &#9474; &#9474;ERSCmd  &#9474;
+                    &#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496; &#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;
+                         &#9474;
+               &#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9604;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;
+               &#9474;   F1 Car          &#9474;
+               &#9474;   (Receiver)      &#9474;
+               &#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;</div>
+                    </div>
+
+                    <!-- Code Snippet LAST -->
+                    <div class="pattern-card-cmd">
+                        <h3>&#128187; Core Implementation</h3>
+                        <div class="code-preview-box"><pre><span class="cm">// Command interface</span>
+<span class="kw">class</span> <span class="fn">Command</span> {
+  <span class="fn">execute</span>() { <span class="kw">throw</span> <span class="str">'Override!'</span>; }
+  <span class="fn">undo</span>()    { <span class="kw">throw</span> <span class="str">'Override!'</span>; }
+}
+
+<span class="cm">// Concrete command with undo</span>
+<span class="kw">class</span> <span class="fn">DRSCommand</span> <span class="kw">extends</span> <span class="fn">Command</span> {
+  <span class="fn">constructor</span>(car) { <span class="kw">this</span>.car = car; }
+  <span class="fn">execute</span>() { <span class="kw">this</span>.car.drs = <span class="kw">true</span>;  }
+  <span class="fn">undo</span>()    { <span class="kw">this</span>.car.drs = <span class="kw">false</span>; }
+}
+
+<span class="cm">// Invoker keeps a history stack</span>
+<span class="kw">class</span> <span class="fn">PitWall</span> {
+  history = [];
+  <span class="fn">executeCmd</span>(cmd) {
+    cmd.<span class="fn">execute</span>();
+    <span class="kw">this</span>.history.<span class="fn">push</span>(cmd);
+  }
+  <span class="fn">undoLast</span>() {
+    <span class="kw">this</span>.history.<span class="fn">pop</span>()?.<span class="fn">undo</span>();
+  }
+}</pre></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Interactive Demo -->
+        <section class="section section-alt" id="interactive-demo">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">02</span>
+                    <h2>Interactive Pit Wall Strategy Console</h2>
+                    <p class="section-desc">Send commands to the F1 car from the Pit Wall. Each command is an object that can be executed and undone. Watch the command history stack grow and shrink!</p>
+                </div>
+
+                <!-- Command Buttons -->
+                <h4 style="color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:1px;font-size:.8rem;margin-bottom:4px;">&#128225; Send Command (Execute)</h4>
+                <div class="command-grid" id="commandPanel">
+                    <button class="command-btn" data-cmd="pitstop" style="--cmd-color:#ef4444;">
+                        <span class="cmd-icon">&#128260;</span>
+                        <div class="cmd-info"><span class="cmd-name">Box Box!</span><span class="cmd-desc">Pit stop &mdash; change tyres</span></div>
+                    </button>
+                    <button class="command-btn" data-cmd="ers" style="--cmd-color:#eab308;">
+                        <span class="cmd-icon">&#9889;</span>
+                        <div class="cmd-info"><span class="cmd-name">Deploy ERS</span><span class="cmd-desc">+160 HP energy boost</span></div>
+                    </button>
+                    <button class="command-btn" data-cmd="drs" style="--cmd-color:#22d3ee;">
+                        <span class="cmd-icon">&#128168;</span>
+                        <div class="cmd-info"><span class="cmd-name">DRS Open</span><span class="cmd-desc">Reduce rear drag</span></div>
+                    </button>
+                    <button class="command-btn" data-cmd="tyres" style="--cmd-color:#22c55e;">
+                        <span class="cmd-icon">&#127793;</span>
+                        <div class="cmd-info"><span class="cmd-name">Soft Tyres</span><span class="cmd-desc">Switch compound</span></div>
+                    </button>
+                    <button class="command-btn" data-cmd="push" style="--cmd-color:#a855f7;">
+                        <span class="cmd-icon">&#128640;</span>
+                        <div class="cmd-info"><span class="cmd-name">Push Mode</span><span class="cmd-desc">Max engine performance</span></div>
+                    </button>
+                    <button class="command-btn" data-cmd="wing" style="--cmd-color:#f59e0b;">
+                        <span class="cmd-icon">&#128295;</span>
+                        <div class="cmd-info"><span class="cmd-name">Adjust Wing</span><span class="cmd-desc">Front wing +2&deg;</span></div>
+                    </button>
+                </div>
+
+                <div class="demo-actions">
+                    <button class="demo-action-btn" id="undoBtn">&#9194; Undo Last Command</button>
+                    <button class="demo-action-btn" id="redoBtn">&#9193; Redo</button>
+                    <button class="demo-action-btn" id="resetCmd">&#128465;&#65039; Reset All</button>
+                </div>
+
+                <!-- Car State + Command History -->
+                <div class="command-demo">
+                    <!-- Left: Car State -->
+                    <div class="car-state-panel">
+                        <div class="car-state-title">&#127937; Car State (Receiver)</div>
+                        <div id="carStateDisplay">
+                            <div class="car-state-empty">Send a command to see car state changes</div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Command History Stack -->
+                    <div class="history-panel">
+                        <div class="history-panel-title">&#128218; Command History Stack <span class="history-count" id="historyCount">0</span></div>
+                        <div class="history-entries" id="historyStack">
+                            <div class="history-empty">
+                                <div class="history-empty-icon">&#128203;</div>
+                                <p>Command stack is empty &mdash; execute commands to fill it</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Undo visualization -->
+                <div class="undo-banner" id="undoBanner" style="display:none;"></div>
+
+                <!-- Live Code -->
+                <h4 style="color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:1px;font-size:.8rem;margin-top:24px;margin-bottom:4px;">&#128187; Live Code (updates as you click)</h4>
+                <div class="code-preview-box">
+                    <pre id="codePreview"><span class="cm">// Click a command to execute it, then try undo...</span></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: How It Works -->
+        <section class="section" id="how-it-works">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">03</span>
+                    <h2>How the Pattern Works Step by Step</h2>
+                    <p class="section-desc">Commands encapsulate actions and enable undo by storing previous state.</p>
+                </div>
+
+                <div class="cmd-overview">
+                    <div class="pattern-card-cmd">
+                        <h3>1&#8419; Create a Command</h3>
+                        <p><strong>Example:</strong> The engineer creates a <code>PitStopCommand(car)</code>. The command holds a reference to the car (receiver) and stores its current tyre compound for potential undo.</p>
+                    </div>
+                    <div class="pattern-card-cmd">
+                        <h3>2&#8419; Invoker Executes It</h3>
+                        <p><strong>Example:</strong> The Pit Wall calls <code>pitWall.executeCmd(pitStopCmd)</code>. The invoker calls <code>cmd.execute()</code> and pushes it to the history stack, without knowing what the command does internally.</p>
+                    </div>
+                    <div class="pattern-card-cmd">
+                        <h3>3&#8419; Undo Via History</h3>
+                        <p><strong>Example:</strong> Rain starts unexpectedly! The Pit Wall calls <code>pitWall.undoLast()</code>, which pops the last command and calls <code>cmd.undo()</code> to revert the car to its previous state.</p>
+                    </div>
+                    <div class="pattern-card-cmd">
+                        <h3>4&#8419; Queue &amp; Replay</h3>
+                        <p><strong>Example:</strong> Commands can be queued: &ldquo;After lap 20, deploy ERS, then open DRS.&rdquo; They can also be serialized, logged, or replayed for telemetry analysis.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Benefits -->
+        <section class="section section-alt" id="benefits">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">04</span>
+                    <h2>Benefits of the Command Pattern</h2>
+                    <p class="section-desc">Why encapsulating actions as objects is so powerful.</p>
+                </div>
+                <div class="cmd-overview">
+                    <div class="pattern-card-cmd">
+                        <h3>&#9194; Undo / Redo</h3>
+                        <p><strong>Example:</strong> In an F1 strategy sim, every decision (pit, tyres, engine mode) can be undone. Just like Ctrl+Z in your editor &mdash; each keystroke is a command object with an inverse operation.</p>
+                    </div>
+                    <div class="pattern-card-cmd">
+                        <h3>&#128203; Logging &amp; Audit</h3>
+                        <p><strong>Example:</strong> Every pit call is logged as a command object with timestamp, parameters, and result. Race analysts replay the entire strategy by iterating the command history.</p>
+                    </div>
+                    <div class="pattern-card-cmd">
+                        <h3>&#128260; Decoupled Invoker</h3>
+                        <p><strong>Example:</strong> The pit wall button &ldquo;Box Box&rdquo; doesn&rsquo;t know if it triggers a tyre change, fuel adjustment, or wing tweak &mdash; it just calls <code>execute()</code> on whatever command is assigned.</p>
+                    </div>
+                    <div class="pattern-card-cmd">
+                        <h3>&#127758; Real-World Usage</h3>
+                        <p><strong>Examples:</strong> Text editor undo stacks, database transaction rollback, game input replay, React Redux actions, macOS <code>NSUndoManager</code>, task scheduling queues.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Command vs Direct Call -->
+        <section class="section" id="comparison">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">05</span>
+                    <h2>Command vs Direct Method Call</h2>
+                    <p class="section-desc">Why wrapping actions in objects beats calling methods directly.</p>
+                </div>
+                <div class="card" style="overflow-x:auto;">
+                    <table class="charter-table">
+                        <thead>
+                            <tr>
+                                <th>Criteria</th>
+                                <th>Direct Call</th>
+                                <th>Command Pattern &#128203;</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Undo support</td>
+                                <td>None &mdash; must manually track state</td>
+                                <td>Built-in via <code>undo()</code> method</td>
+                            </tr>
+                            <tr>
+                                <td>Logging</td>
+                                <td>Ad-hoc, scattered</td>
+                                <td>Automatic &mdash; commands are objects</td>
+                            </tr>
+                            <tr>
+                                <td>Queueing</td>
+                                <td>Not possible</td>
+                                <td>Commands can be queued and deferred</td>
+                            </tr>
+                            <tr>
+                                <td>Coupling</td>
+                                <td>Caller knows the receiver</td>
+                                <td>Invoker is decoupled from receiver</td>
+                            </tr>
+                            <tr>
+                                <td>Replay / macro</td>
+                                <td>Impossible without recording</td>
+                                <td>Replay history array</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <h3>Grand Prix Motors</h3>
+                    <p>Exclusive Formula 1 Car Dealer</p>
+                    <p>&#169; 2026 Grand Prix Motors. All rights reserved.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="products.html">Catalog</a>
+                    <a href="charter.html">About</a>
+                    <a href="patterns.html">Patterns</a>
+                    <a href="planning.html">Planning</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Grand Prix Motors &mdash; Feel the Speed. Own the Legend.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="script.js" defer></script>
+    <script src="command.js" defer></script>
+</body>
+</html>

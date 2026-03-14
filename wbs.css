@@ -1,0 +1,266 @@
+/* ===== WBS DIAGRAM STYLES ===== */
+/* Modern clean design with glassmorphism & refined palette */
+
+/* Legend */
+.wbs-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    justify-content: center;
+    padding: 20px 28px;
+    background: rgba(18, 22, 48, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 18px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+}
+.wbs-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.84rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    letter-spacing: 0.2px;
+}
+.legend-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
+}
+
+/* Scroll wrapper for wide diagram */
+.wbs-scroll-wrapper {
+    overflow-x: auto;
+    padding-bottom: 24px;
+    scrollbar-width: thin;
+}
+
+/* Tree structure */
+.wbs-tree {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 1100px;
+    padding: 10px 20px;
+}
+
+/* Vertical connector */
+.wbs-connector-v {
+    width: 2px;
+    height: 24px;
+    background: linear-gradient(180deg, rgba(59, 130, 246, 0.5), rgba(59, 130, 246, 0.15));
+    margin: 0 auto;
+    border-radius: 2px;
+}
+
+/* Level 2: horizontal row of phase branches */
+.wbs-level-2 {
+    display: flex;
+    gap: 18px;
+    justify-content: center;
+    position: relative;
+    padding-top: 14px;
+}
+.wbs-level-2::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50px;
+    right: 50px;
+    height: 2px;
+    background: linear-gradient(90deg, rgba(59, 130, 246, 0.15), rgba(59, 130, 246, 0.5), rgba(59, 130, 246, 0.15));
+    border-radius: 2px;
+}
+
+/* Each branch */
+.wbs-branch {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    min-width: 200px;
+    position: relative;
+}
+.wbs-branch::before {
+    content: '';
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    width: 2px;
+    height: 14px;
+    background: rgba(59, 130, 246, 0.4);
+    border-radius: 2px;
+}
+
+/* Level 3 */
+.wbs-level-3 {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    align-items: center;
+}
+
+/* Sub-branch (deliverable + level 4) */
+.wbs-sub-branch {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+/* Level 4 */
+.wbs-level-4 {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
+    align-items: center;
+    padding-left: 16px;
+}
+
+/* ===== NODE STYLES ===== */
+.wbs-node {
+    background: rgba(18, 22, 48, 0.85);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 16px;
+    padding: 14px 18px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    width: 100%;
+    max-width: 220px;
+    contain: layout style;
+}
+.wbs-node:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+}
+
+/* Level 1 - Root */
+.wbs-root {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.18) 0%, rgba(99, 102, 241, 0.08) 100%);
+    border-color: rgba(59, 130, 246, 0.5);
+    max-width: 340px;
+    padding: 22px 30px;
+    box-shadow: 0 6px 30px rgba(59, 130, 246, 0.15), inset 0 1px 0 rgba(255,255,255,0.05);
+}
+.wbs-root .wbs-code {
+    background: linear-gradient(135deg, #3b82f6, #6366f1);
+    color: #fff;
+}
+.wbs-root .wbs-title {
+    font-size: 1.18rem;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -0.3px;
+}
+
+/* Level 2 - Phase */
+.wbs-phase {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.12) 0%, rgba(99, 102, 241, 0.04) 100%);
+    border-color: rgba(99, 102, 241, 0.3);
+    max-width: 200px;
+}
+.wbs-phase:hover {
+    border-color: rgba(99, 102, 241, 0.6);
+    box-shadow: 0 8px 28px rgba(99, 102, 241, 0.18);
+}
+.wbs-phase .wbs-code {
+    background: linear-gradient(135deg, #6366f1, #818cf8);
+    color: #fff;
+}
+
+/* Level 3 - Deliverable */
+.wbs-deliverable {
+    background: linear-gradient(135deg, rgba(34, 211, 238, 0.1) 0%, rgba(34, 211, 238, 0.03) 100%);
+    border-color: rgba(34, 211, 238, 0.25);
+    max-width: 190px;
+    padding: 10px 14px;
+}
+.wbs-deliverable:hover {
+    border-color: rgba(34, 211, 238, 0.55);
+    box-shadow: 0 6px 22px rgba(34, 211, 238, 0.12);
+}
+.wbs-deliverable .wbs-code {
+    background: linear-gradient(135deg, #22d3ee, #06b6d4);
+    color: #000;
+}
+.wbs-deliverable .wbs-title {
+    font-size: 0.82rem;
+}
+
+/* Level 4 - Task */
+.wbs-task {
+    background: linear-gradient(135deg, rgba(251, 191, 36, 0.08) 0%, rgba(245, 158, 11, 0.02) 100%);
+    border-color: rgba(251, 191, 36, 0.2);
+    max-width: 190px;
+    padding: 8px 12px;
+    border-left: 3px solid #f59e0b;
+}
+.wbs-task:hover {
+    border-color: rgba(251, 191, 36, 0.45);
+    box-shadow: 0 4px 18px rgba(245, 158, 11, 0.12);
+}
+.wbs-task .wbs-code {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    color: #000;
+    font-size: 0.62rem;
+    padding: 1px 6px;
+}
+.wbs-task .wbs-title {
+    font-size: 0.75rem;
+}
+.wbs-task .wbs-meta {
+    font-size: 0.65rem;
+}
+.wbs-task .wbs-deadline {
+    font-size: 0.62rem;
+}
+
+/* ===== NODE INNER ELEMENTS ===== */
+.wbs-code {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 8px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+}
+.wbs-title {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #f1f5f9;
+    margin-bottom: 4px;
+    line-height: 1.3;
+}
+.wbs-meta {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    margin-bottom: 3px;
+}
+.wbs-deadline {
+    font-size: 0.68rem;
+    color: #60a5fa;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .wbs-legend {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    .wbs-tree {
+        min-width: 900px;
+    }
+}

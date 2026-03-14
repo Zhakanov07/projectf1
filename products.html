@@ -1,0 +1,297 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Catalog  Grand Prix Motors</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <script>if(sessionStorage.getItem('pt-navigating'))document.documentElement.classList.add('pt-arriving');</script>
+</head>
+<body>
+    <div class="page-transition" id="pageTransition"><div class="pt-bg"></div><div class="pt-fg"></div><div class="pt-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M4 4v16" stroke="#fff" stroke-width="2" stroke-linecap="round"/><path d="M4 4c3 0 4 2 8 2s5-2 8-2v10c-3 0-4 2-8 2s-5-2-8-2" fill="url(#ptG)" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/><defs><linearGradient id="ptG" x1="4" y1="4" x2="20" y2="14"><stop offset="0%" stop-color="#6366f1"/><stop offset="100%" stop-color="#3b82f6"/></linearGradient></defs></svg></div></div>
+    <nav class="topnav" id="topnav">
+        <div class="topnav-inner">
+            <a href="index.html" class="topnav-logo">
+                <img src="logo-opt.webp" alt="F1 Motors" class="logo-img" width="48" height="48">
+            </a>
+            <div class="topnav-search">
+                <div class="search-box">
+                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    <input type="text" id="searchInput" class="search-input" placeholder="Find a car, team or year..." autocomplete="off">
+                    <div class="search-results" id="searchResults"></div>
+                </div>
+            </div>
+            <div class="topnav-links" id="topnavLinks">
+                <a href="index.html" class="topnav-link">Home</a>
+                <a href="products.html" class="topnav-link active">Catalog</a>
+                <a href="charter.html" class="topnav-link">About</a>
+                <a href="patterns.html" class="topnav-link">Patterns</a>
+                <a href="planning.html" class="topnav-link">Planning</a>
+            </div>
+            <button class="topnav-toggle" id="topnavToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+        </div>
+    </nav>
+
+    <div class="scroll-progress" id="scrollProgress"></div>
+    <button class="back-to-top" id="backToTop" aria-label="Back to top"></button>
+
+    <div class="page-hero">
+        <h1> Car Catalog</h1>
+        <p>Choose your legendary Formula 1 car</p>
+    </div>
+
+    <main>
+        <section class="section" style="padding-top:20px; padding-bottom:0;">
+            <div class="container">
+                <div class="sort-panel">
+                    <div class="sort-label">Sort:</div>
+                    <div class="sort-buttons">
+                        <button class="sort-btn active" data-sort="default">Default</button>
+                        <button class="sort-btn" data-sort="year-asc">Year &#8593; (oldest)</button>
+                        <button class="sort-btn" data-sort="year-desc">Year &#8595; (newest)</button>
+                        <button class="sort-btn" data-sort="price-asc">Price &#8593;</button>
+                        <button class="sort-btn" data-sort="price-desc">Price &#8595;</button>
+                    </div>
+                    <div class="sort-filters">
+                        <button class="filter-btn active" data-filter="all">All</button>
+                        <button class="filter-btn" data-filter="modern">Modern</button>
+                        <button class="filter-btn" data-filter="classic">Classic</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="catalog">
+            <div class="container">
+                <div class="f1-catalog-grid" id="catalogGrid">
+
+                    <!-- Ferrari SF-23 -->
+                    <div class="card f1-car-card infographic-card" data-year="2023" data-price="8500000" data-type="modern">
+                        <div class="infographic-top" style="background: linear-gradient(135deg, #e10600 0%, #900 100%);">
+                            <img class="car-photo" data-wiki="Ferrari_SF-23" alt="Ferrari SF-23">
+                            <span class="f1-car-badge">Ferrari</span>
+                            <div class="infographic-overlay">
+                                <div class="info-stat"><span class="info-val">1000+</span><span class="info-label">HP</span></div>
+                                <div class="info-stat"><span class="info-val">350</span><span class="info-label">km/h</span></div>
+                                <div class="info-stat"><span class="info-val">798</span><span class="info-label">kg</span></div>
+                            </div>
+                        </div>
+                        <div class="f1-car-info">
+                            <h3>Ferrari SF-23</h3>
+                            <p class="f1-car-year">2023  V6 Turbo Hybrid  Maranello</p>
+                            <p class="f1-car-desc">Charles Leclerc and Carlos Sainz's car. 1000+ HP, competed in 22 Grand Prix races.</p>
+                            <div class="infographic-bars">
+                                <div class="bar-item"><span class="bar-label">Power</span><div class="bar-track"><div class="bar-fill" style="width:95%;background:#e10600;"></div></div></div>
+                                <div class="bar-item"><span class="bar-label">Speed</span><div class="bar-track"><div class="bar-fill" style="width:88%;background:#ff4136;"></div></div></div>
+                                <div class="bar-item"><span class="bar-label">Aerodynamics</span><div class="bar-track"><div class="bar-fill" style="width:82%;background:#fbbf24;"></div></div></div>
+                            </div>
+                            <div class="f1-car-price">$8,500,000</div>
+                            <a href="car-detail.html?car=ferrari-sf-23" class="f1-car-btn" style="display:inline-block;text-decoration:none;text-align:center;">Details &#8594;</a>
+                        </div>
+                    </div>
+
+                    <!-- Red Bull RB19 -->
+                    <div class="card f1-car-card infographic-card" data-year="2023" data-price="12000000" data-type="modern">
+                        <div class="infographic-top" style="background: linear-gradient(135deg, #0600ef 0%, #001040 100%);">
+                            <img class="car-photo" data-wiki="Red_Bull_RB19" alt="Red Bull RB19">
+                            <span class="f1-car-badge" style="background:#1e3a8a;">Red Bull</span>
+                            <div class="infographic-overlay">
+                                <div class="info-stat"><span class="info-val">1000+</span><span class="info-label">HP</span></div>
+                                <div class="info-stat"><span class="info-val">360</span><span class="info-label">km/h</span></div>
+                                <div class="info-stat"><span class="info-val">798</span><span class="info-label">kg</span></div>
+                            </div>
+                        </div>
+                        <div class="f1-car-info">
+                            <h3>Red Bull RB19</h3>
+                            <p class="f1-car-year">2023  V6 Turbo Hybrid  Milton Keynes</p>
+                            <p class="f1-car-desc">The most dominant car of the season. 21 wins out of 22 races. Verstappen's machine.</p>
+                            <div class="infographic-bars">
+                                <div class="bar-item"><span class="bar-label">Power</span><div class="bar-track"><div class="bar-fill" style="width:98%;background:#0600ef;"></div></div></div>
+                                <div class="bar-item"><span class="bar-label">Speed</span><div class="bar-track"><div class="bar-fill" style="width:96%;background:#1e3a8a;"></div></div></div>
+                                <div class="bar-item"><span class="bar-label">Aerodynamics</span><div class="bar-track"><div class="bar-fill" style="width:99%;background:#ffd700;"></div></div></div>
+                            </div>
+                            <div class="f1-car-price">$12,000,000</div>
+                            <a href="car-detail.html?car=red-bull-rb19" class="f1-car-btn" style="display:inline-block;text-decoration:none;text-align:center;">Details &#8594;</a>
+                        </div>
+                    </div>
+
+                    <!-- Mercedes W11 -->
+                    <div class="card f1-car-card infographic-card" data-year="2020" data-price="15000000" data-type="modern">
+                        <div class="infographic-top" style="background: linear-gradient(135deg, #00d2be 0%, #005f56 100%);">
+                            <img class="car-photo" data-wiki="Mercedes-AMG_F1_W11_EQ_Performance" alt="Mercedes W11">
+                            <span class="f1-car-badge" style="background:#00d2be;color:#000;">Mercedes</span>
+                            <div class="infographic-overlay">
+                                <div class="info-stat"><span class="info-val">950+</span><span class="info-label">HP</span></div>
+                                <div class="info-stat"><span class="info-val">355</span><span class="info-label">km/h</span></div>
+                                <div class="info-stat"><span class="info-val">746</span><span class="info-label">kg</span></div>
+                            </div>
+                        </div>
+                        <div class="f1-car-info">
+                            <h3>Mercedes W11</h3>
+                            <p class="f1-car-year">2020  V6 Turbo Hybrid  Brixworth</p>
+                            <p class="f1-car-desc">The most dominant car in history. Hamilton's 7th title. 13 wins out of 17.</p>
+                            <div class="infographic-bars">
+                                <div class="bar-item"><span class="bar-label">Power</span><div class="bar-track"><div class="bar-fill" style="width:92%;background:#00d2be;"></div></div></div>
+                                <div class="bar-item"><span class="bar-label">Speed</span><div class="bar-track"><div class="bar-fill" style="width:90%;background:#007d71;"></div></div></div>
+                                <div class="bar-item"><span class="bar-label">Aerodynamics</span><div class="bar-track"><div class="bar-fill" style="width:95%;background:#c0c0c0;"></div></div></div>
+                            </div>
+                            <div class="f1-car-price">$15,000,000</div>
+                            <a href="car-detail.html?car=mercedes-w11" class="f1-car-btn" style="display:inline-block;text-decoration:none;text-align:center;">Details &#8594;</a>
+                        </div>
+                    </div>
+
+                    <!-- McLaren MCL60 -->
+                    <div class="card f1-car-card infographic-card" data-year="2023" data-price="6800000" data-type="modern">
+                        <div class="infographic-top" style="background: linear-gradient(135deg, #ff8000 0%, #c76300 100%);">
+                            <img class="car-photo" data-wiki="McLaren_MCL60" alt="McLaren MCL60">
+                            <span class="f1-car-badge" style="background:#ff8000;color:#000;">McLaren</span>
+                            <div class="infographic-overlay">
+                                <div class="info-stat"><span class="info-val">1000+</span><span class="info-label">HP</span></div>
+                                <div class="info-stat"><span class="info-val">345</span><span class="info-label">km/h</span></div>
+                                <div class="info-stat"><span class="info-val">798</span><span class="info-label">kg</span></div>
+                            </div>
+                        </div>
+                        <div class="f1-car-info">
+                            <h3>McLaren MCL60</h3>
+                            <p class="f1-car-year">2023  V6 Turbo Hybrid  Woking</p>
+                            <p class="f1-car-desc">McLaren's comeback car. Lando Norris and Oscar Piastri. Impressive progress.</p>
+                            <div class="infographic-bars">
+                                <div class="bar-item"><span class="bar-label">Power</span><div class="bar-track"><div class="bar-fill" style="width:90%;background:#ff8000;"></div></div></div>
+                                <div class="bar-item"><span class="bar-label">Speed</span><div class="bar-track"><div class="bar-fill" style="width:85%;background:#e06000;"></div></div></div>
+                                <div class="bar-item"><span class="bar-label">Aerodynamics</span><div class="bar-track"><div class="bar-fill" style="width:88%;background:#fbbf24;"></div></div></div>
+                            </div>
+                            <div class="f1-car-price">$6,800,000</div>
+                            <a href="car-detail.html?car=mclaren-mcl60" class="f1-car-btn" style="display:inline-block;text-decoration:none;text-align:center;">Details &#8594;</a>
+                        </div>
+                    </div>
+
+                    <!-- Ferrari F2004 -->
+                    <div class="card f1-car-card infographic-card" data-year="2004" data-price="25000000" data-type="classic">
+                        <div class="infographic-top" style="background: linear-gradient(135deg, #cc0000 0%, #660000 100%);">
+                            <img class="car-photo" data-wiki="Ferrari_F2004" alt="Ferrari F2004">
+                            <span class="f1-car-badge classic-badge">Ferrari</span>
+                            <div class="infographic-overlay">
+                                <div class="info-stat"><span class="info-val">900</span><span class="info-label">HP</span></div>
+                                <div class="info-stat"><span class="info-val">370</span><span class="info-label">km/h</span></div>
+                                <div class="info-stat"><span class="info-val">605</span><span class="info-label">kg</span></div>
+                            </div>
+                        </div>
+                        <div class="f1-car-info">
+                            <h3>Ferrari F2004</h3>
+                            <p class="f1-car-year">2004  V10 3.0L  Maranello</p>
+                            <p class="f1-car-desc">Schumacher's greatest car. 15 wins out of 18 races. An unbeatable machine.</p>
+                            <div class="infographic-bars">
+                                <div class="bar-item"><span class="bar-label">Power</span><div class="bar-track"><div class="bar-fill" style="width:85%;background:#cc0000;"></div></div></div>
+                                <div class="bar-item"><span class="bar-label">Speed</span><div class="bar-track"><div class="bar-fill" style="width:94%;background:#ff2200;"></div></div></div>
+                                <div class="bar-item"><span class="bar-label">Legend</span><div class="bar-track"><div class="bar-fill" style="width:100%;background:#d4af37;"></div></div></div>
+                            </div>
+                            <div class="f1-car-price">$25,000,000</div>
+                            <a href="car-detail.html?car=ferrari-f2004" class="f1-car-btn" style="display:inline-block;text-decoration:none;text-align:center;">Details &#8594;</a>
+                        </div>
+                    </div>
+
+                    <!-- McLaren MP4/4 -->
+                    <div class="card f1-car-card infographic-card" data-year="1988" data-price="30000000" data-type="classic">
+                        <div class="infographic-top" style="background: linear-gradient(135deg, #c0c0c0 0%, #505050 100%);">
+                            <img class="car-photo" data-wiki="McLaren_MP4/4" alt="McLaren MP4/4">
+                            <span class="f1-car-badge classic-badge">McLaren</span>
+                            <div class="infographic-overlay">
+                                <div class="info-stat"><span class="info-val">685</span><span class="info-label">HP</span></div>
+                                <div class="info-stat"><span class="info-val">340</span><span class="info-label">km/h</span></div>
+                                <div class="info-stat"><span class="info-val">540</span><span class="info-label">kg</span></div>
+                            </div>
+                        </div>
+                        <div class="f1-car-info">
+                            <h3>McLaren MP4/4</h3>
+                            <p class="f1-car-year">1988  V6 Turbo 1.5L  Woking</p>
+                            <p class="f1-car-desc">Ayrton Senna's legendary car. 15 wins out of 16 races. Absolute record.</p>
+                            <div class="infographic-bars">
+                                <div class="bar-item"><span class="bar-label">Power</span><div class="bar-track"><div class="bar-fill" style="width:70%;background:#c0c0c0;"></div></div></div>
+                                <div class="bar-item"><span class="bar-label">Speed</span><div class="bar-track"><div class="bar-fill" style="width:82%;background:#ff4500;"></div></div></div>
+                                <div class="bar-item"><span class="bar-label">Legend</span><div class="bar-track"><div class="bar-fill" style="width:100%;background:#d4af37;"></div></div></div>
+                            </div>
+                            <div class="f1-car-price">$30,000,000</div>
+                            <a href="car-detail.html?car=mclaren-mp4-4" class="f1-car-btn" style="display:inline-block;text-decoration:none;text-align:center;">Details &#8594;</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="section section-alt" id="services">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">02</span>
+                    <h2>Additional Services</h2>
+                    <p class="section-desc">Full service package for car owners.</p>
+                </div>
+                <div class="addons-grid">
+                    <div class="card addon-card">
+                        <div class="addon-icon"></div>
+                        <h3>Maintenance</h3>
+                        <p>Full car maintenance with oil changes, systems check and engine diagnostics.</p>
+                        <div class="addon-price">from $50,000</div>
+                    </div>
+                    <div class="card addon-card">
+                        <div class="addon-icon"></div>
+                        <h3>Track Day</h3>
+                        <p>Full-day circuit rental with an instructor and complete technical support.</p>
+                        <div class="addon-price">from $25,000</div>
+                    </div>
+                    <div class="card addon-card">
+                        <div class="addon-icon"></div>
+                        <h3>Delivery</h3>
+                        <p>Transportation in a specialized climate-controlled container.</p>
+                        <div class="addon-price">from $15,000</div>
+                    </div>
+                    <div class="card addon-card">
+                        <div class="addon-icon"></div>
+                        <h3>Insurance</h3>
+                        <p>Comprehensive car insurance for storage, transport and track days.</p>
+                        <div class="addon-price">from $30,000/year</div>
+                    </div>
+                    <div class="card addon-card">
+                        <div class="addon-icon"></div>
+                        <h3>Restoration</h3>
+                        <p>Full restoration of classic cars to showroom condition.</p>
+                        <div class="addon-price">from $200,000</div>
+                    </div>
+                    <div class="card addon-card">
+                        <div class="addon-icon"></div>
+                        <h3>FIA Certification</h3>
+                        <p>Authenticity certificate with complete car history documentation.</p>
+                        <div class="addon-price">from $10,000</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <h3>Grand Prix Motors</h3>
+                    <p>Exclusive Formula 1 Car Dealer</p>
+                    <p>&#169; 2026 Grand Prix Motors. All rights reserved.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="products.html">Catalog</a>
+                    <a href="charter.html">About</a>
+                    <a href="patterns.html">Patterns</a>
+                    <a href="planning.html">Planning</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p> Grand Prix Motors  Feel the Speed. Own the Legend.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="script.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,1042 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Racing Strategies  Grand Prix Motors</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <script>if(sessionStorage.getItem('pt-navigating'))document.documentElement.classList.add('pt-arriving');</script>
+</head>
+<body>
+    <div class="page-transition" id="pageTransition"><div class="pt-bg"></div><div class="pt-fg"></div><div class="pt-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M4 4v16" stroke="#fff" stroke-width="2" stroke-linecap="round"/><path d="M4 4c3 0 4 2 8 2s5-2 8-2v10c-3 0-4 2-8 2s-5-2-8-2" fill="url(#ptG)" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/><defs><linearGradient id="ptG" x1="4" y1="4" x2="20" y2="14"><stop offset="0%" stop-color="#6366f1"/><stop offset="100%" stop-color="#3b82f6"/></linearGradient></defs></svg></div></div>
+    <nav class="topnav" id="topnav">
+        <div class="topnav-inner">
+            <a href="index.html" class="topnav-logo">
+                <img src="logo-opt.webp" alt="F1 Motors" class="logo-img" width="48" height="48">
+            </a>
+            <div class="topnav-search">
+                <div class="search-box">
+                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    <input type="text" id="searchInput" class="search-input" placeholder="Find a car, team or year..." autocomplete="off">
+                    <div class="search-results" id="searchResults"></div>
+                </div>
+            </div>
+            <div class="topnav-links" id="topnavLinks">
+                <a href="index.html" class="topnav-link">Home</a>
+                <a href="products.html" class="topnav-link">Catalog</a>
+                <a href="charter.html" class="topnav-link">About</a>
+                <a href="patterns.html" class="topnav-link active">Patterns</a>
+                <a href="planning.html" class="topnav-link">Planning</a>
+            </div>
+            <button class="topnav-toggle" id="topnavToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+        </div>
+    </nav>
+
+    <div class="scroll-progress" id="scrollProgress"></div>
+    <button class="back-to-top" id="backToTop" aria-label="Back to top"></button>
+
+    <div class="page-hero">
+        <h1> Racing Strategies</h1>
+        <p>Tactics, aerodynamics and Formula 1 technologies</p>
+    </div>
+
+    <main>
+        <!-- ═══ Track Analysis Section ═══ -->
+        <section class="section" id="track-analysis">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">01</span>
+                    <h2>Circuit Analysis &amp; Telemetry</h2>
+                    <p class="section-desc">Detailed breakdown of each F1 circuit — sectors, speeds and key characteristics.</p>
+                </div>
+
+                <!-- Track selector tabs -->
+                <div class="track-tabs" id="trackTabs">
+                    <button class="track-tab active" data-track="monza">Monza</button>
+                    <button class="track-tab" data-track="spa">Spa-Francorchamps</button>
+                    <button class="track-tab" data-track="monaco">Monaco</button>
+                    <button class="track-tab" data-track="silverstone">Silverstone</button>
+                    <button class="track-tab" data-track="suzuka">Suzuka</button>
+                    <button class="track-tab" data-track="bahrain">Bahrain</button>
+                </div>
+
+                <!-- Track panels -->
+                <div class="track-panels" id="trackPanels">
+
+                    <!-- MONZA -->
+                    <div class="track-panel active" data-track="monza">
+                        <div class="track-layout">
+                            <div class="track-map-card">
+                                <div class="track-map-header">
+                                    <h3>Autodromo Nazionale Monza</h3>
+                                    <span class="track-country"> Italy</span>
+                                </div>
+                                <div class="track-svg-wrap">
+                                    <img src="tracks/monza.svg" alt="Autodromo Nazionale Monza" class="track-img" loading="lazy" width="300" height="300">
+                                </div>
+                                <div class="track-legend">
+                                    <span class="legend-item"><span class="legend-dot" style="background:#e10600;"></span> Sector 1</span>
+                                    <span class="legend-item"><span class="legend-dot" style="background:#fbbf24;"></span> Sector 2</span>
+                                    <span class="legend-item"><span class="legend-dot" style="background:#8b5cf6;"></span> Sector 3</span>
+                                    <span class="legend-item"><span class="legend-dot" style="background:#22c55e;"></span> DRS Zone</span>
+                                </div>
+                            </div>
+                            <div class="track-data-card">
+                                <div class="track-info-grid">
+                                    <div class="track-info-item"><span class="track-info-val">5.793</span><span class="track-info-label">Circuit Length (km)</span></div>
+                                    <div class="track-info-item"><span class="track-info-val">53</span><span class="track-info-label">Laps</span></div>
+                                    <div class="track-info-item"><span class="track-info-val">370+</span><span class="track-info-label">Top Speed (km/h)</span></div>
+                                    <div class="track-info-item"><span class="track-info-val">11</span><span class="track-info-label">Turns</span></div>
+                                    <div class="track-info-item"><span class="track-info-val">1:20.355</span><span class="track-info-label">Lap Record</span></div>
+                                    <div class="track-info-item"><span class="track-info-val">Low</span><span class="track-info-label">Downforce Level</span></div>
+                                </div>
+                                <h4 class="track-data-title">Sector Times (Qualifying)</h4>
+                                <div class="sector-bars">
+                                    <div class="sector-bar-item"><span class="sector-label">S1</span><div class="sector-bar-track"><div class="sector-bar-fill" style="width:85%;background:#e10600;"></div></div><span class="sector-time">26.124s</span></div>
+                                    <div class="sector-bar-item"><span class="sector-label">S2</span><div class="sector-bar-track"><div class="sector-bar-fill" style="width:78%;background:#fbbf24;"></div></div><span class="sector-time">27.801s</span></div>
+                                    <div class="sector-bar-item"><span class="sector-label">S3</span><div class="sector-bar-track"><div class="sector-bar-fill" style="width:72%;background:#8b5cf6;"></div></div><span class="sector-time">26.430s</span></div>
+                                </div>
+                                <h4 class="track-data-title">Speed Trap Analysis</h4>
+                                <div class="speed-chart">
+                                    <div class="speed-bar"><span class="speed-loc">Main Straight</span><div class="speed-bar-track"><div class="speed-bar-fill" style="width:100%;"></div></div><span class="speed-val">370 km/h</span></div>
+                                    <div class="speed-bar"><span class="speed-loc">After Lesmo</span><div class="speed-bar-track"><div class="speed-bar-fill" style="width:82%;"></div></div><span class="speed-val">305 km/h</span></div>
+                                    <div class="speed-bar"><span class="speed-loc">Parabolica Exit</span><div class="speed-bar-track"><div class="speed-bar-fill" style="width:75%;"></div></div><span class="speed-val">280 km/h</span></div>
+                                    <div class="speed-bar"><span class="speed-loc">Curva Grande</span><div class="speed-bar-track"><div class="speed-bar-fill" style="width:70%;"></div></div><span class="speed-val">260 km/h</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SPA -->
+                    <div class="track-panel" data-track="spa">
+                        <div class="track-layout">
+                            <div class="track-map-card">
+                                <div class="track-map-header">
+                                    <h3>Circuit de Spa-Francorchamps</h3>
+                                    <span class="track-country"> Belgium</span>
+                                </div>
+                                <div class="track-svg-wrap">
+                                    <img src="tracks/spa.svg" alt="Circuit de Spa-Francorchamps" class="track-img" loading="lazy" width="300" height="300">
+                                </div>
+                                <div class="track-legend">
+                                    <span class="legend-item"><span class="legend-dot" style="background:#e10600;"></span> Sector 1</span>
+                                    <span class="legend-item"><span class="legend-dot" style="background:#fbbf24;"></span> Sector 2</span>
+                                    <span class="legend-item"><span class="legend-dot" style="background:#8b5cf6;"></span> Sector 3</span>
+                                </div>
+                            </div>
+                            <div class="track-data-card">
+                                <div class="track-info-grid">
+                                    <div class="track-info-item"><span class="track-info-val">7.004</span><span class="track-info-label">Circuit Length (km)</span></div>
+                                    <div class="track-info-item"><span class="track-info-val">44</span><span class="track-info-label">Laps</span></div>
+                                    <div class="track-info-item"><span class="track-info-val">345</span><span class="track-info-label">Top Speed (km/h)</span></div>
+                                    <div class="track-info-item"><span class="track-info-val">19</span><span class="track-info-label">Turns</span></div>
+                                    <div class="track-info-item"><span class="track-info-val">1:46.286</span><span class="track-info-label">Lap Record</span></div>
+                                    <div class="track-info-item"><span class="track-info-val">Medium</span><span class="track-info-label">Downforce Level</span></div>
+                                </div>
+                                <h4 class="track-data-title">Sector Times (Qualifying)</h4>
+                                <div class="sector-bars">
+                                    <div class="sector-bar-item"><span class="sector-label">S1</span><div class="sector-bar-track"><div class="sector-bar-fill" style="width:80%;background:#e10600;"></div></div><span class="sector-time">33.412s</span></div>
+                                    <div class="sector-bar-item"><span class="sector-label">S2</span><div class="sector-bar-track"><div class="sector-bar-fill" style="width:88%;background:#fbbf24;"></div></div><span class="sector-time">41.205s</span></div>
+                                    <div class="sector-bar-item"><span class="sector-label">S3</span><div class="sector-bar-track"><div class="sector-bar-fill" style="width:75%;background:#8b5cf6;"></div></div><span class="sector-time">31.669s</span></div>
+                                </div>
+                                <h4 class="track-data-title">Speed Trap Analysis</h4>
+                                <div class="speed-chart">
+                                    <div class="speed-bar"><span class="speed-loc">Kemmel Straight</span><div class="speed-bar-track"><div class="speed-bar-fill" style="width:93%;"></div></div><span class="speed-val">345 km/h</span></div>
+                                    <div class="speed-bar"><span class="speed-loc">Blanchimont</span><div class="speed-bar-track"><div class="speed-bar-fill" style="width:88%;"></div></div><span class="speed-val">325 km/h</span></div>
+                                    <div class="speed-bar"><span class="speed-loc">Eau Rouge Apex</span><div class="speed-bar-track"><div class="speed-bar-fill" style="width:52%;"></div></div><span class="speed-val">190 km/h</span></div>
+                                    <div class="speed-bar"><span class="speed-loc">La Source</span><div class="speed-bar-track"><div class="speed-bar-fill" style="width:22%;"></div></div><span class="speed-val">80 km/h</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- MONACO -->
+                    <div class="track-panel" data-track="monaco">
+                        <div class="track-layout">
+                            <div class="track-map-card">
+                                <div class="track-map-header">
+                                    <h3>Circuit de Monaco</h3>
+                                    <span class="track-country"> Monaco</span>
+                                </div>
+                                <div class="track-svg-wrap">
+                                    <img src="tracks/monaco.svg" alt="Circuit de Monaco" class="track-img" loading="lazy" width="300" height="300">
+                                </div>
+                                <div class="track-legend">
+                                    <span class="legend-item"><span class="legend-dot" style="background:#e10600;"></span> Sector 1</span>
+                                    <span class="legend-item"><span class="legend-dot" style="background:#fbbf24;"></span> Sector 2</span>
+                                    <span class="legend-item"><span class="legend-dot" style="background:#8b5cf6;"></span> Sector 3</span>
+                                </div>
+                            </div>
+                            <div class="track-data-card">
+                                <div class="track-info-grid">
+                                    <div class="track-info-item"><span class="track-info-val">3.337</span><span class="track-info-label">Circuit Length (km)</span></div>
+                                    <div class="track-info-item"><span class="track-info-val">78</span><span class="track-info-label">Laps</span></div>
+                                    <div class="track-info-item"><span class="track-info-val">290</span><span class="track-info-label">Top Speed (km/h)</span></div>
+                                    <div class="track-info-item"><span class="track-info-val">19</span><span class="track-info-label">Turns</span></div>
+                                    <div class="track-info-item"><span class="track-info-val">1:12.909</span><span class="track-info-label">Lap Record</span></div>
+                                    <div class="track-info-item"><span class="track-info-val">Maximum</span><span class="track-info-label">Downforce Level</span></div>
+                                </div>
+                                <h4 class="track-data-title">Sector Times (Qualifying)</h4>
+                                <div class="sector-bars">
+                                    <div class="sector-bar-item"><span class="sector-label">S1</span><div class="sector-bar-track"><div class="sector-bar-fill" style="width:82%;background:#e10600;"></div></div><span class="sector-time">20.321s</span></div>
+                                    <div class="sector-bar-item"><span class="sector-label">S2</span><div class="sector-bar-track"><div class="sector-bar-fill" style="width:90%;background:#fbbf24;"></div></div><span class="sector-time">32.456s</span></div>
+                                    <div class="sector-bar-item"><span class="sector-label">S3</span><div class="sector-bar-track"><div class="sector-bar-fill" style="width:68%;background:#8b5cf6;"></div></div><span class="sector-time">20.132s</span></div>
+                                </div>
+                                <h4 class="track-data-title">Speed Trap Analysis</h4>
+                                <div class="speed-chart">
+                                    <div class="speed-bar"><span class="speed-loc">Tunnel Exit</span><div class="speed-bar-track"><div class="speed-bar-fill" style="width:78%;"></div></div><span class="speed-val">290 km/h</span></div>
+                                    <div class="speed-bar"><span class="speed-loc">Start/Finish</span><div class="speed-bar-track"><div class="speed-bar-fill" style="width:70%;"></div></div><span class="speed-val">260 km/h</span></div>
+                                    <div class="speed-bar"><span class="speed-loc">Grand Hotel</span><div class="speed-bar-track"><div class="speed-bar-fill" style="width:18%;"></div></div><span class="speed-val">65 km/h</span></div>
+                                    <div class="speed-bar"><span class="speed-loc">Rascasse</span><div class="speed-bar-track"><div class="speed-bar-fill" style="width:12%;"></div></div><span class="speed-val">45 km/h</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SILVERSTONE -->
+                    <div class="track-panel" data-track="silverstone">
+                        <div class="track-layout">
+                            <div class="track-map-card">
+                                <div class="track-map-header">
+                                    <h3>Silverstone Circuit</h3>
+                                    <span class="track-country"> United Kingdom</span>
+                                </div>
+                                <div class="track-svg-wrap">
+                                    <img src="tracks/silverstone.svg" alt="Silverstone Circuit" class="track-img" loading="lazy" width="300" height="300">
+                                </div>
+                                <div class="track-legend">
+                                    <span class="legend-item"><span class="legend-dot" style="background:#e10600;"></span> Sector 1</span>
+                                    <span class="legend-item"><span class="legend-dot" style="background:#fbbf24;"></span> Sector 2</span>
+                                    <span class="legend-item"><span class="legend-dot" style="background:#8b5cf6;"></span> Sector 3</span>
+                                </div>
+                            </div>
+                            <div class="track-data-card">
+                                <div class="track-info-grid">
+                                    <div class="track-info-item"><span class="track-info-val">5.891</span><span class="track-info-label">Circuit Length (km)</span></div>
+                                    <div class="track-info-item"><span class="track-info-val">52</span><span class="track-info-label">Laps</span></div>
+                                    <div class="track-info-item"><span class="track-info-val">340</span><span class="track-info-label">Top Speed (km/h)</span></div>
+                                    <div class="track-info-item"><span class="track-info-val">18</span><span class="track-info-label">Turns</span></div>
+                                    <div class="track-info-item"><span class="track-info-val">1:27.097</span><span class="track-info-label">Lap Record</span></div>
+                                    <div class="track-info-item"><span class="track-info-val">High</span><span class="track-info-label">Downforce Level</span></div>
+                                </div>
+                                <h4 class="track-data-title">Sector Times (Qualifying)</h4>
+                                <div class="sector-bars">
+                                    <div class="sector-bar-item"><span class="sector-label">S1</span><div class="sector-bar-track"><div class="sector-bar-fill" style="width:85%;background:#e10600;"></div></div><span class="sector-time">28.312s</span></div>
+                                    <div class="sector-bar-item"><span class="sector-label">S2</span><div class="sector-bar-track"><div class="sector-bar-fill" style="width:92%;background:#fbbf24;"></div></div><span class="sector-time">35.672s</span></div>
+                                    <div class="sector-bar-item"><span class="sector-label">S3</span><div class="sector-bar-track"><div class="sector-bar-fill" style="width:70%;background:#8b5cf6;"></div></div><span class="sector-time">23.113s</span></div>
+                                </div>
+                                <h4 class="track-data-title">Speed Trap Analysis</h4>
+                                <div class="speed-chart">
+                                    <div class="speed-bar"><span class="speed-loc">Hangar Straight</span><div class="speed-bar-track"><div class="speed-bar-fill" style="width:92%;"></div></div><span class="speed-val">340 km/h</span></div>
+                                    <div class="speed-bar"><span class="speed-loc">Wellington</span><div class="speed-bar-track"><div class="speed-bar-fill" style="width:84%;"></div></div><span class="speed-val">310 km/h</span></div>
+                                    <div class="speed-bar"><span class="speed-loc">Copse</span><div class="speed-bar-track"><div class="speed-bar-fill" style="width:72%;"></div></div><span class="speed-val">265 km/h</span></div>
+                                    <div class="speed-bar"><span class="speed-loc">Maggotts</span><div class="speed-bar-track"><div class="speed-bar-fill" style="width:55%;"></div></div><span class="speed-val">200 km/h</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SUZUKA -->
+                    <div class="track-panel" data-track="suzuka">
+                        <div class="track-layout">
+                            <div class="track-map-card">
+                                <div class="track-map-header">
+                                    <h3>Suzuka International Racing Course</h3>
+                                    <span class="track-country"> Japan</span>
+                                </div>
+                                <div class="track-svg-wrap">
+                                    <img src="tracks/suzuka.svg" alt="Suzuka International Racing Course" class="track-img" loading="lazy" width="300" height="300">
+                                </div>
+                                <div class="track-legend">
+                                    <span class="legend-item"><span class="legend-dot" style="background:#e10600;"></span> Sector 1</span>
+                                    <span class="legend-item"><span class="legend-dot" style="background:#fbbf24;"></span> Sector 2</span>
+                                    <span class="legend-item"><span class="legend-dot" style="background:#8b5cf6;"></span> Sector 3</span>
+                                </div>
+                            </div>
+                            <div class="track-data-card">
+                                <div class="track-info-grid">
+                                    <div class="track-info-item"><span class="track-info-val">5.807</span><span class="track-info-label">Circuit Length (km)</span></div>
+                                    <div class="track-info-item"><span class="track-info-val">53</span><span class="track-info-label">Laps</span></div>
+                                    <div class="track-info-item"><span class="track-info-val">330</span><span class="track-info-label">Top Speed (km/h)</span></div>
+                                    <div class="track-info-item"><span class="track-info-val">18</span><span class="track-info-label">Turns</span></div>
+                                    <div class="track-info-item"><span class="track-info-val">1:30.983</span><span class="track-info-label">Lap Record</span></div>
+                                    <div class="track-info-item"><span class="track-info-val">High</span><span class="track-info-label">Downforce Level</span></div>
+                                </div>
+                                <h4 class="track-data-title">Sector Times (Qualifying)</h4>
+                                <div class="sector-bars">
+                                    <div class="sector-bar-item"><span class="sector-label">S1</span><div class="sector-bar-track"><div class="sector-bar-fill" style="width:88%;background:#e10600;"></div></div><span class="sector-time">30.142s</span></div>
+                                    <div class="sector-bar-item"><span class="sector-label">S2</span><div class="sector-bar-track"><div class="sector-bar-fill" style="width:85%;background:#fbbf24;"></div></div><span class="sector-time">38.956s</span></div>
+                                    <div class="sector-bar-item"><span class="sector-label">S3</span><div class="sector-bar-track"><div class="sector-bar-fill" style="width:72%;background:#8b5cf6;"></div></div><span class="sector-time">21.885s</span></div>
+                                </div>
+                                <h4 class="track-data-title">Speed Trap Analysis</h4>
+                                <div class="speed-chart">
+                                    <div class="speed-bar"><span class="speed-loc">Back Straight</span><div class="speed-bar-track"><div class="speed-bar-fill" style="width:89%;"></div></div><span class="speed-val">330 km/h</span></div>
+                                    <div class="speed-bar"><span class="speed-loc">130R</span><div class="speed-bar-track"><div class="speed-bar-fill" style="width:82%;"></div></div><span class="speed-val">305 km/h</span></div>
+                                    <div class="speed-bar"><span class="speed-loc">Spoon Exit</span><div class="speed-bar-track"><div class="speed-bar-fill" style="width:60%;"></div></div><span class="speed-val">220 km/h</span></div>
+                                    <div class="speed-bar"><span class="speed-loc">Hairpin</span><div class="speed-bar-track"><div class="speed-bar-fill" style="width:18%;"></div></div><span class="speed-val">65 km/h</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- BAHRAIN -->
+                    <div class="track-panel" data-track="bahrain">
+                        <div class="track-layout">
+                            <div class="track-map-card">
+                                <div class="track-map-header">
+                                    <h3>Bahrain International Circuit</h3>
+                                    <span class="track-country"> Bahrain</span>
+                                </div>
+                                <div class="track-svg-wrap">
+                                    <img src="tracks/bahrain.svg" alt="Bahrain International Circuit" class="track-img" loading="lazy" width="300" height="300">
+                                </div>
+                                <div class="track-legend">
+                                    <span class="legend-item"><span class="legend-dot" style="background:#e10600;"></span> Sector 1</span>
+                                    <span class="legend-item"><span class="legend-dot" style="background:#fbbf24;"></span> Sector 2</span>
+                                    <span class="legend-item"><span class="legend-dot" style="background:#8b5cf6;"></span> Sector 3</span>
+                                </div>
+                            </div>
+                            <div class="track-data-card">
+                                <div class="track-info-grid">
+                                    <div class="track-info-item"><span class="track-info-val">5.412</span><span class="track-info-label">Circuit Length (km)</span></div>
+                                    <div class="track-info-item"><span class="track-info-val">57</span><span class="track-info-label">Laps</span></div>
+                                    <div class="track-info-item"><span class="track-info-val">330</span><span class="track-info-label">Top Speed (km/h)</span></div>
+                                    <div class="track-info-item"><span class="track-info-val">15</span><span class="track-info-label">Turns</span></div>
+                                    <div class="track-info-item"><span class="track-info-val">1:31.447</span><span class="track-info-label">Lap Record</span></div>
+                                    <div class="track-info-item"><span class="track-info-val">Medium</span><span class="track-info-label">Downforce Level</span></div>
+                                </div>
+                                <h4 class="track-data-title">Sector Times (Qualifying)</h4>
+                                <div class="sector-bars">
+                                    <div class="sector-bar-item"><span class="sector-label">S1</span><div class="sector-bar-track"><div class="sector-bar-fill" style="width:82%;background:#e10600;"></div></div><span class="sector-time">29.156s</span></div>
+                                    <div class="sector-bar-item"><span class="sector-label">S2</span><div class="sector-bar-track"><div class="sector-bar-fill" style="width:86%;background:#fbbf24;"></div></div><span class="sector-time">36.844s</span></div>
+                                    <div class="sector-bar-item"><span class="sector-label">S3</span><div class="sector-bar-track"><div class="sector-bar-fill" style="width:74%;background:#8b5cf6;"></div></div><span class="sector-time">25.447s</span></div>
+                                </div>
+                                <h4 class="track-data-title">Speed Trap Analysis</h4>
+                                <div class="speed-chart">
+                                    <div class="speed-bar"><span class="speed-loc">Main Straight</span><div class="speed-bar-track"><div class="speed-bar-fill" style="width:89%;"></div></div><span class="speed-val">330 km/h</span></div>
+                                    <div class="speed-bar"><span class="speed-loc">Back Straight</span><div class="speed-bar-track"><div class="speed-bar-fill" style="width:83%;"></div></div><span class="speed-val">310 km/h</span></div>
+                                    <div class="speed-bar"><span class="speed-loc">T4 Exit</span><div class="speed-bar-track"><div class="speed-bar-fill" style="width:55%;"></div></div><span class="speed-val">205 km/h</span></div>
+                                    <div class="speed-bar"><span class="speed-loc">T10 (Hairpin)</span><div class="speed-bar-track"><div class="speed-bar-fill" style="width:20%;"></div></div><span class="speed-val">75 km/h</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="pitstop">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">02</span>
+                    <h2>Pit Stop Strategies</h2>
+                    <p class="section-desc">How strategy choices decide race outcomes.</p>
+                </div>
+                <div class="features-grid">
+                    <div class="card feature-card">
+                        <div class="feature-icon">1&#8419;</div>
+                        <h3>One-Stop</h3>
+                        <p>Minimum time loss. Used on circuits with low tire wear: Monza, Spa.</p>
+                    </div>
+                    <div class="card feature-card">
+                        <div class="feature-icon">2&#8419;</div>
+                        <h3>Two-Stop</h3>
+                        <p>Balance of speed and durability. Popular on technical circuits: Barcelona, Singapore.</p>
+                    </div>
+                    <div class="card feature-card">
+                        <div class="feature-icon">3&#8419;</div>
+                        <h3>Three-Stop</h3>
+                        <p>Aggressive strategy for high-wear races: Silverstone, Sakhir.</p>
+                    </div>
+                    <div class="card feature-card">
+                        <div class="feature-icon"></div>
+                        <h3>Undercut</h3>
+                        <p>Pit earlier than your rival. Exit on fresh tires and overtake through pace.</p>
+                    </div>
+                    <div class="card feature-card">
+                        <div class="feature-icon"></div>
+                        <h3>Overcut</h3>
+                        <p>Stay out longer. Use clean air to attack when exiting the pits.</p>
+                    </div>
+                    <div class="card feature-card">
+                        <div class="feature-icon"></div>
+                        <h3>Rain Strategy</h3>
+                        <p>Wet  Inter  Slick transitions. The timing of the switch is key to victory in changeable conditions.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section-alt" id="tires">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">03</span>
+                    <h2>Pirelli Tire Compounds</h2>
+                    <p class="section-desc">Five dry compounds + two for rain.</p>
+                </div>
+                <div class="card">
+                    <table class="charter-table">
+                        <thead>
+                            <tr>
+                                <th>Compound</th>
+                                <th>Color</th>
+                                <th>Characteristics</th>
+                                <th>Durability</th>
+                                <th>Speed</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="badge" style="background:#e10600;color:#fff;">C5</span> Hypersoft</td>
+                                <td> Red</td>
+                                <td>Maximum grip, minimum lifespan</td>
+                                <td>&#9733;</td>
+                                <td>&#9733;&#9733;&#9733;&#9733;&#9733;</td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge" style="background:#fbbf24;color:#000;">C4</span> Soft</td>
+                                <td> Yellow</td>
+                                <td>Fast with good balance</td>
+                                <td>&#9733;&#9733;</td>
+                                <td>&#9733;&#9733;&#9733;&#9733;</td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge" style="background:#fff;color:#000;">C3</span> Medium</td>
+                                <td> White</td>
+                                <td>Universal compound</td>
+                                <td>&#9733;&#9733;&#9733;</td>
+                                <td>&#9733;&#9733;&#9733;</td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge" style="background:#60a5fa;color:#fff;">C2</span> Hard</td>
+                                <td> Blue</td>
+                                <td>Durable, for long stints</td>
+                                <td>&#9733;&#9733;&#9733;&#9733;</td>
+                                <td>&#9733;&#9733;</td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge" style="background:#94a3b8;color:#000;">C1</span> Superhard</td>
+                                <td> Grey</td>
+                                <td>Maximum durability</td>
+                                <td>&#9733;&#9733;&#9733;&#9733;&#9733;</td>
+                                <td>&#9733;</td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge" style="background:#34d399;color:#000;">Inter</span></td>
+                                <td> Green</td>
+                                <td>Intermediate, damp track</td>
+                                <td>&#9733;&#9733;&#9733;</td>
+                                <td>&#9733;&#9733;&#9733;</td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge" style="background:#2563eb;color:#fff;">Wet</span></td>
+                                <td> Dark Blue</td>
+                                <td>Full wet weather</td>
+                                <td>&#9733;&#9733;&#9733;&#9733;</td>
+                                <td>&#9733;&#9733;</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="aero">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">04</span>
+                    <h2>Aerodynamics</h2>
+                    <p class="section-desc">How the car's shape determines speed.</p>
+                </div>
+                <div class="features-grid">
+                    <div class="card feature-card">
+                        <div class="feature-icon"></div>
+                        <h3>Downforce</h3>
+                        <p>A modern F1 car generates up to 1500 kg of downforce at 250 km/h. Theoretically could drive on the ceiling.</p>
+                    </div>
+                    <div class="card feature-card">
+                        <div class="feature-icon"></div>
+                        <h3>Ground Effect</h3>
+                        <p>Since 2022, the underbody creates a Venturi effect  the main source of downforce comes from beneath the car.</p>
+                    </div>
+                    <div class="card feature-card">
+                        <div class="feature-icon"></div>
+                        <h3>DRS</h3>
+                        <p>Drag Reduction System. Opening the rear wing increases straight-line speed by 10-15 km/h.</p>
+                    </div>
+                    <div class="card feature-card">
+                        <div class="feature-icon"></div>
+                        <h3>Vortices</h3>
+                        <p>Bargeboards, deflectors and vortex generators direct airflow around the car.</p>
+                    </div>
+                    <div class="card feature-card">
+                        <div class="feature-icon"></div>
+                        <h3>Wing Configuration</h3>
+                        <p>High downforce (Monaco) vs low drag (Monza). Setup tailored to each circuit.</p>
+                    </div>
+                    <div class="card feature-card">
+                        <div class="feature-icon"></div>
+                        <h3>Wind Tunnel &amp; CFD</h3>
+                        <p>Thousands of hours of wind tunnel testing and computer simulation each season.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section-alt" id="specs">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">05</span>
+                    <h2>F1 Car Technical Specifications</h2>
+                    <p class="section-desc">Key parameters of a modern F1 car.</p>
+                </div>
+                <div class="card">
+                    <table class="charter-table">
+                        <thead>
+                            <tr>
+                                <th>Parameter</th>
+                                <th>Value</th>
+                                <th>Note</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Engine</td><td>1.6L V6 Turbo Hybrid</td><td>ICE + MGU-K + MGU-H + ES + CE + TC</td></tr>
+                            <tr><td>Power</td><td>~1000 HP</td><td>ICE ~700 + ERS ~300</td></tr>
+                            <tr><td>Max RPM</td><td>15,000 rpm</td><td>FIA regulation limit</td></tr>
+                            <tr><td>Min. Weight</td><td>798 kg</td><td>With driver, without fuel</td></tr>
+                            <tr><td>Top Speed</td><td>~370 km/h</td><td>Depends on wing configuration</td></tr>
+                            <tr><td>0-100 km/h</td><td>~2.6 seconds</td><td>Limited by tire grip</td></tr>
+                            <tr><td>0-200 km/h</td><td>~4.6 seconds</td><td>Faster than any supercar</td></tr>
+                            <tr><td>Max G-Force</td><td>6G</td><td>Under braking and cornering</td></tr>
+                            <tr><td>Fuel Load</td><td>110 kg</td><td>Maximum at race start</td></tr>
+                            <tr><td>Downforce</td><td>~1500 kg</td><td>At speeds of 250+ km/h</td></tr>
+                            <tr><td>Brake Disc</td><td>1000C</td><td>Carbon-ceramic composite</td></tr>
+                            <tr><td>Pit Stop</td><td>~2.0 s</td><td>Record: 1.80 s (Red Bull)</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="oop-relationships">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">06</span>
+                    <h2>Object Relationships in Code</h2>
+                    <p class="section-desc">How F1 domain objects relate to each other using OOP patterns.</p>
+                </div>
+
+                <div class="relationship-grid">
+                    <div class="card relationship-card">
+                        <span class="badge rel-composition">Composition</span>
+                        <h3>Team &#x25C6; Engine</h3>
+                        <p>The Engine <strong>cannot exist</strong> without its Team. When the Team is destroyed, the Engine goes with it.</p>
+                        <div class="code-block" data-lang="Python">
+<pre>class Engine:
+    """Tightly coupled to Team lifecycle."""
+    def __init__(self, spec: str, horsepower: int):
+        self.spec = spec
+        self.horsepower = horsepower
+
+    def start(self) -> str:
+        return f"{self.spec} engine firing up ({self.horsepower} HP)"
+
+
+class Team:
+    """Owns its Engine via composition."""
+    def __init__(self, name: str, engine_spec: str, hp: int):
+        self.name = name
+        # Engine is CREATED inside Team  composition
+        self._engine = Engine(engine_spec, hp)
+
+    def race(self) -> str:
+        return f"{self.name}: {self._engine.start()}"
+
+    # When Team is deleted, Engine is deleted too
+
+
+ferrari = Team("Scuderia Ferrari", "066/7", 1000)
+print(ferrari.race())
+# Scuderia Ferrari: 066/7 engine firing up (1000 HP)</pre>
+                        </div>
+                        <div class="code-explanation">
+                            The <code>Engine</code> is created inside <code>Team.__init__</code>. It has no independent lifecycle &mdash; if the team is dissolved, the engine ceases to exist. This is <strong>Composition</strong> (filled diamond &#x25C6;).
+                        </div>
+                    </div>
+
+                    <div class="card relationship-card">
+                        <span class="badge rel-aggregation">Aggregation</span>
+                        <h3>Team &#x25C7; Driver</h3>
+                        <p>A Driver <strong>can exist</strong> independently of a Team. They can transfer between teams.</p>
+                        <div class="code-block" data-lang="Python">
+<pre>class Driver:
+    """Exists independently of any Team."""
+    def __init__(self, name: str, number: int):
+        self.name = name
+        self.number = number
+
+    def __repr__(self):
+        return f"#{self.number} {self.name}"
+
+
+class Team:
+    """Holds references to Drivers  aggregation."""
+    def __init__(self, name: str):
+        self.name = name
+        self.drivers: list[Driver] = []
+
+    def sign_driver(self, driver: Driver):
+        self.drivers.append(driver)
+
+    def release_driver(self, driver: Driver):
+        self.drivers.remove(driver)
+
+    def lineup(self) -> str:
+        return f"{self.name}: {', '.join(str(d) for d in self.drivers)}"
+
+
+verstappen = Driver("Max Verstappen", 1)
+red_bull = Team("Red Bull Racing")
+red_bull.sign_driver(verstappen)
+
+# Driver survives if Team is dissolved
+red_bull.release_driver(verstappen)
+# verstappen still exists independently</pre>
+                        </div>
+                        <div class="code-explanation">
+                            The <code>Driver</code> object is passed into the <code>Team</code> from outside. Releasing a driver doesn't destroy them. This is <strong>Aggregation</strong> (empty diamond &#x25C7;).
+                        </div>
+                    </div>
+
+                    <div class="card relationship-card">
+                        <span class="badge rel-inheritance">Inheritance</span>
+                        <h3>RaceCar &#x2192; Vehicle</h3>
+                        <p>A RaceCar <strong>is a</strong> Vehicle with specialized behavior and additional capabilities.</p>
+                        <div class="code-block" data-lang="Python">
+<pre>from abc import ABC, abstractmethod
+
+
+class Vehicle(ABC):
+    """Base abstraction for all motorized vehicles."""
+    def __init__(self, make: str, top_speed: int):
+        self.make = make
+        self.top_speed = top_speed
+
+    @abstractmethod
+    def accelerate(self) -> str: ...
+
+    def __repr__(self):
+        return f"{self.make} (top speed: {self.top_speed} km/h)"
+
+
+class RaceCar(Vehicle):
+    """Specialized vehicle with DRS and KERS."""
+    def __init__(self, make: str, top_speed: int, drs: bool = True):
+        super().__init__(make, top_speed)
+        self.drs = drs
+        self.kers_charge = 100
+
+    def accelerate(self) -> str:
+        boost = " + DRS open!" if self.drs else ""
+        return f"{self.make} accelerating to {self.top_speed} km/h{boost}"
+
+    def deploy_kers(self) -> str:
+        self.kers_charge -= 20
+        return f"KERS deployed! Charge remaining: {self.kers_charge}%"
+
+
+rb19 = RaceCar("Red Bull RB19", 370, drs=True)
+print(rb19.accelerate())
+# Red Bull RB19 accelerating to 370 km/h + DRS open!
+print(rb19.deploy_kers())
+# KERS deployed! Charge remaining: 80%</pre>
+                        </div>
+                        <div class="code-explanation">
+                            <code>RaceCar</code> extends the abstract <code>Vehicle</code> class, inheriting <code>make</code> and <code>top_speed</code> while adding <code>drs</code> and <code>deploy_kers</code>. This is <strong>Inheritance</strong> (IS-A).
+                        </div>
+                    </div>
+
+                    <div class="card relationship-card">
+                        <span class="badge rel-association">Association</span>
+                        <h3>Driver &#x2014; RaceCar</h3>
+                        <p>A Driver <strong>uses</strong> a RaceCar but neither owns nor contains the other.</p>
+                        <div class="code-block" data-lang="Python">
+<pre>class RaceCar:
+    def __init__(self, model: str):
+        self.model = model
+
+    def drive(self, driver_name: str) -> str:
+        return f"{driver_name} is driving the {self.model}"
+
+
+class Driver:
+    def __init__(self, name: str):
+        self.name = name
+
+    def get_in(self, car: RaceCar) -> str:
+        """Association: Driver uses RaceCar."""
+        return car.drive(self.name)
+
+
+sf23 = RaceCar("Ferrari SF-23")
+leclerc = Driver("Charles Leclerc")
+
+print(leclerc.get_in(sf23))
+# Charles Leclerc is driving the Ferrari SF-23
+
+# Both objects exist independently
+# Neither creates nor owns the other</pre>
+                        </div>
+                        <div class="code-explanation">
+                            Neither <code>Driver</code> nor <code>RaceCar</code> owns the other. The driver receives the car as a parameter. Both have independent lifecycles. This is <strong>Association</strong> (plain line).
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section-alt" id="solid">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">07</span>
+                    <h2>SOLID Principles in F1 Domain</h2>
+                    <p class="section-desc">Each letter of SOLID illustrated with Formula 1 objects.</p>
+                </div>
+
+                <div class="solid-grid">
+                    <!-- S  Single Responsibility -->
+                    <div class="card code-section">
+                        <span class="principle-badge">S</span>
+                        <h3>Single Responsibility Principle</h3>
+                        <p>A class should have <strong>one reason to change</strong>. The LapTimer only tracks lap times  it does not handle telemetry, fuel or tires.</p>
+                        <div class="code-block" data-lang="Python">
+<pre># BAD: one class does everything
+class GodRaceManager:
+    def record_lap(self): ...
+    def calculate_fuel(self): ...
+    def adjust_tire_pressure(self): ...
+    def send_telemetry(self): ...
+
+
+# GOOD: each class has one responsibility
+class LapTimer:
+    """Only tracks lap times."""
+    def __init__(self):
+        self._laps: list[float] = []
+
+    def record(self, time: float):
+        self._laps.append(time)
+
+    def best_lap(self) -> float:
+        return min(self._laps) if self._laps else 0.0
+
+    def average(self) -> float:
+        return sum(self._laps) / len(self._laps) if self._laps else 0.0
+
+
+class FuelManager:
+    """Only manages fuel calculations."""
+    def __init__(self, capacity: float):
+        self.capacity = capacity
+        self.current = capacity
+
+    def consume(self, amount: float):
+        self.current = max(0, self.current - amount)
+
+    def laps_remaining(self, consumption_per_lap: float) -> int:
+        return int(self.current / consumption_per_lap)</pre>
+                        </div>
+                    </div>
+
+                    <!-- O  Open/Closed -->
+                    <div class="card code-section">
+                        <span class="principle-badge">O</span>
+                        <h3>Open/Closed Principle</h3>
+                        <p>Open for extension, closed for modification. New tire strategies are added by creating new classes, not by editing existing ones.</p>
+                        <div class="code-block" data-lang="Python">
+<pre>from abc import ABC, abstractmethod
+
+
+class TireStrategy(ABC):
+    """Base strategy  closed for modification."""
+    @abstractmethod
+    def recommend_stop_lap(self, total_laps: int) -> list[int]: ...
+
+    @abstractmethod
+    def compound_sequence(self) -> list[str]: ...
+
+
+class OneStopStrategy(TireStrategy):
+    """Extension: one stop around mid-race."""
+    def recommend_stop_lap(self, total_laps: int) -> list[int]:
+        return [total_laps // 2]
+
+    def compound_sequence(self) -> list[str]:
+        return ["Medium", "Hard"]
+
+
+class TwoStopStrategy(TireStrategy):
+    """Extension: two stops splitting race into thirds."""
+    def recommend_stop_lap(self, total_laps: int) -> list[int]:
+        return [total_laps // 3, 2 * total_laps // 3]
+
+    def compound_sequence(self) -> list[str]:
+        return ["Soft", "Medium", "Hard"]
+
+
+class WetToSlickStrategy(TireStrategy):
+    """New strategy added WITHOUT modifying existing code."""
+    def recommend_stop_lap(self, total_laps: int) -> list[int]:
+        return [8, total_laps // 2]
+
+    def compound_sequence(self) -> list[str]:
+        return ["Wet", "Intermediate", "Soft"]</pre>
+                        </div>
+                    </div>
+
+                    <!-- L  Liskov Substitution -->
+                    <div class="card code-section">
+                        <span class="principle-badge">L</span>
+                        <h3>Liskov Substitution Principle</h3>
+                        <p>Subtypes must be substitutable for their base type. Any <code>Tire</code> subclass must work wherever a <code>Tire</code> is expected.</p>
+                        <div class="code-block" data-lang="Python">
+<pre>class Tire:
+    """Base tire with grip and degradation."""
+    def __init__(self, compound: str, initial_grip: float):
+        self.compound = compound
+        self.grip = initial_grip
+
+    def degrade(self, laps: int) -> float:
+        self.grip -= laps * 0.02
+        return max(0, self.grip)
+
+    def is_safe(self) -> bool:
+        return self.grip > 0.2
+
+
+class SoftTire(Tire):
+    """Higher grip, faster degradation."""
+    def __init__(self):
+        super().__init__("Soft", 1.0)
+
+    def degrade(self, laps: int) -> float:
+        self.grip -= laps * 0.05  # degrades faster
+        return max(0, self.grip)
+
+
+class HardTire(Tire):
+    """Lower grip, slower degradation."""
+    def __init__(self):
+        super().__init__("Hard", 0.75)
+
+    def degrade(self, laps: int) -> float:
+        self.grip -= laps * 0.01  # degrades slower
+        return max(0, self.grip)
+
+
+def simulate_stint(tire: Tire, laps: int):
+    """Works with ANY Tire subtype  LSP guaranteed."""
+    for lap in range(1, laps + 1):
+        grip = tire.degrade(1)
+        if not tire.is_safe():
+            return f"{tire.compound}: unsafe at lap {lap}"
+    return f"{tire.compound}: completed {laps} laps (grip: {tire.grip:.2f})"
+
+
+# Both subtypes work seamlessly as Tire
+print(simulate_stint(SoftTire(), 20))
+print(simulate_stint(HardTire(), 20))</pre>
+                        </div>
+                    </div>
+
+                    <!-- I  Interface Segregation -->
+                    <div class="card code-section">
+                        <span class="principle-badge">I</span>
+                        <h3>Interface Segregation Principle</h3>
+                        <p>No client should be forced to depend on interfaces it doesn't use. Separate capabilities into focused protocols.</p>
+                        <div class="code-block" data-lang="Python">
+<pre>from typing import Protocol
+
+
+# BAD: fat interface forces all implementors to define everything
+# class ICar:
+#     def drive(self): ...
+#     def repair(self): ...
+#     def send_telemetry(self): ...
+#     def display_sponsor_logo(self): ...
+
+
+# GOOD: segregated interfaces
+class Driveable(Protocol):
+    def accelerate(self) -> str: ...
+    def brake(self) -> str: ...
+
+
+class Repairable(Protocol):
+    def diagnose(self) -> list[str]: ...
+    def fix(self, issue: str) -> str: ...
+
+
+class Telemetric(Protocol):
+    def send_data(self) -> dict: ...
+    def stream_live(self) -> bool: ...
+
+
+class RaceCar:
+    """Implements all three interfaces."""
+    def __init__(self, model: str):
+        self.model = model
+        self.speed = 0
+
+    # Driveable
+    def accelerate(self) -> str:
+        self.speed += 50
+        return f"{self.model} speed: {self.speed} km/h"
+
+    def brake(self) -> str:
+        self.speed = max(0, self.speed - 80)
+        return f"Braking! Speed: {self.speed} km/h"
+
+    # Repairable
+    def diagnose(self) -> list[str]:
+        return ["front wing", "tire wear"]
+
+    def fix(self, issue: str) -> str:
+        return f"Fixed {issue} on {self.model}"
+
+    # Telemetric
+    def send_data(self) -> dict:
+        return {"speed": self.speed, "model": self.model}
+
+    def stream_live(self) -> bool:
+        return True
+
+
+class SafetyCar:
+    """Only needs Driveable  not forced to implement Repairable/Telemetric."""
+    def accelerate(self) -> str:
+        return "Safety car leading the field"
+
+    def brake(self) -> str:
+        return "Safety car slowing down"</pre>
+                        </div>
+                    </div>
+
+                    <!-- D  Dependency Inversion -->
+                    <div class="card code-section">
+                        <span class="principle-badge">D</span>
+                        <h3>Dependency Inversion Principle</h3>
+                        <p>High-level modules should depend on abstractions, not concrete implementations. The RaceEngineer depends on a Strategy interface.</p>
+                        <div class="code-block" data-lang="Python">
+<pre>from abc import ABC, abstractmethod
+
+
+class Strategy(ABC):
+    """Abstraction that high-level modules depend on."""
+    @abstractmethod
+    def plan(self, laps_remaining: int, tire_age: int) -> str: ...
+
+
+class AggressiveStrategy(Strategy):
+    def plan(self, laps_remaining: int, tire_age: int) -> str:
+        if tire_age > 8:
+            return "BOX BOX BOX  switch to Soft"
+        return "Push hard, DRS every lap"
+
+
+class ConservativeStrategy(Strategy):
+    def plan(self, laps_remaining: int, tire_age: int) -> str:
+        if tire_age > 20:
+            return "BOX BOX  switch to Hard"
+        return "Manage tires, save fuel"
+
+
+class RaceEngineer:
+    """High-level module depends on Strategy abstraction."""
+    def __init__(self, name: str, strategy: Strategy):
+        self.name = name
+        self._strategy = strategy  # depends on ABC, not concrete class
+
+    def advise(self, laps_remaining: int, tire_age: int) -> str:
+        decision = self._strategy.plan(laps_remaining, tire_age)
+        return f"Engineer {self.name}: {decision}"
+
+    def change_strategy(self, new_strategy: Strategy):
+        """Can swap strategy at runtime without modifying RaceEngineer."""
+        self._strategy = new_strategy
+
+
+# Usage: inject any Strategy implementation
+engineer = RaceEngineer("James", AggressiveStrategy())
+print(engineer.advise(20, 10))
+# Engineer James: BOX BOX BOX  switch to Soft
+
+engineer.change_strategy(ConservativeStrategy())
+print(engineer.advise(20, 5))
+# Engineer James: Manage tires, save fuel</pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+print(engineer.advise(20, 5))
+# Engineer James: Manage tires, save fuel</pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Grand Prix Motors</h4>
+                    <p>Exclusive Formula 1 car dealership. From legendary classics to modern championship-winning machines.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Navigation</h4>
+                    <a href="index.html">Home</a>
+                    <a href="products.html">Catalog</a>
+                    <a href="charter.html">About Us</a>
+                    <a href="patterns.html">Patterns</a>
+                    <a href="planning.html">Planning</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <p> 42 Enzo Ferrari Ave, Maranello</p>
+                    <p> +39 0536 949 111</p>
+                    <p> info@grandprixmotors.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Grand Prix Motors. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js" defer></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const tabs = document.querySelectorAll('.track-tab');
+        const panels = document.querySelectorAll('.track-panel');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const track = tab.getAttribute('data-track');
+                tabs.forEach(t => t.classList.remove('active'));
+                panels.forEach(p => p.classList.remove('active'));
+                tab.classList.add('active');
+                const target = document.querySelector(`.track-panel[data-track="${track}"]`);
+                if (target) target.classList.add('active');
+            });
+        });
+    });
+    </script>
+</body>
+</html>

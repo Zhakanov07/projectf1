@@ -1,0 +1,251 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us  Grand Prix Motors</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <script>if(sessionStorage.getItem('pt-navigating'))document.documentElement.classList.add('pt-arriving');</script>
+</head>
+<body>
+    <div class="page-transition" id="pageTransition"><div class="pt-bg"></div><div class="pt-fg"></div><div class="pt-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M4 4v16" stroke="#fff" stroke-width="2" stroke-linecap="round"/><path d="M4 4c3 0 4 2 8 2s5-2 8-2v10c-3 0-4 2-8 2s-5-2-8-2" fill="url(#ptG)" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/><defs><linearGradient id="ptG" x1="4" y1="4" x2="20" y2="14"><stop offset="0%" stop-color="#6366f1"/><stop offset="100%" stop-color="#3b82f6"/></linearGradient></defs></svg></div></div>
+    <nav class="topnav" id="topnav">
+        <div class="topnav-inner">
+            <a href="index.html" class="topnav-logo">
+                <img src="logo-opt.webp" alt="F1 Motors" class="logo-img" width="48" height="48">
+            </a>
+            <div class="topnav-search">
+                <div class="search-box">
+                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    <input type="text" id="searchInput" class="search-input" placeholder="Find a car, team or year..." autocomplete="off">
+                    <div class="search-results" id="searchResults"></div>
+                </div>
+            </div>
+            <div class="topnav-links" id="topnavLinks">
+                <a href="index.html" class="topnav-link">Home</a>
+                <a href="products.html" class="topnav-link">Catalog</a>
+                <a href="charter.html" class="topnav-link active">About</a>
+                <a href="patterns.html" class="topnav-link">Patterns</a>
+                <a href="planning.html" class="topnav-link">Planning</a>
+            </div>
+            <button class="topnav-toggle" id="topnavToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+        </div>
+    </nav>
+
+    <div class="scroll-progress" id="scrollProgress"></div>
+    <button class="back-to-top" id="backToTop" aria-label="Back to top"></button>
+
+    <div class="page-hero">
+        <h1> About Us</h1>
+        <p>Grand Prix Motors  history, mission and team</p>
+    </div>
+
+    <main>
+        <section class="section" id="about">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">01</span>
+                    <h2>Our History</h2>
+                    <p class="section-desc">More than half a century in the world of Formula 1.</p>
+                </div>
+                <div class="card">
+                    <div class="about-content">
+                        <p>Grand Prix Motors was founded in <strong>1971</strong> by a group of motorsport enthusiasts in Monaco. Starting from a small garage, we became the world's largest Formula 1 car dealership.</p>
+                        <p>Over 55 years we have sold more than <strong>200 cars</strong> to collectors and museums worldwide. Our clients include royal families, tech company founders, and motorsport legends.</p>
+                        <p>Today Grand Prix Motors is a team of <strong>40 specialists</strong>, including former engineers from Ferrari, Mercedes and McLaren, who ensure the authenticity, maintenance and restoration of every car.</p>
+                    </div>
+                </div>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-year">1971</div>
+                        <div class="timeline-content">
+                            <h4>Foundation</h4>
+                            <p>Opening of the first showroom in Monaco. First sale  a 1968 Lotus 49.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1985</div>
+                        <div class="timeline-content">
+                            <h4>Expansion</h4>
+                            <p>Opening of the restoration center in Maranello. Partnership with Ferrari.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2000</div>
+                        <div class="timeline-content">
+                            <h4>Global Growth</h4>
+                            <p>Offices in London, Dubai and Tokyo. Sale of Schumacher's car for a record $15M.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2015</div>
+                        <div class="timeline-content">
+                            <h4>Digitalization</h4>
+                            <p>Launch of online platform. Virtual showroom tours. Real-time auctions.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2026</div>
+                        <div class="timeline-content">
+                            <h4>Today</h4>
+                            <p>50+ cars in stock. World-class service center. Market leader.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section-alt" id="mission">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">02</span>
+                    <h2>Mission &amp; Values</h2>
+                    <p class="section-desc">What drives us.</p>
+                </div>
+                <div class="features-grid">
+                    <div class="card feature-card">
+                        <div class="feature-icon"></div>
+                        <h3>Mission</h3>
+                        <p>Preserving the heritage of Formula 1, making legendary cars accessible to true motorsport connoisseurs.</p>
+                    </div>
+                    <div class="card feature-card">
+                        <div class="feature-icon"></div>
+                        <h3>Authenticity</h3>
+                        <p>Every car undergoes rigorous verification. We guarantee 100% originality.</p>
+                    </div>
+                    <div class="card feature-card">
+                        <div class="feature-icon"></div>
+                        <h3>Trust</h3>
+                        <p>55 years of impeccable reputation. Trusted by F1 teams, museums and private collectors.</p>
+                    </div>
+                    <div class="card feature-card">
+                        <div class="feature-icon"></div>
+                        <h3>Expertise</h3>
+                        <p>Our engineers are former staff of top F1 teams with decades of experience.</p>
+                    </div>
+                    <div class="card feature-card">
+                        <div class="feature-icon"></div>
+                        <h3>Global Reach</h3>
+                        <p>Working with clients from 30+ countries. Delivery and service worldwide.</p>
+                    </div>
+                    <div class="card feature-card">
+                        <div class="feature-icon"></div>
+                        <h3>Premium Service</h3>
+                        <p>Personal manager, VIP track days and Grand Prix invitations for every client.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="team">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">03</span>
+                    <h2>Our Team</h2>
+                    <p class="section-desc">The people behind Grand Prix Motors.</p>
+                </div>
+                <div class="card">
+                    <table class="charter-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Position</th>
+                                <th>Experience</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><div class="stakeholder-name"><span class="avatar" style="background:#e10600;">MR</span> Marco Rossi</div></td>
+                                <td>Founder &amp; CEO</td>
+                                <td>55 years in motorsport, former Ferrari mechanic</td>
+                            </tr>
+                            <tr>
+                                <td><div class="stakeholder-name"><span class="avatar" style="background:#00d2be;">SW</span> Sara Williams</div></td>
+                                <td>Sales Director</td>
+                                <td>20 years, formerly Christie's Automotive Division</td>
+                            </tr>
+                            <tr>
+                                <td><div class="stakeholder-name"><span class="avatar" style="background:#0600ef;">HN</span> Hiroshi Nakamura</div></td>
+                                <td>Chief Engineer</td>
+                                <td>25 years, former Honda/McLaren F1 engineer</td>
+                            </tr>
+                            <tr>
+                                <td><div class="stakeholder-name"><span class="avatar" style="background:#ff8000;">LM</span> Luca Martini</div></td>
+                                <td>Restoration Director</td>
+                                <td>30 years, classic Ferrari specialist</td>
+                            </tr>
+                            <tr>
+                                <td><div class="stakeholder-name"><span class="avatar" style="background:#358c75;">AT</span> Anna Turner</div></td>
+                                <td>Logistics Manager</td>
+                                <td>15 years, international transport expert</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section-alt" id="partners">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">04</span>
+                    <h2>Partners</h2>
+                    <p class="section-desc">Teams and organizations we collaborate with.</p>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card" style="border-color: #e10600;">
+                        <div class="stat-number" style="color:#e10600;"></div>
+                        <div class="stat-label">Scuderia Ferrari</div>
+                    </div>
+                    <div class="stat-card" style="border-color: #00d2be;">
+                        <div class="stat-number" style="color:#00d2be;">&#9733;</div>
+                        <div class="stat-label">Mercedes-AMG F1</div>
+                    </div>
+                    <div class="stat-card" style="border-color: #0600ef;">
+                        <div class="stat-number" style="color:#0600ef;"></div>
+                        <div class="stat-label">Red Bull Racing</div>
+                    </div>
+                    <div class="stat-card" style="border-color: #ff8000;">
+                        <div class="stat-number" style="color:#ff8000;"></div>
+                        <div class="stat-label">McLaren F1 Team</div>
+                    </div>
+                    <div class="stat-card" style="border-color: #358c75;">
+                        <div class="stat-number" style="color:#358c75;"></div>
+                        <div class="stat-label">Aston Martin F1</div>
+                    </div>
+                    <div class="stat-card" style="border-color: #ffd700;">
+                        <div class="stat-number" style="color:#ffd700;"></div>
+                        <div class="stat-label">FIA Heritage</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <h3>Grand Prix Motors</h3>
+                    <p>Exclusive Formula 1 Car Dealer</p>
+                    <p>&#169; 2026 Grand Prix Motors. All rights reserved.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="products.html">Catalog</a>
+                    <a href="charter.html">About</a>
+                    <a href="patterns.html">Patterns</a>
+                    <a href="planning.html">Planning</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p> Grand Prix Motors  Feel the Speed. Own the Legend.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="script.js" defer></script>
+</body>
+</html>

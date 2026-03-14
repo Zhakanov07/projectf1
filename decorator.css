@@ -1,0 +1,426 @@
+/* ============================================
+   Decorator Pattern Page — Styles
+   ============================================ */
+
+/* ── Car Selector ── */
+.car-select-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 12px;
+    margin-top: 16px;
+}
+.car-select-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 16px 12px;
+    border-radius: 12px;
+    border: 2px solid rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.03);
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: inherit;
+    font-size: .85rem;
+    font-weight: 600;
+}
+.car-select-btn:hover {
+    background: rgba(255,255,255,0.07);
+    transform: translateY(-2px);
+}
+.car-select-btn.active {
+    border-color: var(--car-color, #6366f1);
+    background: rgba(99,102,241,0.1);
+    box-shadow: 0 0 20px rgba(99,102,241,0.2);
+}
+.car-select-btn .car-emoji {
+    font-size: 2rem;
+}
+.car-select-btn .car-label {
+    font-size: .78rem;
+    color: rgba(255,255,255,0.6);
+}
+
+/* ── Upgrade Panel ── */
+.upgrade-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 10px;
+    margin-top: 16px;
+}
+.upgrade-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.03);
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.25s;
+    font-family: inherit;
+    font-size: .82rem;
+}
+.upgrade-btn:hover {
+    background: rgba(255,255,255,0.08);
+    transform: translateY(-1px);
+}
+.upgrade-btn.active {
+    border-color: var(--upgrade-color, #6366f1);
+    background: rgba(99,102,241,0.15);
+    box-shadow: 0 0 15px rgba(99,102,241,0.2);
+}
+.upgrade-btn .up-icon {
+    font-size: 1.3rem;
+    flex-shrink: 0;
+}
+.upgrade-btn .up-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+.upgrade-btn .up-name {
+    font-weight: 600;
+    font-size: .8rem;
+}
+.upgrade-btn .up-desc {
+    font-size: .68rem;
+    color: rgba(255,255,255,0.5);
+}
+
+/* ── Demo Layout ── */
+.decorator-demo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 24px;
+}
+@media (max-width: 860px) {
+    .decorator-demo {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ── Spec Display ── */
+.spec-panel {
+    background: rgba(255,255,255,0.025);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 18px;
+    padding: 26px;
+}
+.spec-panel-title {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.spec-car-name {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: #fff;
+    padding-bottom: 12px;
+    margin-bottom: 16px;
+    border-bottom: 3px solid #6366f1;
+}
+.spec-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+@media (max-width: 500px) {
+    .spec-grid { grid-template-columns: 1fr; }
+}
+.spec-item {
+    background: rgba(255,255,255,0.03);
+    border-radius: 10px;
+    padding: 14px;
+}
+.spec-icon {
+    font-size: 1.4rem;
+    margin-bottom: 4px;
+}
+.spec-value {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #fff;
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+.spec-value small {
+    font-size: .7rem;
+    color: rgba(255,255,255,0.5);
+    font-weight: 400;
+}
+.spec-diff {
+    font-size: .72rem;
+    font-weight: 600;
+    padding: 1px 6px;
+    border-radius: 4px;
+}
+.spec-diff.positive {
+    background: rgba(34,197,94,0.15);
+    color: #4ade80;
+}
+.spec-diff.negative {
+    background: rgba(239,68,68,0.15);
+    color: #f87171;
+}
+.spec-label {
+    font-size: .72rem;
+    color: rgba(255,255,255,0.45);
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    margin-top: 2px;
+    margin-bottom: 8px;
+}
+.spec-bar {
+    height: 5px;
+    border-radius: 3px;
+    background: rgba(255,255,255,0.06);
+    overflow: hidden;
+}
+.spec-bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.5s ease;
+}
+
+/* Upgrade tags */
+.spec-upgrades {
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+}
+.spec-upgrades-title {
+    font-size: .78rem;
+    color: rgba(255,255,255,0.5);
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    margin-bottom: 8px;
+}
+.spec-upgrade-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.upgrade-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.04);
+    font-size: .75rem;
+    color: rgba(255,255,255,0.8);
+    animation: tagPop 0.3s ease;
+}
+@keyframes tagPop {
+    from { opacity: 0; transform: scale(0.8); }
+    to   { opacity: 1; transform: scale(1); }
+}
+.spec-no-upgrades {
+    margin-top: 16px;
+    text-align: center;
+    padding: 20px;
+    color: rgba(255,255,255,0.3);
+    font-size: .85rem;
+    border: 1px dashed rgba(255,255,255,0.08);
+    border-radius: 10px;
+}
+
+/* ── Chain Visualization ── */
+.chain-panel {
+    background: rgba(255,255,255,0.025);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 18px;
+    padding: 26px;
+}
+.chain-panel-title {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.chain-node {
+    padding: 14px 18px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.03);
+    animation: chainSlide 0.3s ease;
+}
+.chain-node.chain-base {
+    border-color: rgba(99,102,241,0.4);
+    background: rgba(99,102,241,0.08);
+}
+.chain-node.chain-decorator {
+    border-left-width: 3px;
+}
+.chain-node.chain-result {
+    border-color: rgba(250,204,21,0.4);
+    background: rgba(250,204,21,0.06);
+}
+.chain-icon {
+    font-size: 1.1rem;
+}
+.chain-sub {
+    font-size: .72rem;
+    color: rgba(255,255,255,0.45);
+    margin-top: 4px;
+}
+.chain-arrow {
+    text-align: center;
+    color: rgba(255,255,255,0.25);
+    font-size: .72rem;
+    padding: 6px 0;
+    letter-spacing: .5px;
+}
+.chain-empty {
+    text-align: center;
+    padding: 40px 20px;
+    color: rgba(255,255,255,0.3);
+}
+.chain-empty-icon {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+@keyframes chainSlide {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Code Preview ── */
+.code-preview-box {
+    background: rgba(0,0,0,0.5);
+    border: 1px solid rgba(99,102,241,0.2);
+    border-radius: 12px;
+    padding: 20px 24px;
+    overflow-x: auto;
+    margin-top: 24px;
+}
+.code-preview-box pre {
+    margin: 0;
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-size: .78rem;
+    line-height: 1.7;
+    color: #e2e8f0;
+}
+.code-preview-box .kw  { color: #c084fc; }
+.code-preview-box .fn  { color: #67e8f9; }
+.code-preview-box .str { color: #86efac; }
+.code-preview-box .cm  { color: #64748b; font-style: italic; }
+.code-preview-box .num { color: #fbbf24; }
+
+/* ── Action Buttons ── */
+.demo-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+}
+.demo-action-btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.12);
+    background: rgba(255,255,255,0.05);
+    color: #fff;
+    font-size: .82rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+.demo-action-btn:hover {
+    background: rgba(255,255,255,0.1);
+    transform: translateY(-1px);
+}
+
+/* Reuse pattern-card & code-block from observer.css */
+.pattern-card-dec {
+    background: rgba(255,255,255,0.025);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 18px;
+    padding: 30px;
+    transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+    position: relative;
+    overflow: hidden;
+}
+.pattern-card-dec::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+}
+.pattern-card-dec:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.35), 0 0 0 1px rgba(99,102,241,0.08);
+    border-color: rgba(99,102,241,0.2);
+}
+.pattern-card-dec h3 {
+    font-size: 1.15rem;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.pattern-card-dec p, .pattern-card-dec ul {
+    color: rgba(255,255,255,0.7);
+    font-size: .9rem;
+    line-height: 1.65;
+}
+.pattern-card-dec ul {
+    padding-left: 18px;
+    margin-top: 8px;
+}
+.pattern-card-dec ul li {
+    margin-bottom: 6px;
+}
+.pattern-card-dec code {
+    background: rgba(99,102,241,0.15);
+    color: #a5b4fc;
+    padding: 2px 7px;
+    border-radius: 4px;
+    font-size: .85rem;
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+.dec-overview {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-top: 24px;
+}
+@media (max-width: 768px) {
+    .dec-overview { grid-template-columns: 1fr; }
+}
+
+/* UML box for decorator */
+.uml-box-dec {
+    background: rgba(0,0,0,0.4);
+    border: 1px solid rgba(99,102,241,0.3);
+    border-radius: 12px;
+    padding: 24px;
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-size: .75rem;
+    line-height: 1.8;
+    color: #c4b5fd;
+    overflow-x: auto;
+    white-space: pre;
+    margin-top: 16px;
+}

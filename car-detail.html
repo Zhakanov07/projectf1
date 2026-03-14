@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Detail — Grand Prix Motors</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="car-detail.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>if(sessionStorage.getItem('pt-navigating'))document.documentElement.classList.add('pt-arriving');</script>
+</head>
+<body>
+    <div class="page-transition" id="pageTransition"><div class="pt-bg"></div><div class="pt-fg"></div><div class="pt-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M4 4v16" stroke="#fff" stroke-width="2" stroke-linecap="round"/><path d="M4 4c3 0 4 2 8 2s5-2 8-2v10c-3 0-4 2-8 2s-5-2-8-2" fill="url(#ptG)" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/><defs><linearGradient id="ptG" x1="4" y1="4" x2="20" y2="14"><stop offset="0%" stop-color="#6366f1"/><stop offset="100%" stop-color="#3b82f6"/></linearGradient></defs></svg></div></div>
+    <nav class="topnav" id="topnav">
+        <div class="topnav-inner">
+            <a href="index.html" class="topnav-logo">
+                <img src="logo-opt.webp" alt="F1 Motors" class="logo-img" width="48" height="48">
+            </a>
+            <div class="topnav-search">
+                <div class="search-box">
+                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    <input type="text" id="searchInput" class="search-input" placeholder="Find a car, team or year..." autocomplete="off">
+                    <div class="search-results" id="searchResults"></div>
+                </div>
+            </div>
+            <div class="topnav-links" id="topnavLinks">
+                <a href="index.html" class="topnav-link">Home</a>
+                <a href="products.html" class="topnav-link">Catalog</a>
+                <a href="charter.html" class="topnav-link">About</a>
+                <a href="patterns.html" class="topnav-link">Patterns</a>
+                <a href="planning.html" class="topnav-link">Planning</a>
+            </div>
+            <button class="topnav-toggle" id="topnavToggle" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="scroll-progress" id="scrollProgress"></div>
+    <button class="back-to-top" id="backToTop" aria-label="Back to top"></button>
+
+    <!-- ═══ Hero Banner ═══ -->
+    <section class="cd-hero" id="cdHero">
+        <div class="cd-hero-bg" id="cdHeroBg"></div>
+        <img class="cd-hero-photo" id="heroImg" alt="" src="">
+        <div class="cd-hero-overlay"></div>
+        <div class="cd-hero-content">
+            <a href="products.html" class="cd-back-link">&#8592; Back to Catalog</a>
+            <span class="cd-badge" id="heroBadge">Modern Era</span>
+            <h1 class="cd-hero-name" id="heroName">Loading…</h1>
+            <p class="cd-hero-team" id="heroTeam"></p>
+            <p class="cd-hero-subtitle" id="heroSubtitle"></p>
+            <div class="cd-hero-price" id="heroPrice"></div>
+        </div>
+    </section>
+
+    <main class="cd-main">
+        <div class="container">
+
+            <!-- Description -->
+            <section class="cd-section animate-on-scroll">
+                <div class="cd-description" id="carDescription"></div>
+            </section>
+
+            <!-- Specs Grid -->
+            <section class="cd-section animate-on-scroll">
+                <h2 class="cd-section-title"> Key Specifications</h2>
+                <div class="cd-specs-grid" id="specsGrid"></div>
+            </section>
+
+            <!-- Performance -->
+            <section class="cd-section animate-on-scroll">
+                <h2 class="cd-section-title"> Performance Ratings</h2>
+                <div class="cd-two-col">
+                    <div class="cd-card">
+                        <h3 class="cd-card-title">Statistics</h3>
+                        <div class="cd-perf-bars" id="perfBars"></div>
+                    </div>
+                    <div class="cd-card cd-radar-wrap">
+                        <h3 class="cd-card-title">Radar Chart</h3>
+                        <canvas id="radarCanvas" width="340" height="340"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tech Specs & Drivers -->
+            <section class="cd-section animate-on-scroll">
+                <h2 class="cd-section-title"> Technical Details</h2>
+                <div class="cd-two-col">
+                    <div class="cd-card">
+                        <h3 class="cd-card-title">Full Specifications</h3>
+                        <div class="cd-tech-list" id="techList"></div>
+                    </div>
+                    <div class="cd-card">
+                        <h3 class="cd-card-title"> Drivers</h3>
+                        <div class="cd-driver-list" id="driverList"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ═══ Driver Profile (F1-style) ═══ -->
+            <section class="cd-section animate-on-scroll" id="driverProfileSection">
+                <h2 class="cd-section-title"> Driver Profile</h2>
+                <div class="dp-container" id="driverProfile"></div>
+            </section>
+
+            <!-- History Timeline -->
+            <section class="cd-section animate-on-scroll">
+                <h2 class="cd-section-title"> Timeline</h2>
+                <div class="cd-card">
+                    <div class="cd-timeline" id="carTimeline"></div>
+                </div>
+            </section>
+
+            <!-- Additional Info (races, championships, key facts) -->
+            <section class="cd-section animate-on-scroll">
+                <h2 class="cd-section-title"> Season Highlights</h2>
+                <div class="cd-highlights" id="highlights"></div>
+            </section>
+
+            <!-- CTA -->
+            <section class="cd-section cd-cta animate-on-scroll">
+                <div class="cd-cta-inner">
+                    <h2>Interested in this car?</h2>
+                    <p>Contact Grand Prix Motors for a private viewing, test drive experience, or to discuss acquisition options for your collection.</p>
+                    <div class="cd-cta-buttons">
+                        <a href="products.html" class="cd-btn cd-btn-primary"> Browse Catalog</a>
+                        <a href="charter.html" class="cd-btn cd-btn-outline"> Contact Us</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Prev / Next -->
+            <nav class="cd-car-nav">
+                <a href="#" class="cd-nav-btn cd-nav-prev" id="prevCar">
+                    <span class="cd-nav-arrow">&#8592;</span>
+                    <div class="cd-nav-info">
+                        <span class="cd-nav-label">Previous Car</span>
+                        <span class="cd-nav-name"></span>
+                    </div>
+                </a>
+                <a href="#" class="cd-nav-btn cd-nav-next" id="nextCar">
+                    <div class="cd-nav-info">
+                        <span class="cd-nav-label">Next Car</span>
+                        <span class="cd-nav-name"></span>
+                    </div>
+                    <span class="cd-nav-arrow">&#8594;</span>
+                </a>
+            </nav>
+
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <h3>Grand Prix Motors</h3>
+                    <p>Exclusive Formula 1 Car Dealer</p>
+                    <p>&#169; 2026 Grand Prix Motors. All rights reserved.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="products.html">Catalog</a>
+                    <a href="charter.html">About</a>
+                    <a href="patterns.html">Patterns</a>
+                    <a href="planning.html">Planning</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p> Grand Prix Motors — Feel the Speed. Own the Legend.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js" defer></script>
+    <script src="car-detail.js" defer></script>
+</body>
+</html>

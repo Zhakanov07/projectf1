@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WBS Diagram &mdash; Grand Prix Motors</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="wbs.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>if(sessionStorage.getItem('pt-navigating'))document.documentElement.classList.add('pt-arriving');</script>
+</head>
+<body>
+    <div class="page-transition" id="pageTransition"><div class="pt-bg"></div><div class="pt-fg"></div><div class="pt-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M4 4v16" stroke="#fff" stroke-width="2" stroke-linecap="round"/><path d="M4 4c3 0 4 2 8 2s5-2 8-2v10c-3 0-4 2-8 2s-5-2-8-2" fill="url(#ptG)" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/><defs><linearGradient id="ptG" x1="4" y1="4" x2="20" y2="14"><stop offset="0%" stop-color="#6366f1"/><stop offset="100%" stop-color="#3b82f6"/></linearGradient></defs></svg></div></div>
+    <nav class="topnav" id="topnav">
+        <div class="topnav-inner">
+            <a href="index.html" class="topnav-logo">
+                <img src="logo-opt.webp" alt="F1 Motors" class="logo-img" width="48" height="48">
+            </a>
+            <div class="topnav-search">
+                <div class="search-box">
+                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    <input type="text" id="searchInput" class="search-input" placeholder="Find a car, team or year..." autocomplete="off">
+                    <div class="search-results" id="searchResults"></div>
+                </div>
+            </div>
+            <div class="topnav-links" id="topnavLinks">
+                <a href="index.html" class="topnav-link">Home</a>
+                <a href="products.html" class="topnav-link">Catalog</a>
+                <a href="charter.html" class="topnav-link">About</a>
+                <a href="patterns.html" class="topnav-link">Patterns</a>
+                <a href="planning.html" class="topnav-link active">Planning</a>
+            </div>
+            <button class="topnav-toggle" id="topnavToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+        </div>
+    </nav>
+
+    <div class="scroll-progress" id="scrollProgress"></div>
+    <button class="back-to-top" id="backToTop" aria-label="Back to top"></button>
+
+    <div class="page-hero">
+        <h1> Work Breakdown Structure</h1>
+        <p>Grand Prix Motors &mdash; Project WBS Diagram (4 Levels)</p>
+    </div>
+
+    <main>
+        <!-- Legend -->
+        <section class="section" style="padding-top: 20px; padding-bottom: 0;">
+            <div class="container">
+                <div class="wbs-legend">
+                    <span class="wbs-legend-item"><span class="legend-dot" style="background:linear-gradient(135deg,#3b82f6,#6366f1);"></span> Level 1 &mdash; Project</span>
+                    <span class="wbs-legend-item"><span class="legend-dot" style="background:linear-gradient(135deg,#6366f1,#818cf8);"></span> Level 2 &mdash; Phases</span>
+                    <span class="wbs-legend-item"><span class="legend-dot" style="background:linear-gradient(135deg,#22d3ee,#06b6d4);"></span> Level 3 &mdash; Deliverables</span>
+                    <span class="wbs-legend-item"><span class="legend-dot" style="background:linear-gradient(135deg,#f59e0b,#d97706);"></span> Level 4 &mdash; Work Packages</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- WBS Diagram -->
+        <section class="section" id="wbs-diagram">
+            <div class="container">
+                <div class="wbs-scroll-wrapper">
+                    <div class="wbs-tree">
+                        <!-- Level 1: Root -->
+                        <div class="wbs-level-1">
+                            <div class="wbs-node wbs-root">
+                                <div class="wbs-code">1.0</div>
+                                <div class="wbs-title">Grand Prix Motors Website</div>
+                                <div class="wbs-meta">Project Manager: Marco Rossi</div>
+                                <div class="wbs-deadline">Jan 2026 &ndash; Jun 2026</div>
+                            </div>
+                        </div>
+
+                        <!-- Level 2: Main Phases -->
+                        <div class="wbs-connector-v"></div>
+                        <div class="wbs-level-2">
+
+                            <!-- Phase 1: Planning -->
+                            <div class="wbs-branch">
+                                <div class="wbs-node wbs-phase">
+                                    <div class="wbs-code">1.1</div>
+                                    <div class="wbs-title">Planning &amp; Analysis</div>
+                                    <div class="wbs-meta">Lead: Sara Williams</div>
+                                    <div class="wbs-deadline">Jan 5 &ndash; Feb 2</div>
+                                </div>
+                                <div class="wbs-connector-v"></div>
+                                <div class="wbs-level-3">
+                                    <!-- Deliverable 1.1.1 -->
+                                    <div class="wbs-sub-branch">
+                                        <div class="wbs-node wbs-deliverable">
+                                            <div class="wbs-code">1.1.1</div>
+                                            <div class="wbs-title">Requirements</div>
+                                            <div class="wbs-deadline">Jan 5 &ndash; Jan 15</div>
+                                        </div>
+                                        <div class="wbs-connector-v"></div>
+                                        <div class="wbs-level-4">
+                                            <div class="wbs-node wbs-task">
+                                                <div class="wbs-code">1.1.1.1</div>
+                                                <div class="wbs-title">Stakeholder Interviews</div>
+                                                <div class="wbs-meta">Sara Williams</div>
+                                                <div class="wbs-deadline">Jan 5 &ndash; Jan 8</div>
+                                            </div>
+                                            <div class="wbs-node wbs-task">
+                                                <div class="wbs-code">1.1.1.2</div>
+                                                <div class="wbs-title">User Stories &amp; Use Cases</div>
+                                                <div class="wbs-meta">Sara Williams</div>
+                                                <div class="wbs-deadline">Jan 9 &ndash; Jan 12</div>
+                                            </div>
+                                            <div class="wbs-node wbs-task">
+                                                <div class="wbs-code">1.1.1.3</div>
+                                                <div class="wbs-title">Requirements Document (SRS)</div>
+                                                <div class="wbs-meta">Sara Williams</div>
+                                                <div class="wbs-deadline">Jan 13 &ndash; Jan 15</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Deliverable 1.1.2 -->
+                                    <div class="wbs-sub-branch">
+                                        <div class="wbs-node wbs-deliverable">
+                                            <div class="wbs-code">1.1.2</div>
+                                            <div class="wbs-title">Project Charter</div>
+                                            <div class="wbs-deadline">Jan 16 &ndash; Jan 24</div>
+                                        </div>
+                                        <div class="wbs-connector-v"></div>
+                                        <div class="wbs-level-4">
+                                            <div class="wbs-node wbs-task">
+                                                <div class="wbs-code">1.1.2.1</div>
+                                                <div class="wbs-title">Scope &amp; Objectives</div>
+                                                <div class="wbs-meta">Marco Rossi</div>
+                                                <div class="wbs-deadline">Jan 16 &ndash; Jan 18</div>
+                                            </div>
+                                            <div class="wbs-node wbs-task">
+                                                <div class="wbs-code">1.1.2.2</div>
+                                                <div class="wbs-title">Risk Assessment</div>
+                                                <div class="wbs-meta">Sara Williams</div>
+                                                <div class="wbs-deadline">Jan 19 &ndash; Jan 21</div>
+                                            </div>
+                                            <div class="wbs-node wbs-task">
+                                                <div class="wbs-code">1.1.2.3</div>
+                                                <div class="wbs-title">Budget &amp; Timeline</div>
+                                                <div class="wbs-meta">Marco Rossi</div>
+                                                <div class="wbs-deadline">Jan 22 &ndash; Jan 24</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Deliverable 1.1.3 -->
+                                    <div class="wbs-sub-branch">
+                                        <div class="wbs-node wbs-deliverable">
+                                            <div class="wbs-code">1.1.3</div>
+                                            <div class="wbs-title">Technology Stack</div>
+                                            <div class="wbs-deadline">Jan 25 &ndash; Feb 2</div>
+                                        </div>
+                                        <div class="wbs-connector-v"></div>
+                                        <div class="wbs-level-4">
+                                            <div class="wbs-node wbs-task">
+                                                <div class="wbs-code">1.1.3.1</div>
+                                                <div class="wbs-title">Frontend Framework Selection</div>
+                                                <div class="wbs-meta">Hiroshi Nakamura</div>
+                                                <div class="wbs-deadline">Jan 25 &ndash; Jan 28</div>
+                                            </div>
+                                            <div class="wbs-node wbs-task">
+                                                <div class="wbs-code">1.1.3.2</div>
+                                                <div class="wbs-title">API &amp; Data Sources Research</div>
+                                                <div class="wbs-meta">Hiroshi Nakamura</div>
+                                                <div class="wbs-deadline">Jan 29 &ndash; Feb 2</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Phase 2: Design -->
+                            <div class="wbs-branch">
+                                <div class="wbs-node wbs-phase">
+                                    <div class="wbs-code">1.2</div>
+                                    <div class="wbs-title">UI/UX Design</div>
+                                    <div class="wbs-meta">Lead: Luca Martini</div>
+                                    <div class="wbs-deadline">Feb 3 &ndash; Mar 2</div>
+                                </div>
+                                <div class="wbs-connector-v"></div>
+                                <div class="wbs-level-3">
+                                    <div class="wbs-sub-branch">
+                                        <div class="wbs-node wbs-deliverable">
+                                            <div class="wbs-code">1.2.1</div>
+                                            <div class="wbs-title">Wireframes</div>
+                                            <div class="wbs-deadline">Feb 3 &ndash; Feb 12</div>
+                                        </div>
+                                        <div class="wbs-connector-v"></div>
+                                        <div class="wbs-level-4">
+                                            <div class="wbs-node wbs-task">
+                                                <div class="wbs-code">1.2.1.1</div>
+                                                <div class="wbs-title">Homepage Wireframe</div>
+                                                <div class="wbs-meta">Luca Martini</div>
+                                                <div class="wbs-deadline">Feb 3 &ndash; Feb 5</div>
+                                            </div>
+                                            <div class="wbs-node wbs-task">
+                                                <div class="wbs-code">1.2.1.2</div>
+                                                <div class="wbs-title">Catalog Page Wireframe</div>
+                                                <div class="wbs-meta">Luca Martini</div>
+                                                <div class="wbs-deadline">Feb 6 &ndash; Feb 8</div>
+                                            </div>
+                                            <div class="wbs-node wbs-task">
+                                                <div class="wbs-code">1.2.1.3</div>
+                                                <div class="wbs-title">Sub-pages Wireframes</div>
+                                                <div class="wbs-meta">Luca Martini</div>
+                                                <div class="wbs-deadline">Feb 9 &ndash; Feb 12</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="wbs-sub-branch">
+                                        <div class="wbs-node wbs-deliverable">
+                                            <div class="wbs-code">1.2.2</div>
+                                            <div class="wbs-title">Visual Design</div>
+                                            <div class="wbs-deadline">Feb 13 &ndash; Feb 22</div>
+                                        </div>
+                                        <div class="wbs-connector-v"></div>
+                                        <div class="wbs-level-4">
+                                            <div class="wbs-node wbs-task">
+                                                <div class="wbs-code">1.2.2.1</div>
+                                                <div class="wbs-title">Color Scheme &amp; Typography</div>
+                                                <div class="wbs-meta">Luca Martini</div>
+                                                <div class="wbs-deadline">Feb 13 &ndash; Feb 15</div>
+                                            </div>
+                                            <div class="wbs-node wbs-task">
+                                                <div class="wbs-code">1.2.2.2</div>
+                                                <div class="wbs-title">Logo &amp; Branding Assets</div>
+                                                <div class="wbs-meta">Luca Martini</div>
+                                                <div class="wbs-deadline">Feb 16 &ndash; Feb 19</div>
+                                            </div>
+                                            <div class="wbs-node wbs-task">
+                                                <div class="wbs-code">1.2.2.3</div>
+                                                <div class="wbs-title">High-fidelity Mockups</div>
+                                                <div class="wbs-meta">Luca Martini</div>
+                                                <div class="wbs-deadline">Feb 20 &ndash; Feb 22</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="wbs-sub-branch">
+                                        <div class="wbs-node wbs-deliverable">
+                                            <div class="wbs-code">1.2.3</div>
+                                            <div class="wbs-title">Responsive Design</div>
+                                            <div class="wbs-deadline">Feb 23 &ndash; Mar 2</div>
+                                        </div>
+                                        <div class="wbs-connector-v"></div>
+                                        <div class="wbs-level-4">
+                                            <div class="wbs-node wbs-task">
+                                                <div class="wbs-code">1.2.3.1</div>
+                                                <div class="wbs-title">Mobile Layout Adaptation</div>
+                                                <div class="wbs-meta">Luca Martini</div>
+                                                <div class="wbs-deadline">Feb 23 &ndash; Feb 26</div>
+                                            </div>
+                                            <div class="wbs-node wbs-task">
+                                                <div class="wbs-code">1.2.3.2</div>
+                                                <div class="wbs-title">Tablet &amp; Desktop Breakpoints</div>
+                                                <div class="wbs-meta">Luca Martini</div>
+                                                <div class="wbs-deadline">Feb 27 &ndash; Mar 2</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Phase 3: Development -->
+                            <div class="wbs-branch">
+                                <div class="wbs-node wbs-phase">
+                                    <div class="wbs-code">1.3</div>
+                                    <div class="wbs-title">Development</div>
+                                    <div class="wbs-meta">Lead: Hiroshi Nakamura</div>
+                                    <div class="wbs-deadline">Mar 3 &ndash; May 4</div>
+                                </div>
+                                <div class="wbs-connector-v"></div>
+                                <div class="wbs-level-3">
+                                    <div class="wbs-sub-branch">
+                                        <div class="wbs-node wbs-deliverable">
+                                            <div class="wbs-code">1.3.1</div>
+                                            <div class="wbs-title">Frontend (HTML/CSS/JS)</div>
+                                            <div class="wbs-deadline">Mar 3 &ndash; Apr 6</div>
+                                        </div>
+                                        <div class="wbs-connector-v"></div>
+                                        <div class="wbs-level-4">
+                                            <div class="wbs-node wbs-task">
+                                                <div class="wbs-code">1.3.1.1</div>
+                                                <div class="wbs-title">Homepage Development</div>
+                                                <div class="wbs-meta">Hiroshi Nakamura</div>
+                                                <div class="wbs-deadline">Mar 3 &ndash; Mar 10</div>
+                                            </div>
+                                            <div class="wbs-node wbs-task">
+                                                <div class="wbs-code">1.3.1.2</div>
+                                                <div class="wbs-title">Catalog &amp; Car Cards</div>
+                                                <div class="wbs-meta">Hiroshi Nakamura</div>
+                                                <div class="wbs-deadline">Mar 11 &ndash; Mar 20</div>
+                                            </div>
+                                            <div class="wbs-node wbs-task">
+                                                <div class="wbs-code">1.3.1.3</div>
+                                                <div class="wbs-title">About &amp; Strategy Pages</div>
+                                                <div class="wbs-meta">Anna Turner</div>
+                                                <div class="wbs-deadline">Mar 21 &ndash; Mar 28</div>
+                                            </div>
+                                            <div class="wbs-node wbs-task">
+                                                <div class="wbs-code">1.3.1.4</div>
+                                                <div class="wbs-title">CSS Animations &amp; Transitions</div>
+                                                <div class="wbs-meta">Hiroshi Nakamura</div>
+                                                <div class="wbs-deadline">Mar 29 &ndash; Apr 6</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="wbs-sub-branch">
+                                        <div class="wbs-node wbs-deliverable">
+                                            <div class="wbs-code">1.3.2</div>
+                                            <div class="wbs-title">Interactive Features</div>
+                                            <div class="wbs-deadline">Apr 7 &ndash; Apr 20</div>
+                                        </div>
+                                        <div class="wbs-connector-v"></div>
+                                        <div class="wbs-level-4">
+                                            <div class="wbs-node wbs-task">
+                                                <div class="wbs-code">1.3.2.1</div>
+                                                <div class="wbs-title">Search Functionality</div>
+                                                <div class="wbs-meta">Hiroshi Nakamura</div>
+                                                <div class="wbs-deadline">Apr 7 &ndash; Apr 10</div>
+                                            </div>
+                                            <div class="wbs-node wbs-task">
+                                                <div class="wbs-code">1.3.2.2</div>
+                                                <div class="wbs-title">Sort &amp; Filter Catalog</div>
+                                                <div class="wbs-meta">Hiroshi Nakamura</div>
+                                                <div class="wbs-deadline">Apr 11 &ndash; Apr 14</div>
+                                            </div>
+                                            <div class="wbs-node wbs-task">
+                                                <div class="wbs-code">1.3.2.3</div>
+                                                <div class="wbs-title">Wikipedia Photo API Integration</div>
+                                                <div class="wbs-meta">Anna Turner</div>
+                                                <div class="wbs-deadline">Apr 15 &ndash; Apr 20</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="wbs-sub-branch">
+                                        <div class="wbs-node wbs-deliverable">
+                                            <div class="wbs-code">1.3.3</div>
+                                            <div class="wbs-title">Content &amp; Data</div>
+                                            <div class="wbs-deadline">Apr 21 &ndash; May 4</div>
+                                        </div>
+                                        <div class="wbs-connector-v"></div>
+                                        <div class="wbs-level-4">
+                                            <div class="wbs-node wbs-task">
+                                                <div class="wbs-code">1.3.3.1</div>
+                                                <div class="wbs-title">F1 Car Database (10 cars)</div>
+                                                <div class="wbs-meta">Anna Turner</div>
+                                                <div class="wbs-deadline">Apr 21 &ndash; Apr 25</div>
+                                            </div>
+                                            <div class="wbs-node wbs-task">
+                                                <div class="wbs-code">1.3.3.2</div>
+                                                <div class="wbs-title">Technical Specs &amp; Descriptions</div>
+                                                <div class="wbs-meta">Anna Turner</div>
+                                                <div class="wbs-deadline">Apr 26 &ndash; Apr 30</div>
+                                            </div>
+                                            <div class="wbs-node wbs-task">
+                                                <div class="wbs-code">1.3.3.3</div>
+                                                <div class="wbs-title">OOP &amp; SOLID Code Examples</div>
+                                                <div class="wbs-meta">Hiroshi Nakamura</div>
+                                                <div class="wbs-deadline">May 1 &ndash; May 4</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Phase 4: Testing -->
+                            <div class="wbs-branch">
+                                <div class="wbs-node wbs-phase">
+                                    <div class="wbs-code">1.4</div>
+                                    <div class="wbs-title">Testing &amp; QA</div>
+                                    <div class="wbs-meta">Lead: Anna Turner</div>
+                                    <div class="wbs-deadline">May 5 &ndash; May 25</div>
+                                </div>
+                                <div class="wbs-connector-v"></div>
+                                <div class="wbs-level-3">
+                                    <div class="wbs-sub-branch">
+                                        <div class="wbs-node wbs-deliverable">
+                                            <div class="wbs-code">1.4.1</div>
+                                            <div class="wbs-title">Functional Testing</div>
+                                            <div class="wbs-deadline">May 5 &ndash; May 12</div>
+                                        </div>
+                                        <div class="wbs-connector-v"></div>
+                                        <div class="wbs-level-4">
+                                            <div class="wbs-node wbs-task">
+                                                <div class="wbs-code">1.4.1.1</div>
+                                                <div class="wbs-title">Navigation &amp; Links Test</div>
+                                                <div class="wbs-meta">Anna Turner</div>
+                                                <div class="wbs-deadline">May 5 &ndash; May 7</div>
+                                            </div>
+                                            <div class="wbs-node wbs-task">
+                                                <div class="wbs-code">1.4.1.2</div>
+                                                <div class="wbs-title">Search &amp; Filter Validation</div>
+                                                <div class="wbs-meta">Anna Turner</div>
+                                                <div class="wbs-deadline">May 8 &ndash; May 10</div>
+                                            </div>
+                                            <div class="wbs-node wbs-task">
+                                                <div class="wbs-code">1.4.1.3</div>
+                                                <div class="wbs-title">API &amp; Image Loading Test</div>
+                                                <div class="wbs-meta">Anna Turner</div>
+                                                <div class="wbs-deadline">May 11 &ndash; May 12</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="wbs-sub-branch">
+                                        <div class="wbs-node wbs-deliverable">
+                                            <div class="wbs-code">1.4.2</div>
+                                            <div class="wbs-title">Cross-browser &amp; Responsive</div>
+                                            <div class="wbs-deadline">May 13 &ndash; May 19</div>
+                                        </div>
+                                        <div class="wbs-connector-v"></div>
+                                        <div class="wbs-level-4">
+                                            <div class="wbs-node wbs-task">
+                                                <div class="wbs-code">1.4.2.1</div>
+                                                <div class="wbs-title">Chrome / Firefox / Safari Test</div>
+                                                <div class="wbs-meta">Anna Turner</div>
+                                                <div class="wbs-deadline">May 13 &ndash; May 15</div>
+                                            </div>
+                                            <div class="wbs-node wbs-task">
+                                                <div class="wbs-code">1.4.2.2</div>
+                                                <div class="wbs-title">Mobile &amp; Tablet Responsiveness</div>
+                                                <div class="wbs-meta">Luca Martini</div>
+                                                <div class="wbs-deadline">May 16 &ndash; May 19</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="wbs-sub-branch">
+                                        <div class="wbs-node wbs-deliverable">
+                                            <div class="wbs-code">1.4.3</div>
+                                            <div class="wbs-title">Performance &amp; Accessibility</div>
+                                            <div class="wbs-deadline">May 20 &ndash; May 25</div>
+                                        </div>
+                                        <div class="wbs-connector-v"></div>
+                                        <div class="wbs-level-4">
+                                            <div class="wbs-node wbs-task">
+                                                <div class="wbs-code">1.4.3.1</div>
+                                                <div class="wbs-title">Lighthouse Audit</div>
+                                                <div class="wbs-meta">Hiroshi Nakamura</div>
+                                                <div class="wbs-deadline">May 20 &ndash; May 22</div>
+                                            </div>
+                                            <div class="wbs-node wbs-task">
+                                                <div class="wbs-code">1.4.3.2</div>
+                                                <div class="wbs-title">WCAG Accessibility Check</div>
+                                                <div class="wbs-meta">Anna Turner</div>
+                                                <div class="wbs-deadline">May 23 &ndash; May 25</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Phase 5: Deployment -->
+                            <div class="wbs-branch">
+                                <div class="wbs-node wbs-phase">
+                                    <div class="wbs-code">1.5</div>
+                                    <div class="wbs-title">Deployment &amp; Launch</div>
+                                    <div class="wbs-meta">Lead: Hiroshi Nakamura</div>
+                                    <div class="wbs-deadline">May 26 &ndash; Jun 15</div>
+                                </div>
+                                <div class="wbs-connector-v"></div>
+                                <div class="wbs-level-3">
+                                    <div class="wbs-sub-branch">
+                                        <div class="wbs-node wbs-deliverable">
+                                            <div class="wbs-code">1.5.1</div>
+                                            <div class="wbs-title">Hosting Setup</div>
+                                            <div class="wbs-deadline">May 26 &ndash; Jun 1</div>
+                                        </div>
+                                        <div class="wbs-connector-v"></div>
+                                        <div class="wbs-level-4">
+                                            <div class="wbs-node wbs-task">
+                                                <div class="wbs-code">1.5.1.1</div>
+                                                <div class="wbs-title">Domain &amp; SSL Configuration</div>
+                                                <div class="wbs-meta">Hiroshi Nakamura</div>
+                                                <div class="wbs-deadline">May 26 &ndash; May 28</div>
+                                            </div>
+                                            <div class="wbs-node wbs-task">
+                                                <div class="wbs-code">1.5.1.2</div>
+                                                <div class="wbs-title">CDN &amp; Caching Setup</div>
+                                                <div class="wbs-meta">Hiroshi Nakamura</div>
+                                                <div class="wbs-deadline">May 29 &ndash; Jun 1</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="wbs-sub-branch">
+                                        <div class="wbs-node wbs-deliverable">
+                                            <div class="wbs-code">1.5.2</div>
+                                            <div class="wbs-title">Go-Live &amp; Monitoring</div>
+                                            <div class="wbs-deadline">Jun 2 &ndash; Jun 8</div>
+                                        </div>
+                                        <div class="wbs-connector-v"></div>
+                                        <div class="wbs-level-4">
+                                            <div class="wbs-node wbs-task">
+                                                <div class="wbs-code">1.5.2.1</div>
+                                                <div class="wbs-title">Production Deployment</div>
+                                                <div class="wbs-meta">Hiroshi Nakamura</div>
+                                                <div class="wbs-deadline">Jun 2 &ndash; Jun 4</div>
+                                            </div>
+                                            <div class="wbs-node wbs-task">
+                                                <div class="wbs-code">1.5.2.2</div>
+                                                <div class="wbs-title">Analytics &amp; Error Monitoring</div>
+                                                <div class="wbs-meta">Anna Turner</div>
+                                                <div class="wbs-deadline">Jun 5 &ndash; Jun 8</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="wbs-sub-branch">
+                                        <div class="wbs-node wbs-deliverable">
+                                            <div class="wbs-code">1.5.3</div>
+                                            <div class="wbs-title">Documentation &amp; Handoff</div>
+                                            <div class="wbs-deadline">Jun 9 &ndash; Jun 15</div>
+                                        </div>
+                                        <div class="wbs-connector-v"></div>
+                                        <div class="wbs-level-4">
+                                            <div class="wbs-node wbs-task">
+                                                <div class="wbs-code">1.5.3.1</div>
+                                                <div class="wbs-title">Technical Documentation</div>
+                                                <div class="wbs-meta">Hiroshi Nakamura</div>
+                                                <div class="wbs-deadline">Jun 9 &ndash; Jun 12</div>
+                                            </div>
+                                            <div class="wbs-node wbs-task">
+                                                <div class="wbs-code">1.5.3.2</div>
+                                                <div class="wbs-title">User Manual &amp; Training</div>
+                                                <div class="wbs-meta">Sara Williams</div>
+                                                <div class="wbs-deadline">Jun 13 &ndash; Jun 15</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Summary Table -->
+        <section class="section section-alt" id="wbs-summary">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">02</span>
+                    <h2>WBS Summary Table</h2>
+                    <p class="section-desc">All work packages with responsible persons and deadlines.</p>
+                </div>
+                <div class="card" style="overflow-x:auto;">
+                    <table class="charter-table">
+                        <thead>
+                            <tr>
+                                <th>WBS Code</th>
+                                <th>Task</th>
+                                <th>Responsible</th>
+                                <th>Deadline</th>
+                                <th>Phase</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><span class="badge" style="background:linear-gradient(135deg,#3b82f6,#6366f1);color:#fff;">1.0</span></td><td><strong>Grand Prix Motors Website</strong></td><td>Marco Rossi (PM)</td><td>Jan &ndash; Jun 2026</td><td>&mdash;</td></tr>
+                            <tr><td><span class="badge" style="background:linear-gradient(135deg,#6366f1,#818cf8);color:#fff;">1.1</span></td><td><strong>Planning &amp; Analysis</strong></td><td>Sara Williams</td><td>Jan 5 &ndash; Feb 2</td><td>Planning</td></tr>
+                            <tr><td>1.1.1.1</td><td>Stakeholder Interviews</td><td>Sara Williams</td><td>Jan 5 &ndash; Jan 8</td><td>Planning</td></tr>
+                            <tr><td>1.1.1.2</td><td>User Stories &amp; Use Cases</td><td>Sara Williams</td><td>Jan 9 &ndash; Jan 12</td><td>Planning</td></tr>
+                            <tr><td>1.1.1.3</td><td>Requirements Document (SRS)</td><td>Sara Williams</td><td>Jan 13 &ndash; Jan 15</td><td>Planning</td></tr>
+                            <tr><td>1.1.2.1</td><td>Scope &amp; Objectives</td><td>Marco Rossi</td><td>Jan 16 &ndash; Jan 18</td><td>Planning</td></tr>
+                            <tr><td>1.1.2.2</td><td>Risk Assessment</td><td>Sara Williams</td><td>Jan 19 &ndash; Jan 21</td><td>Planning</td></tr>
+                            <tr><td>1.1.2.3</td><td>Budget &amp; Timeline</td><td>Marco Rossi</td><td>Jan 22 &ndash; Jan 24</td><td>Planning</td></tr>
+                            <tr><td>1.1.3.1</td><td>Frontend Framework Selection</td><td>Hiroshi Nakamura</td><td>Jan 25 &ndash; Jan 28</td><td>Planning</td></tr>
+                            <tr><td>1.1.3.2</td><td>API &amp; Data Sources Research</td><td>Hiroshi Nakamura</td><td>Jan 29 &ndash; Feb 2</td><td>Planning</td></tr>
+                            <tr><td><span class="badge" style="background:linear-gradient(135deg,#6366f1,#818cf8);color:#fff;">1.2</span></td><td><strong>UI/UX Design</strong></td><td>Luca Martini</td><td>Feb 3 &ndash; Mar 2</td><td>Design</td></tr>
+                            <tr><td>1.2.1.1</td><td>Homepage Wireframe</td><td>Luca Martini</td><td>Feb 3 &ndash; Feb 5</td><td>Design</td></tr>
+                            <tr><td>1.2.1.2</td><td>Catalog Page Wireframe</td><td>Luca Martini</td><td>Feb 6 &ndash; Feb 8</td><td>Design</td></tr>
+                            <tr><td>1.2.1.3</td><td>Sub-pages Wireframes</td><td>Luca Martini</td><td>Feb 9 &ndash; Feb 12</td><td>Design</td></tr>
+                            <tr><td>1.2.2.1</td><td>Color Scheme &amp; Typography</td><td>Luca Martini</td><td>Feb 13 &ndash; Feb 15</td><td>Design</td></tr>
+                            <tr><td>1.2.2.2</td><td>Logo &amp; Branding Assets</td><td>Luca Martini</td><td>Feb 16 &ndash; Feb 19</td><td>Design</td></tr>
+                            <tr><td>1.2.2.3</td><td>High-fidelity Mockups</td><td>Luca Martini</td><td>Feb 20 &ndash; Feb 22</td><td>Design</td></tr>
+                            <tr><td>1.2.3.1</td><td>Mobile Layout Adaptation</td><td>Luca Martini</td><td>Feb 23 &ndash; Feb 26</td><td>Design</td></tr>
+                            <tr><td>1.2.3.2</td><td>Tablet &amp; Desktop Breakpoints</td><td>Luca Martini</td><td>Feb 27 &ndash; Mar 2</td><td>Design</td></tr>
+                            <tr><td><span class="badge" style="background:linear-gradient(135deg,#6366f1,#818cf8);color:#fff;">1.3</span></td><td><strong>Development</strong></td><td>Hiroshi Nakamura</td><td>Mar 3 &ndash; May 4</td><td>Dev</td></tr>
+                            <tr><td>1.3.1.1</td><td>Homepage Development</td><td>Hiroshi Nakamura</td><td>Mar 3 &ndash; Mar 10</td><td>Dev</td></tr>
+                            <tr><td>1.3.1.2</td><td>Catalog &amp; Car Cards</td><td>Hiroshi Nakamura</td><td>Mar 11 &ndash; Mar 20</td><td>Dev</td></tr>
+                            <tr><td>1.3.1.3</td><td>About &amp; Strategy Pages</td><td>Anna Turner</td><td>Mar 21 &ndash; Mar 28</td><td>Dev</td></tr>
+                            <tr><td>1.3.1.4</td><td>CSS Animations &amp; Transitions</td><td>Hiroshi Nakamura</td><td>Mar 29 &ndash; Apr 6</td><td>Dev</td></tr>
+                            <tr><td>1.3.2.1</td><td>Search Functionality</td><td>Hiroshi Nakamura</td><td>Apr 7 &ndash; Apr 10</td><td>Dev</td></tr>
+                            <tr><td>1.3.2.2</td><td>Sort &amp; Filter Catalog</td><td>Hiroshi Nakamura</td><td>Apr 11 &ndash; Apr 14</td><td>Dev</td></tr>
+                            <tr><td>1.3.2.3</td><td>Wikipedia Photo API Integration</td><td>Anna Turner</td><td>Apr 15 &ndash; Apr 20</td><td>Dev</td></tr>
+                            <tr><td>1.3.3.1</td><td>F1 Car Database (10 cars)</td><td>Anna Turner</td><td>Apr 21 &ndash; Apr 25</td><td>Dev</td></tr>
+                            <tr><td>1.3.3.2</td><td>Technical Specs &amp; Descriptions</td><td>Anna Turner</td><td>Apr 26 &ndash; Apr 30</td><td>Dev</td></tr>
+                            <tr><td>1.3.3.3</td><td>OOP &amp; SOLID Code Examples</td><td>Hiroshi Nakamura</td><td>May 1 &ndash; May 4</td><td>Dev</td></tr>
+                            <tr><td><span class="badge" style="background:linear-gradient(135deg,#6366f1,#818cf8);color:#fff;">1.4</span></td><td><strong>Testing &amp; QA</strong></td><td>Anna Turner</td><td>May 5 &ndash; May 25</td><td>Testing</td></tr>
+                            <tr><td>1.4.1.1</td><td>Navigation &amp; Links Test</td><td>Anna Turner</td><td>May 5 &ndash; May 7</td><td>Testing</td></tr>
+                            <tr><td>1.4.1.2</td><td>Search &amp; Filter Validation</td><td>Anna Turner</td><td>May 8 &ndash; May 10</td><td>Testing</td></tr>
+                            <tr><td>1.4.1.3</td><td>API &amp; Image Loading Test</td><td>Anna Turner</td><td>May 11 &ndash; May 12</td><td>Testing</td></tr>
+                            <tr><td>1.4.2.1</td><td>Chrome / Firefox / Safari Test</td><td>Anna Turner</td><td>May 13 &ndash; May 15</td><td>Testing</td></tr>
+                            <tr><td>1.4.2.2</td><td>Mobile &amp; Tablet Responsiveness</td><td>Luca Martini</td><td>May 16 &ndash; May 19</td><td>Testing</td></tr>
+                            <tr><td>1.4.3.1</td><td>Lighthouse Audit</td><td>Hiroshi Nakamura</td><td>May 20 &ndash; May 22</td><td>Testing</td></tr>
+                            <tr><td>1.4.3.2</td><td>WCAG Accessibility Check</td><td>Anna Turner</td><td>May 23 &ndash; May 25</td><td>Testing</td></tr>
+                            <tr><td><span class="badge" style="background:linear-gradient(135deg,#6366f1,#818cf8);color:#fff;">1.5</span></td><td><strong>Deployment &amp; Launch</strong></td><td>Hiroshi Nakamura</td><td>May 26 &ndash; Jun 15</td><td>Deploy</td></tr>
+                            <tr><td>1.5.1.1</td><td>Domain &amp; SSL Configuration</td><td>Hiroshi Nakamura</td><td>May 26 &ndash; May 28</td><td>Deploy</td></tr>
+                            <tr><td>1.5.1.2</td><td>CDN &amp; Caching Setup</td><td>Hiroshi Nakamura</td><td>May 29 &ndash; Jun 1</td><td>Deploy</td></tr>
+                            <tr><td>1.5.2.1</td><td>Production Deployment</td><td>Hiroshi Nakamura</td><td>Jun 2 &ndash; Jun 4</td><td>Deploy</td></tr>
+                            <tr><td>1.5.2.2</td><td>Analytics &amp; Error Monitoring</td><td>Anna Turner</td><td>Jun 5 &ndash; Jun 8</td><td>Deploy</td></tr>
+                            <tr><td>1.5.3.1</td><td>Technical Documentation</td><td>Hiroshi Nakamura</td><td>Jun 9 &ndash; Jun 12</td><td>Deploy</td></tr>
+                            <tr><td>1.5.3.2</td><td>User Manual &amp; Training</td><td>Sara Williams</td><td>Jun 13 &ndash; Jun 15</td><td>Deploy</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <h3>Grand Prix Motors</h3>
+                    <p>Exclusive Formula 1 Car Dealer</p>
+                    <p>&#169; 2026 Grand Prix Motors. All rights reserved.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="products.html">Catalog</a>
+                    <a href="charter.html">About</a>
+                    <a href="patterns.html">Patterns</a>
+                    <a href="planning.html">Planning</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p> Grand Prix Motors &mdash; Feel the Speed. Own the Legend.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="script.js" defer></script>
+</body>
+</html>

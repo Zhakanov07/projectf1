@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Factory Pattern &mdash; Grand Prix Motors</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="factory.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>if(sessionStorage.getItem('pt-navigating'))document.documentElement.classList.add('pt-arriving');</script>
+</head>
+<body>
+    <div class="page-transition" id="pageTransition"><div class="pt-bg"></div><div class="pt-fg"></div><div class="pt-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M4 4v16" stroke="#fff" stroke-width="2" stroke-linecap="round"/><path d="M4 4c3 0 4 2 8 2s5-2 8-2v10c-3 0-4 2-8 2s-5-2-8-2" fill="url(#ptG)" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/><defs><linearGradient id="ptG" x1="4" y1="4" x2="20" y2="14"><stop offset="0%" stop-color="#6366f1"/><stop offset="100%" stop-color="#3b82f6"/></linearGradient></defs></svg></div></div>
+    <nav class="topnav" id="topnav">
+        <div class="topnav-inner">
+            <a href="index.html" class="topnav-logo">
+                <img src="logo-opt.webp" alt="F1 Motors" class="logo-img" width="48" height="48">
+            </a>
+            <div class="topnav-search">
+                <div class="search-box">
+                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    <input type="text" id="searchInput" class="search-input" placeholder="Find a car, team or year..." autocomplete="off">
+                    <div class="search-results" id="searchResults"></div>
+                </div>
+            </div>
+            <div class="topnav-links" id="topnavLinks">
+                <a href="index.html" class="topnav-link">Home</a>
+                <a href="products.html" class="topnav-link">Catalog</a>
+                <a href="charter.html" class="topnav-link">About</a>
+                <a href="patterns.html" class="topnav-link active">Patterns</a>
+                <a href="planning.html" class="topnav-link">Planning</a>
+            </div>
+            <button class="topnav-toggle" id="topnavToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+        </div>
+    </nav>
+
+    <div class="scroll-progress" id="scrollProgress"></div>
+    <button class="back-to-top" id="backToTop" aria-label="Back to top"></button>
+
+    <div class="page-hero">
+        <h1>Factory Pattern</h1>
+        <p>Creational Design Pattern &mdash; F1 Component Manufacturing</p>
+    </div>
+
+    <main>
+        <!-- Section 1: Pattern Explanation -->
+        <section class="section" id="pattern-explanation">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">01</span>
+                    <h2>What is the Factory Pattern?</h2>
+                    <p class="section-desc">A creational design pattern that provides an interface for creating objects in a superclass, but allows subclasses to alter the type of objects that will be created &mdash; without exposing instantiation logic to the client.</p>
+                </div>
+
+                <div class="fac-overview">
+                    <!-- F1 Analogy FIRST -->
+                    <div class="pattern-card-fac">
+                        <h3>F1 Manufacturing Analogy</h3>
+                        <p>Each F1 team has its own <strong>factory</strong> that produces team-specific components. The FIA regulates the interface &mdash; every component must meet certain specs &mdash; but each factory builds them differently:</p>
+                        <ul>
+                            <li><strong>Ferrari Factory</strong> &mdash; produces high-power Italian-engineered parts</li>
+                            <li><strong>Red Bull Factory</strong> &mdash; produces aero-focused components by Adrian Newey</li>
+                            <li><strong>McLaren Factory</strong> &mdash; produces balanced, reliable British components</li>
+                            <li><strong>Mercedes Factory</strong> &mdash; produces precision German-engineered parts</li>
+                        </ul>
+                    </div>
+
+                    <!-- Key Concepts SECOND -->
+                    <div class="pattern-card-fac">
+                        <h3>Key Concepts</h3>
+                        <ul>
+                            <li><code>Product</code> &mdash; defines the interface for objects the factory method creates</li>
+                            <li><code>ConcreteProduct</code> &mdash; specific implementation of the product (e.g. Ferrari Engine, Red Bull Chassis)</li>
+                            <li><code>Creator</code> &mdash; declares the factory method that returns a Product object</li>
+                            <li><code>ConcreteCreator</code> &mdash; overrides the factory method to produce a specific ConcreteProduct</li>
+                            <li>The client code works with <strong>factories and products via interfaces</strong>, staying decoupled from concrete classes</li>
+                        </ul>
+                    </div>
+
+                    <!-- UML Diagram -->
+                    <div class="pattern-card-fac">
+                        <h3>UML Structure</h3>
+                        <div class="uml-box-fac">
+┌─────────────────────────────┐
+│    &laquo;Creator&raquo;                │
+│    TeamFactory               │
+├─────────────────────────────┤
+│ + createEngine()             │
+│ + createChassis()            │
+│ + createAeroKit()            │
+│ + createTyreSet()            │
+└──────────┬──────────────────┘
+           │ extends
+   ┌───────┼───────────┐
+   │       │           │
+   ▼       ▼           ▼
+┌────────┐┌──────────┐┌─────────┐
+│Ferrari ││ Red Bull ││Mercedes │
+│Factory ││ Factory  ││Factory  │
+└───┬────┘└────┬─────┘└────┬────┘
+    │ creates  │ creates   │ creates
+    ▼          ▼           ▼
+┌────────┐┌──────────┐┌─────────┐
+│Ferrari ││ Red Bull ││Mercedes │
+│Engine  ││ Engine   ││Engine   │
+└────────┘└──────────┘└─────────┘
+    &laquo;Product&raquo; interface</div>
+                    </div>
+
+                    <!-- Code Snippet -->
+                    <div class="pattern-card-fac">
+                        <h3>Core Implementation</h3>
+                        <div class="code-preview-box"><pre><span class="kw">class</span> <span class="fn">TeamFactory</span> {
+  <span class="fn">createEngine</span>()  { <span class="kw">throw</span> <span class="str">'Override me!'</span>; }
+  <span class="fn">createChassis</span>() { <span class="kw">throw</span> <span class="str">'Override me!'</span>; }
+}
+
+<span class="kw">class</span> <span class="fn">FerrariFactory</span> <span class="kw">extends</span> <span class="fn">TeamFactory</span> {
+  <span class="fn">createEngine</span>() {
+    <span class="kw">return new</span> <span class="fn">FerrariEngine</span>();
+  }
+  <span class="fn">createChassis</span>() {
+    <span class="kw">return new</span> <span class="fn">FerrariChassis</span>();
+  }
+}
+
+<span class="cm">// Client code works with the factory interface</span>
+<span class="kw">const</span> factory = <span class="kw">new</span> <span class="fn">FerrariFactory</span>();
+<span class="kw">const</span> engine  = factory.<span class="fn">createEngine</span>();
+engine.<span class="fn">getSpecs</span>();  <span class="cm">// → Ferrari V6 Turbo Hybrid</span></pre></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Interactive Demo -->
+        <section class="section section-alt" id="interactive-demo">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">02</span>
+                    <h2>Interactive Component Factory</h2>
+                    <p class="section-desc">Choose a team factory, then manufacture F1 components. Each factory produces team-specific parts with unique specs. Watch the production log grow!</p>
+                </div>
+
+                <!-- Factory Selector -->
+                <h4 style="color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:1px;font-size:.8rem;margin-bottom:4px;">Select Team Factory (Creator)</h4>
+                <div class="factory-select-grid" id="factorySelect">
+                    <button class="factory-select-btn active" data-factory="ferrari" style="--fac-color:#e10600;">
+                        <span class="fac-emoji">&#127467;&#127470;</span>
+                        <strong>Ferrari Factory</strong>
+                        <span class="fac-label">Maranello, Italy</span>
+                    </button>
+                    <button class="factory-select-btn" data-factory="redbull" style="--fac-color:#1e3a8a;">
+                        <span class="fac-emoji">&#127462;&#127481;</span>
+                        <strong>Red Bull Factory</strong>
+                        <span class="fac-label">Milton Keynes, UK</span>
+                    </button>
+                    <button class="factory-select-btn" data-factory="mclaren" style="--fac-color:#ff8000;">
+                        <span class="fac-emoji">&#127468;&#127463;</span>
+                        <strong>McLaren Factory</strong>
+                        <span class="fac-label">Woking, UK</span>
+                    </button>
+                    <button class="factory-select-btn" data-factory="mercedes" style="--fac-color:#00d2be;">
+                        <span class="fac-emoji">&#127465;&#127466;</span>
+                        <strong>Mercedes Factory</strong>
+                        <span class="fac-label">Brackley, UK</span>
+                    </button>
+                </div>
+
+                <!-- Component Buttons -->
+                <h4 style="color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:1px;font-size:.8rem;margin-top:24px;margin-bottom:4px;">Manufacture Component (Product)</h4>
+                <div class="component-grid" id="componentPanel">
+                    <button class="component-btn" data-component="engine" style="--comp-color:#ef4444;">
+                        <span class="comp-icon">&#9881;&#65039;</span>
+                        <div class="comp-info"><span class="comp-name">Engine</span><span class="comp-desc">V6 Turbo Hybrid Power Unit</span></div>
+                    </button>
+                    <button class="component-btn" data-component="chassis" style="--comp-color:#6366f1;">
+                        <span class="comp-icon">&#128663;</span>
+                        <div class="comp-info"><span class="comp-name">Chassis</span><span class="comp-desc">Carbon fibre monocoque</span></div>
+                    </button>
+                    <button class="component-btn" data-component="aero" style="--comp-color:#22d3ee;">
+                        <span class="comp-icon">&#127744;</span>
+                        <div class="comp-info"><span class="comp-name">Aero Kit</span><span class="comp-desc">Wings, diffuser &amp; floor</span></div>
+                    </button>
+                    <button class="component-btn" data-component="tyres" style="--comp-color:#f59e0b;">
+                        <span class="comp-icon">&#9898;</span>
+                        <div class="comp-info"><span class="comp-name">Tyre Set</span><span class="comp-desc">Race compound allocation</span></div>
+                    </button>
+                </div>
+
+                <div class="demo-actions">
+                    <button class="demo-action-btn" id="produceAll">&#9889; Produce All Components</button>
+                    <button class="demo-action-btn" id="clearLog">&#128465;&#65039; Clear Production Log</button>
+                </div>
+
+                <!-- Product Display + Production Log -->
+                <div class="factory-demo">
+                    <!-- Left: Product Specs -->
+                    <div class="product-panel">
+                        <div class="product-panel-title">&#128196; Latest Product Specs</div>
+                        <div id="productDisplay">
+                            <div class="product-empty">Select a component to manufacture</div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Production Log -->
+                    <div class="log-panel-fac">
+                        <div class="log-panel-title">&#128220; Production Log <span class="log-count" id="logCount">0</span></div>
+                        <div class="log-entries" id="productionLog">
+                            <div class="log-empty">
+                                <div class="log-empty-icon">&#127981;</div>
+                                <p>Factory idle &mdash; produce components to see the log</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Live Code Preview -->
+                <h4 style="color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:1px;font-size:.8rem;margin-top:24px;margin-bottom:4px;">&#128187; Live Code (updates as you click)</h4>
+                <div class="code-preview-box">
+                    <pre id="codePreview"><span class="cm">// Select a factory and manufacture a component...</span></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: How It Works -->
+        <section class="section" id="how-it-works">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">03</span>
+                    <h2>How the Pattern Works Step by Step</h2>
+                    <p class="section-desc">The factory encapsulates object creation, letting subclasses decide which class to instantiate.</p>
+                </div>
+
+                <div class="fac-overview">
+                    <div class="pattern-card-fac">
+                        <h3>1&#8419; Define the Product Interface</h3>
+                        <p>Create a common interface (e.g. <code>getSpecs()</code>, <code>getPower()</code>) that all products must implement. This guarantees the client can work with any product uniformly.</p>
+                    </div>
+                    <div class="pattern-card-fac">
+                        <h3>2&#8419; Implement Concrete Products</h3>
+                        <p>Each team creates its own version: <code>FerrariEngine</code> outputs 1000 HP, <code>RedBullEngine</code> outputs 1020 HP. Different internals, same interface.</p>
+                    </div>
+                    <div class="pattern-card-fac">
+                        <h3>3&#8419; Create Factory Classes</h3>
+                        <p><code>FerrariFactory</code> overrides <code>createEngine()</code> to return a <code>FerrariEngine</code>. The client never calls <code>new FerrariEngine()</code> directly.</p>
+                    </div>
+                    <div class="pattern-card-fac">
+                        <h3>4&#8419; Client Uses Factory Interface</h3>
+                        <p>The client calls <code>factory.createEngine()</code>. It gets back an engine without knowing (or caring) which concrete class was instantiated. Swap factories to change products.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Benefits -->
+        <section class="section section-alt" id="benefits">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">04</span>
+                    <h2>Benefits of the Factory Pattern</h2>
+                    <p class="section-desc">Why this pattern is essential for scalable object creation.</p>
+                </div>
+                <div class="fac-overview">
+                    <div class="pattern-card-fac">
+                        <h3>&#128274; Loose Coupling</h3>
+                        <p>Client code depends only on the abstract Creator and Product interfaces, not on concrete classes. You can add new teams without modifying existing code.</p>
+                    </div>
+                    <div class="pattern-card-fac">
+                        <h3>&#128736;&#65039; Single Responsibility</h3>
+                        <p>Object creation logic is centralized in factory classes. The client focuses on using products, not constructing them.</p>
+                    </div>
+                    <div class="pattern-card-fac">
+                        <h3>&#128260; Easy Substitution</h3>
+                        <p>Swap <code>FerrariFactory</code> for <code>RedBullFactory</code> and the entire product family changes. Ideal for configuration-driven or plugin-based architectures.</p>
+                    </div>
+                    <div class="pattern-card-fac">
+                        <h3>&#127758; Real-World Usage</h3>
+                        <p>Java&rsquo;s <code>Calendar.getInstance()</code>, React&rsquo;s <code>createElement()</code>, Python&rsquo;s <code>logging.getLogger()</code>, database driver factories, UI theme factories.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Factory vs Direct Instantiation -->
+        <section class="section" id="comparison">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">05</span>
+                    <h2>Factory vs Direct Instantiation</h2>
+                    <p class="section-desc">Why delegating creation beats hard-coded constructors.</p>
+                </div>
+                <div class="card" style="overflow-x:auto;">
+                    <table class="charter-table">
+                        <thead>
+                            <tr>
+                                <th>Criteria</th>
+                                <th>Direct <code>new</code></th>
+                                <th>Factory Pattern &#127981;</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Coupling</td>
+                                <td>Tight &mdash; client knows concrete classes</td>
+                                <td>Loose &mdash; client knows interfaces only</td>
+                            </tr>
+                            <tr>
+                                <td>Adding new types</td>
+                                <td>Modify client code everywhere</td>
+                                <td>Add a new factory subclass</td>
+                            </tr>
+                            <tr>
+                                <td>Testing</td>
+                                <td>Hard to mock concrete constructors</td>
+                                <td>Inject mock factory easily</td>
+                            </tr>
+                            <tr>
+                                <td>Flexibility</td>
+                                <td>Fixed at coding time</td>
+                                <td>Selectable at runtime</td>
+                            </tr>
+                            <tr>
+                                <td>Example (4 teams, 4 parts)</td>
+                                <td>16 scattered <code>new</code> calls</td>
+                                <td>4 factory classes, 1 interface call</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <h3>Grand Prix Motors</h3>
+                    <p>Exclusive Formula 1 Car Dealer</p>
+                    <p>&#169; 2026 Grand Prix Motors. All rights reserved.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="products.html">Catalog</a>
+                    <a href="charter.html">About</a>
+                    <a href="patterns.html">Patterns</a>
+                    <a href="planning.html">Planning</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Grand Prix Motors &mdash; Feel the Speed. Own the Legend.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="script.js" defer></script>
+    <script src="factory.js" defer></script>
+</body>
+</html>
