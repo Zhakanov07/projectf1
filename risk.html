@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <script>if(sessionStorage.getItem('pt-navigating'))document.documentElement.classList.add('pt-arriving');</script>
 </head>
-<body>
+<body class="risk-page">
     <!-- Page Transition -->
     <div class="page-transition" id="pageTransition"><div class="pt-bg"></div><div class="pt-fg"></div><div class="pt-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M4 4v16" stroke="#fff" stroke-width="2" stroke-linecap="round"/><path d="M4 4c3 0 4 2 8 2s5-2 8-2v10c-3 0-4 2-8 2s-5-2-8-2" fill="url(#ptG)" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/><defs><linearGradient id="ptG" x1="4" y1="4" x2="20" y2="14"><stop offset="0%" stop-color="#6366f1"/><stop offset="100%" stop-color="#3b82f6"/></linearGradient></defs></svg></div></div>
 
@@ -54,7 +54,7 @@
         <!-- Overview Stats -->
         <section class="section" style="padding-top: 20px; padding-bottom: 0;">
             <div class="container">
-                <div class="overview-grid" id="overviewStats">
+                <div class="overview-bar" id="overviewStats">
                     <!-- Filled by risk.js -->
                 </div>
             </div>
@@ -70,8 +70,8 @@
                 <p class="risk-section-subtitle">
                     All identified project risks with probability assessment, impact analysis, and response strategies.
                 </p>
-                <div class="risk-table-wrap">
-                    <table class="risk-table">
+                <div class="register-wrap">
+                    <table>
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -102,7 +102,7 @@
                 <p class="risk-section-subtitle">
                     Visual prioritization of risks based on probability and impact. Red zones indicate critical risks requiring immediate attention.
                 </p>
-                <div class="risk-matrix-container">
+                <div class="matrix-wrap">
                     <table class="risk-matrix-table" id="riskMatrix">
                         <!-- Filled by risk.js -->
                     </table>

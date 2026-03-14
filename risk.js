@@ -2,31 +2,36 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     /* ---------- DATA ---------- */
+    const probLevels  = ['Almost Certain', 'Likely', 'Possible', 'Unlikely', 'Rare'];
+    const impactLevels = ['Negligible', 'Marginal', 'Moderate', 'Critical', 'Catastrophic'];
+    const probVal  = { 'Almost Certain': 5, 'Likely': 4, 'Possible': 3, 'Unlikely': 2, 'Rare': 1 };
+    const impactVal = { 'Negligible': 1, 'Marginal': 2, 'Moderate': 3, 'Critical': 4, 'Catastrophic': 5 };
+
     const risks = [
         {
             id: 'R-01',
-            description: 'F1 car authentication failure — a listed vehicle may turn out to have non-original or counterfeit components, damaging credibility.',
+            description: 'F1 car authentication failure — a listed vehicle may have non-original or counterfeit components, damaging credibility.',
             cause: 'Incomplete documentation from previous owners; rare components are difficult to verify without FIA lab access.',
-            probability: 'Medium',
-            impact: 'High',
+            probability: 'Possible',
+            impact: 'Critical',
             strategy: 'Mitigate',
             action: 'Implement a two-stage authentication protocol: initial visual & VIN inspection plus independent FIA-certified lab analysis before listing any car.'
         },
         {
             id: 'R-02',
-            description: 'Website performance degradation under high traffic — catalog pages with 3D car viewers may crash during peak events (e.g., race weekends).',
+            description: 'Website performance degradation under high traffic — catalog pages with 3D car viewers may crash during peak events.',
             cause: 'Heavy 3D assets and real-time WebGL rendering combined with insufficient CDN capacity.',
-            probability: 'High',
-            impact: 'Medium',
+            probability: 'Likely',
+            impact: 'Moderate',
             strategy: 'Mitigate',
-            action: 'Use lazy-loading for 3D assets, deploy CDN edge caching, enable auto-scaling on the hosting platform, and set up uptime monitoring with automatic alerts.'
+            action: 'Use lazy-loading for 3D assets, deploy CDN edge caching, enable auto-scaling on the hosting platform, and set up uptime monitoring.'
         },
         {
             id: 'R-03',
             description: 'Key team member departure — loss of the lead developer or chief appraiser mid-project could stall delivery.',
             cause: 'Competitive F1 industry job market; single points of knowledge with no documentation.',
-            probability: 'Medium',
-            impact: 'High',
+            probability: 'Possible',
+            impact: 'Critical',
             strategy: 'Mitigate',
             action: 'Maintain up-to-date technical documentation, cross-train team members, and keep at least one backup resource onboarded for critical roles.'
         },
@@ -34,167 +39,165 @@ document.addEventListener('DOMContentLoaded', () => {
             id: 'R-04',
             description: 'Legal & compliance issues — selling vintage F1 cars across borders may violate import/export or heritage vehicle regulations.',
             cause: 'Varying international automotive laws; some countries classify F1 cars as cultural heritage items.',
-            probability: 'Low',
-            impact: 'High',
+            probability: 'Unlikely',
+            impact: 'Catastrophic',
             strategy: 'Avoid',
-            action: 'Engage a specialized automotive trade lawyer before opening sales to new regions; maintain a compliance checklist per country; refuse transactions where legal status is unclear.'
+            action: 'Engage a specialized automotive trade lawyer before opening sales to new regions; maintain a compliance checklist per country.'
         },
         {
             id: 'R-05',
             description: 'Payment fraud or chargeback on high-value transactions — a single fraudulent order could represent millions in loss.',
             cause: 'High transaction values attract sophisticated fraud; online escrow can be spoofed.',
-            probability: 'Low',
-            impact: 'High',
+            probability: 'Unlikely',
+            impact: 'Catastrophic',
             strategy: 'Transfer',
-            action: 'Partner with a specialized escrow service for all transactions over $500K; require verified identity (KYC) and bank-grade wire transfers; insure each transaction.'
+            action: 'Partner with a specialized escrow service for transactions over $500K; require verified identity (KYC) and bank-grade wire transfers; insure each transaction.'
         },
         {
             id: 'R-06',
             description: 'Project schedule overrun — development of catalog, 3D viewer, and payment integration may exceed planned timeline.',
             cause: 'Scope creep from stakeholder requests; underestimated complexity of F1 car data integration.',
-            probability: 'High',
-            impact: 'Medium',
+            probability: 'Almost Certain',
+            impact: 'Moderate',
             strategy: 'Mitigate',
-            action: 'Use agile sprints with fixed 2-week cycles; freeze scope after each sprint planning; maintain a product backlog for deferred features; weekly status reviews with stakeholders.'
+            action: 'Use agile sprints with fixed 2-week cycles; freeze scope after each sprint planning; weekly status reviews with stakeholders.'
         },
         {
             id: 'R-07',
             description: 'Third-party API downtime — dependency on external services (payment gateway, shipping tracker, FIA database) could disrupt operations.',
             cause: 'External provider outages or breaking API changes without notice.',
-            probability: 'Medium',
-            impact: 'Medium',
+            probability: 'Possible',
+            impact: 'Moderate',
             strategy: 'Accept',
-            action: 'Implement graceful degradation with cached fallback data; set up health-check monitoring for all third-party services; prepare a contingency manual workflow for order processing.'
+            action: 'Implement graceful degradation with cached fallback data; set up health-check monitoring for all third-party services.'
         }
     ];
 
     /* ---------- HELPERS ---------- */
-    const levelMap = { 'Low': 1, 'Medium': 2, 'High': 3 };
+    function riskScore(prob, impact) {
+        return probVal[prob] * impactVal[impact];
+    }
 
     function riskLevel(prob, impact) {
-        const score = levelMap[prob] * levelMap[impact];
-        if (score >= 6) return { label: 'Critical', cls: 'badge-critical' };
-        if (score >= 4) return { label: 'High', cls: 'badge-high' };
-        if (score >= 2) return { label: 'Medium', cls: 'badge-medium' };
-        return { label: 'Low', cls: 'badge-low' };
+        var s = riskScore(prob, impact);
+        if (s >= 15) return { label: 'Extreme',  cls: 'badge-extreme' };
+        if (s >= 10) return { label: 'High',     cls: 'badge-high' };
+        if (s >= 5)  return { label: 'Moderate', cls: 'badge-medium' };
+        if (s >= 3)  return { label: 'Low',      cls: 'badge-low' };
+        return              { label: 'Minimum',  cls: 'badge-minimum' };
+    }
+
+    function cellZone(score) {
+        if (score >= 15) return 'zone-extreme';
+        if (score >= 10) return 'zone-high';
+        if (score >= 5)  return 'zone-moderate';
+        if (score >= 3)  return 'zone-low';
+        return 'zone-minimum';
+    }
+
+    function cellLabel(score) {
+        if (score >= 15) return 'Extreme Risk';
+        if (score >= 10) return 'High Risk';
+        if (score >= 5)  return 'Moderate Risk';
+        if (score >= 3)  return 'Low Risk';
+        return 'Minimum Risk';
     }
 
     function strategyCls(s) {
         return 'strategy-' + s.toLowerCase().split(' ')[0];
     }
 
-    function strategyIcon(s) {
-        return '';
-    }
-
     /* ---------- RENDER REGISTER TABLE ---------- */
-    const tbody = document.getElementById('riskTableBody');
-    if (tbody) {
-        risks.forEach(r => {
-            const lvl = riskLevel(r.probability, r.impact);
-            const tr = document.createElement('tr');
-            tr.innerHTML = `
-                <td><span class="risk-id">${r.id}</span></td>
-                <td>${r.description}</td>
-                <td>${r.cause}</td>
-                <td><span class="badge badge-${r.probability.toLowerCase()}">${r.probability}</span></td>
-                <td><span class="badge badge-${r.impact.toLowerCase()}">${r.impact}</span></td>
-                <td><span class="badge ${lvl.cls}">${lvl.label}</span></td>
-                <td><span class="strategy-tag ${strategyCls(r.strategy)}">${strategyIcon(r.strategy)} ${r.strategy}</span></td>
-                <td>${r.action}</td>
-            `;
-            tbody.appendChild(tr);
+    var regBody = document.getElementById('riskTableBody');
+    if (regBody) {
+        risks.forEach(function(r) {
+            var lvl = riskLevel(r.probability, r.impact);
+            var tr = document.createElement('tr');
+            tr.innerHTML =
+                '<td><span class="risk-id">' + r.id + '</span></td>' +
+                '<td>' + r.description + '</td>' +
+                '<td>' + r.cause + '</td>' +
+                '<td><span class="badge badge-prob">' + r.probability + '</span></td>' +
+                '<td><span class="badge badge-imp">' + r.impact + '</span></td>' +
+                '<td><span class="badge ' + lvl.cls + '">' + lvl.label + '</span></td>' +
+                '<td><span class="strategy-tag ' + strategyCls(r.strategy) + '">' + r.strategy + '</span></td>' +
+                '<td>' + r.action + '</td>';
+            regBody.appendChild(tr);
         });
     }
 
-    /* ---------- RENDER RISK MATRIX ---------- */
-    const matrixTable = document.getElementById('riskMatrix');
+    /* ---------- RENDER 5x5 RISK MATRIX ---------- */
+    var matrixTable = document.getElementById('riskMatrix');
     if (matrixTable) {
-        const levels = ['Low', 'Medium', 'High'];
-        const probRows = ['High', 'Medium', 'Low'];  // top to bottom
-        const zoneClass = (p, i) => {
-            const s = levelMap[p] * levelMap[i];
-            if (s >= 6) return 'zone-critical';
-            if (s >= 4) return 'zone-high';
-            if (s >= 2) return 'zone-medium';
-            return 'zone-low';
-        };
-
-        const map = {};
-        risks.forEach(r => {
-            const key = r.probability + '-' + r.impact;
+        var map = {};
+        risks.forEach(function(r) {
+            var key = r.probability + '-' + r.impact;
             if (!map[key]) map[key] = [];
             map[key].push(r);
         });
 
-        // Colgroup for fixed label column
-        matrixTable.innerHTML = '<colgroup><col class="col-label"><col class="col-label"><col class="col-cell"><col class="col-cell"><col class="col-cell"></colgroup>';
+        var html = '';
+        html += '<colgroup><col style="width:36px"><col style="width:105px">';
+        for (var i = 0; i < 5; i++) html += '<col>';
+        html += '</colgroup>';
 
-        // Header row: corner(probability) + empty + Low / Medium / High
-        const thead = matrixTable.createTHead();
-        const hr = thead.insertRow();
-        hr.innerHTML = '<td></td><td></td>' + levels.map(l => '<th class="matrix-col-header">' + l + '</th>').join('');
+        /* Thead */
+        html += '<thead>';
+        html += '<tr><th colspan="7" class="matrix-title">Risk Probability &amp; Impact Matrix</th></tr>';
+        html += '<tr><td></td><td></td><td colspan="5" class="matrix-impact-header">Impact</td></tr>';
+        html += '<tr><td></td><td class="matrix-corner-label">Risk Management<br>Matrix</td>';
+        impactLevels.forEach(function(l) { html += '<th class="matrix-col-header">' + l + '</th>'; });
+        html += '</tr></thead>';
 
-        // Body rows
-        const tbody = matrixTable.createTBody();
-        probRows.forEach((prob, idx) => {
-            const tr = tbody.insertRow();
-            // First column: vertical "PROBABILITY" label spanning all 3 rows (only on first row)
-            if (idx === 0) {
-                const tdAxis = tr.insertCell();
-                tdAxis.className = 'matrix-corner-cell';
-                tdAxis.rowSpan = 3;
-                tdAxis.innerHTML = '<span class="axis-y">Probability</span>';
+        /* Tbody */
+        html += '<tbody>';
+        probLevels.forEach(function(prob, pIdx) {
+            html += '<tr>';
+            if (pIdx === 0) {
+                html += '<td class="matrix-axis-cell" rowspan="5"><span class="axis-y-label">Probability</span></td>';
             }
-            // Row header: HIGH / MEDIUM / LOW
-            const thRow = document.createElement('th');
-            thRow.className = 'matrix-row-header';
-            thRow.textContent = prob;
-            tr.appendChild(thRow);
-            // 3 data cells
-            levels.forEach(impact => {
-                const td = tr.insertCell();
-                td.className = 'matrix-cell ' + zoneClass(prob, impact);
-                const key = prob + '-' + impact;
+            html += '<th class="matrix-row-header">' + prob + '</th>';
+            impactLevels.forEach(function(impact) {
+                var score = probVal[prob] * impactVal[impact];
+                var zone = cellZone(score);
+                var label = cellLabel(score);
+                var key = prob + '-' + impact;
+                var chips = '';
                 if (map[key]) {
-                    map[key].forEach(r => {
-                        const chip = document.createElement('span');
-                        chip.className = 'matrix-risk-chip';
-                        chip.textContent = r.id;
-                        chip.title = r.description;
-                        td.appendChild(chip);
-                    });
+                    chips = map[key].map(function(r) {
+                        return '<span class="matrix-risk-chip" title="' + r.description.replace(/"/g, '&quot;') + '">' + r.id + '</span>';
+                    }).join(' ');
                 }
+                html += '<td class="matrix-cell ' + zone + '">';
+                html += '<span class="cell-level-label">' + label + '</span>';
+                if (chips) html += '<div class="cell-chips">' + chips + '</div>';
+                html += '</td>';
             });
+            html += '</tr>';
         });
-
-        // Footer row: impact label
-        const tfoot = matrixTable.createTFoot();
-        const fr = tfoot.insertRow();
-        fr.innerHTML = '<td></td><td></td><td colspan="3" class="matrix-impact-label">Impact</td>';
+        html += '</tbody>';
+        matrixTable.innerHTML = html;
     }
 
     /* ---------- RENDER OVERVIEW STATS ---------- */
-    const statsWrap = document.getElementById('overviewStats');
+    var statsWrap = document.getElementById('overviewStats');
     if (statsWrap) {
-        const total = risks.length;
-        let counts = { Critical: 0, High: 0, Medium: 0, Low: 0 };
-        risks.forEach(r => {
-            const lvl = riskLevel(r.probability, r.impact);
-            counts[lvl.label]++;
+        var total = risks.length;
+        var counts = { Extreme: 0, High: 0, Moderate: 0, Low: 0, Minimum: 0 };
+        risks.forEach(function(r) {
+            var lvl = riskLevel(r.probability, r.impact);
+            counts[lvl.label] = (counts[lvl.label] || 0) + 1;
         });
-
-        const statData = [
+        [
             { val: total, lbl: 'Total Risks', color: 'color-blue' },
-            { val: counts.Critical, lbl: 'Critical', color: 'color-red' },
-            { val: counts.High, lbl: 'High', color: 'color-yellow' },
-            { val: counts.Medium, lbl: 'Medium', color: 'color-purple' },
+            { val: counts.Extreme, lbl: 'Extreme', color: 'color-red' },
+            { val: counts.High, lbl: 'High', color: 'color-orange' },
+            { val: counts.Moderate, lbl: 'Moderate', color: 'color-yellow' },
             { val: counts.Low, lbl: 'Low', color: 'color-green' }
-        ];
-        statData.forEach(s => {
-            const div = document.createElement('div');
+        ].forEach(function(s) {
+            var div = document.createElement('div');
             div.className = 'overview-stat';
-            div.innerHTML = `<span class="stat-val ${s.color}">${s.val}</span><span class="stat-lbl">${s.lbl}</span>`;
+            div.innerHTML = '<span class="stat-val ' + s.color + '">' + s.val + '</span><span class="stat-lbl">' + s.lbl + '</span>';
             statsWrap.appendChild(div);
         });
     }
