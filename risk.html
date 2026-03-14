@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Risk Register &amp; Matrix &mdash; Grand Prix Motors</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="risk.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <script>if(sessionStorage.getItem('pt-navigating'))document.documentElement.classList.add('pt-arriving');</script>
+</head>
+<body>
+    <!-- Page Transition -->
+    <div class="page-transition" id="pageTransition"><div class="pt-bg"></div><div class="pt-fg"></div><div class="pt-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M4 4v16" stroke="#fff" stroke-width="2" stroke-linecap="round"/><path d="M4 4c3 0 4 2 8 2s5-2 8-2v10c-3 0-4 2-8 2s-5-2-8-2" fill="url(#ptG)" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/><defs><linearGradient id="ptG" x1="4" y1="4" x2="20" y2="14"><stop offset="0%" stop-color="#6366f1"/><stop offset="100%" stop-color="#3b82f6"/></linearGradient></defs></svg></div></div>
+
+    <!-- Navigation -->
+    <nav class="topnav" id="topnav">
+        <div class="topnav-inner">
+            <a href="index.html" class="topnav-logo">
+                <img src="logo-opt.webp" alt="F1 Motors" class="logo-img" width="48" height="48">
+            </a>
+            <div class="topnav-search">
+                <div class="search-box">
+                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    <input type="text" id="searchInput" class="search-input" placeholder="Find a car, team or year..." autocomplete="off">
+                    <div class="search-results" id="searchResults"></div>
+                </div>
+            </div>
+            <div class="topnav-links" id="topnavLinks">
+                <a href="index.html" class="topnav-link">Home</a>
+                <a href="products.html" class="topnav-link">Catalog</a>
+                <a href="charter.html" class="topnav-link">About</a>
+                <a href="patterns.html" class="topnav-link">Patterns</a>
+                <a href="planning.html" class="topnav-link">Planning</a>
+                <a href="risk.html" class="topnav-link active">Risks</a>
+            </div>
+            <button class="topnav-toggle" id="topnavToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+        </div>
+    </nav>
+
+    <div class="scroll-progress" id="scrollProgress"></div>
+    <button class="back-to-top" id="backToTop" aria-label="Back to top"></button>
+
+    <!-- Hero -->
+    <div class="page-hero">
+        <h1>Risk Register &amp; Risk Matrix</h1>
+        <p>Grand Prix Motors &mdash; Identifying, Analyzing &amp; Managing Project Risks</p>
+    </div>
+
+    <main>
+
+        <!-- Overview Stats -->
+        <section class="section" style="padding-top: 20px; padding-bottom: 0;">
+            <div class="container">
+                <div class="overview-grid" id="overviewStats">
+                    <!-- Filled by risk.js -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Risk Register -->
+        <section class="section" id="risk-register">
+            <div class="container">
+                <h2 class="risk-section-title">
+                    <span class="icon" style="background:linear-gradient(135deg,#3b82f6,#6366f1);">📋</span>
+                    Risk Register
+                </h2>
+                <p class="risk-section-subtitle">
+                    All identified project risks with probability assessment, impact analysis, and response strategies.
+                </p>
+                <div class="risk-table-wrap">
+                    <table class="risk-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Risk Description</th>
+                                <th>Cause</th>
+                                <th>Probability</th>
+                                <th>Impact</th>
+                                <th>Risk Level</th>
+                                <th>Strategy</th>
+                                <th>Action Plan</th>
+                            </tr>
+                        </thead>
+                        <tbody id="riskTableBody">
+                            <!-- Filled by risk.js -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Risk Matrix -->
+        <section class="section section-alt" id="risk-matrix">
+            <div class="container">
+                <h2 class="risk-section-title">
+                    <span class="icon" style="background:linear-gradient(135deg,#ec4899,#ef4444);">📊</span>
+                    Risk Matrix
+                </h2>
+                <p class="risk-section-subtitle">
+                    Visual prioritization of risks based on probability and impact. Red zones indicate critical risks requiring immediate attention.
+                </p>
+                <div class="risk-matrix-container">
+                    <div class="risk-matrix" id="riskMatrix">
+                        <!-- Filled by risk.js -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Short Analysis -->
+        <section class="section" id="analysis">
+            <div class="container">
+                <h2 class="risk-section-title">
+                    <span class="icon" style="background:linear-gradient(135deg,#f59e0b,#ef4444);">🔍</span>
+                    Risk Analysis
+                </h2>
+                <p class="risk-section-subtitle">
+                    Summary of the most critical risks, their implications, and recommended mitigation actions.
+                </p>
+                <div class="analysis-grid">
+                    <div class="analysis-card animate-on-scroll">
+                        <h3>⚠️ Most Critical Risks</h3>
+                        <p>The highest-priority risks for the Grand Prix Motors project are:</p>
+                        <ul>
+                            <li><span class="highlight">R-01</span> — Car authentication failure (Medium probability × High impact). A single counterfeit component scandal could destroy the brand's reputation and result in legal action.</li>
+                            <li><span class="highlight">R-03</span> — Key team member departure (Medium × High). Losing the lead developer with undocumented knowledge would stall the website and catalog delivery.</li>
+                            <li><span class="highlight">R-02</span> — Website performance degradation (High × Medium). Downtime during a race-weekend traffic spike means lost sales at peak demand.</li>
+                            <li><span class="highlight">R-06</span> — Schedule overrun (High × Medium). Scope creep could delay the platform launch past the season opener, missing the primary marketing window.</li>
+                        </ul>
+                    </div>
+                    <div class="analysis-card animate-on-scroll">
+                        <h3>💥 Why These Risks Are Dangerous</h3>
+                        <ul>
+                            <li><strong>Brand &amp; Trust:</strong> F1 car buyers expect world-class authenticity. Any lapse in verification (R-01) directly undermines the core value proposition.</li>
+                            <li><strong>Revenue Impact:</strong> Website downtime (R-02) during high-traffic events and schedule delays (R-06) directly reduce revenue and market opportunity.</li>
+                            <li><strong>Knowledge Loss:</strong> The project relies on specialized F1 and web-tech expertise. Losing key people (R-03) without documentation creates a critical bottleneck.</li>
+                            <li><strong>Legal Exposure:</strong> Cross-border compliance issues (R-04) and payment fraud (R-05) carry financial and legal consequences that could threaten the entire business.</li>
+                        </ul>
+                    </div>
+                    <div class="analysis-card animate-on-scroll">
+                        <h3>🛡️ Key Mitigation Actions</h3>
+                        <ul>
+                            <li><strong>Authentication Protocol:</strong> Introduce FIA-certified lab analysis as a mandatory second step before any listing (R-01).</li>
+                            <li><strong>Infrastructure Hardening:</strong> CDN edge caching, auto-scaling, and lazy-loaded 3D assets to handle traffic spikes (R-02).</li>
+                            <li><strong>Knowledge Management:</strong> Cross-training program and maintained technical wiki to eliminate single points of failure (R-03).</li>
+                            <li><strong>Agile Delivery:</strong> Fixed 2-week sprints with scope freezes to prevent schedule overrun (R-06).</li>
+                            <li><strong>Contingency Plans:</strong> Graceful degradation with cached data for API outages (R-07); manual order workflow as fallback.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <h3>Grand Prix Motors</h3>
+                    <p>Exclusive Formula 1 Car Dealer</p>
+                    <p>&#169; 2026 Grand Prix Motors. All rights reserved.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="products.html">Catalog</a>
+                    <a href="charter.html">About</a>
+                    <a href="patterns.html">Patterns</a>
+                    <a href="planning.html">Planning</a>
+                    <a href="risk.html">Risks</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Grand Prix Motors &mdash; Feel the Speed. Own the Legend.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js" defer></script>
+    <script src="risk.js" defer></script>
+</body>
+</html>
