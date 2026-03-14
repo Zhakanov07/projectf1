@@ -84,8 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function strategyIcon(s) {
-        const icons = { Avoid: '🚫', Mitigate: '🛡️', Transfer: '🔄', Accept: '✅' };
-        return icons[s] || '';
+        return '';
     }
 
     /* ---------- RENDER REGISTER TABLE ---------- */
@@ -187,7 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ];
         statData.forEach(s => {
             const div = document.createElement('div');
-            div.className = 'overview-stat animate-on-scroll';
+            div.className = 'overview-stat';
             div.innerHTML = `<span class="stat-val ${s.color}">${s.val}</span><span class="stat-lbl">${s.lbl}</span>`;
             statsWrap.appendChild(div);
         });
