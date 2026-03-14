@@ -130,7 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Corner cell
         const corner = document.createElement('div');
         corner.className = 'matrix-corner';
-        corner.innerHTML = '<span class="axis-label-y">Probability →</span><span class="axis-label-x">Impact →</span>';
+        corner.innerHTML = '<span class="axis-label-y">Probability</span><span class="axis-label-x">Impact &rarr;</span>';
         matrixGrid.appendChild(corner);
 
         // Header row (impact labels)

@@ -169,70 +169,61 @@
     border-radius: var(--radius);
     padding: 32px;
     box-shadow: var(--shadow);
+    overflow-x: auto;
 }
 .risk-matrix {
     display: grid;
-    grid-template-columns: auto repeat(3, 1fr);
-    grid-template-rows: repeat(4, auto);
-    gap: 0;
+    grid-template-columns: 100px repeat(3, 1fr);
+    grid-template-rows: auto repeat(3, 1fr);
+    gap: 6px;
     max-width: 700px;
+    min-width: 420px;
     margin: 0 auto;
 }
+
+/* Corner cell — axis labels */
 .matrix-corner {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding: 8px 10px 6px 8px;
     position: relative;
 }
-.matrix-corner::after {
-    content: '';
-    position: absolute;
-    bottom: 8px;
-    right: 8px;
-    width: 60px;
-    height: 60px;
-    border-left: 2px solid var(--text-muted);
-    border-bottom: 2px solid var(--text-muted);
-}
 .matrix-corner .axis-label-x {
-    position: absolute;
-    bottom: -2px;
-    right: 0;
-    left: 40px;
-    text-align: center;
-    font-size: 0.72rem;
+    font-size: 0.7rem;
     color: var(--text-muted);
     text-transform: uppercase;
     letter-spacing: 0.06em;
+    white-space: nowrap;
 }
 .matrix-corner .axis-label-y {
     position: absolute;
-    top: 0;
-    bottom: 20px;
-    left: -2px;
-    writing-mode: vertical-lr;
-    transform: rotate(180deg);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.72rem;
+    left: 6px;
+    top: 50%;
+    transform: translateY(-50%) rotate(-90deg);
+    font-size: 0.7rem;
     color: var(--text-muted);
     text-transform: uppercase;
     letter-spacing: 0.06em;
+    white-space: nowrap;
+    transform-origin: center center;
 }
 
-/* Header cells */
+/* Header cells (impact labels at top) */
 .matrix-header {
-    padding: 12px 8px;
+    padding: 10px 8px;
     text-align: center;
     font-size: 0.82rem;
     font-weight: 700;
     color: var(--text-heading);
     text-transform: uppercase;
     letter-spacing: 0.04em;
+    border-bottom: 2px solid rgba(255,255,255,0.08);
 }
 
-/* Row label */
+/* Row label (probability on the left) */
 .matrix-row-label {
-    padding: 12px 16px 12px 8px;
-    text-align: right;
+    padding: 0 12px;
     font-size: 0.82rem;
     font-weight: 700;
     color: var(--text-heading);
@@ -241,15 +232,16 @@
     justify-content: flex-end;
     text-transform: uppercase;
     letter-spacing: 0.04em;
+    border-right: 2px solid rgba(255,255,255,0.08);
+    min-height: 100px;
 }
 
-/* Cells */
+/* Data cells */
 .matrix-cell {
-    min-height: 90px;
+    min-height: 100px;
     border: 1px solid rgba(255,255,255,0.06);
     border-radius: 12px;
-    margin: 3px;
-    padding: 12px;
+    padding: 12px 10px;
     display: flex;
     flex-wrap: wrap;
     align-content: center;
@@ -258,8 +250,9 @@
     transition: transform 0.2s, box-shadow 0.2s;
 }
 .matrix-cell:hover {
-    transform: scale(1.03);
+    transform: scale(1.04);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    z-index: 2;
 }
 
 /* Color zones */
@@ -387,10 +380,16 @@
 @media (max-width: 768px) {
     .risk-matrix {
         max-width: 100%;
+        grid-template-columns: 70px repeat(3, 1fr);
     }
     .matrix-cell {
-        min-height: 70px;
+        min-height: 80px;
         padding: 8px 6px;
+    }
+    .matrix-row-label {
+        min-height: 80px;
+        padding: 0 8px;
+        font-size: 0.75rem;
     }
     .risk-matrix-container {
         padding: 18px 12px;
