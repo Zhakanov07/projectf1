@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="risk.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <script>if(sessionStorage.getItem('pt-navigating'))document.documentElement.classList.add('pt-arriving');</script>
+    <script>if(sessionStorage.getItem('pt-navigating')){document.documentElement.classList.add('pt-arriving');setTimeout(function(){document.documentElement.classList.remove('pt-arriving')},2000)}</script>
 </head>
 <body class="risk-page">
     <!-- Page Transition -->

@@ -2,6 +2,24 @@
    Grand Prix Motors  Main Script
    ============================================ */
 
+// ===== BFCACHE RECOVERY (must be top-level, outside DOMContentLoaded) =====
+// When browser restores a page from bfcache (back/forward), DOMContentLoaded does NOT
+// fire again. The page is frozen with page-exiting (opacity:0) and pt-enter on overlay.
+// This handler runs immediately on restore and makes the page visible again.
+window.addEventListener('pageshow', function(e) {
+    if (e.persisted || document.body.classList.contains('page-exiting')) {
+        document.body.classList.remove('page-exiting');
+        document.documentElement.classList.remove('pt-arriving');
+        sessionStorage.removeItem('pt-navigating');
+        var overlay = document.getElementById('pageTransition');
+        if (overlay) {
+            overlay.classList.remove('pt-enter', 'pt-exit');
+            var layers = overlay.querySelectorAll('.pt-bg, .pt-fg, .pt-icon');
+            for (var i = 0; i < layers.length; i++) layers[i].style.willChange = '';
+        }
+    }
+});
+
 // F1 Car Database for Search
 const f1Database = [
     { name: "Ferrari SF-23", team: "Scuderia Ferrari", year: 2023, price: "$8,500,000", emoji: "\uD83C\uDFCE\uFE0F", page: "products.html", type: "modern" },
@@ -27,6 +45,8 @@ document.addEventListener('DOMContentLoaded', () => {
         document.documentElement.classList.add('embedded');
         return; // Skip initializing nav, search, etc. in embedded mode
     }
+    // MUST run first — clears the pt-arriving overlay before anything else can fail
+    playPageEnterAnimation();
     initSearch();
     initScrollHandlers();
     initNavToggle();
@@ -243,8 +263,7 @@ function initPageTransitions() {
     // Pre-build transition DOM on page load (not on click) for zero jank
     buildTransitionDOM();
 
-    // Play exit animation on the arriving page (slide layers out)
-    playPageEnterAnimation();
+    // (bfcache recovery is handled by the top-level pageshow listener)
 
     // Intercept all internal links
     document.querySelectorAll('a[href]').forEach(link => {
@@ -256,6 +275,19 @@ function initPageTransitions() {
             });
         }
     });
+}
+
+// Clean up any stuck transition state (bfcache restore, back navigation, JS errors)
+function resetTransitionState() {
+    document.body.classList.remove('page-exiting');
+    document.documentElement.classList.remove('pt-arriving');
+    const overlay = document.getElementById('pageTransition');
+    if (overlay) {
+        overlay.classList.remove('pt-enter', 'pt-exit');
+        overlay.querySelectorAll('.pt-bg, .pt-fg, .pt-icon').forEach(l => {
+            l.style.willChange = '';
+        });
+    }
 }
 
 function buildTransitionDOM() {
