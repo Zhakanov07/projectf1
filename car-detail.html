@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Car Detail — Grand Prix Motors</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="car-detail.css">
+    <link rel="stylesheet" href="styles.css?v=2">
+    <link rel="stylesheet" href="car-detail.css?v=2">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <script>if(sessionStorage.getItem('pt-navigating')){document.documentElement.classList.add('pt-arriving');setTimeout(function(){document.documentElement.classList.remove('pt-arriving')},2000)}</script>
 </head>
@@ -57,6 +57,15 @@
 
     <main class="cd-main">
         <div class="container">
+
+            <!-- Onboard Video -->
+            <section class="cd-section animate-on-scroll" id="videoSection" style="display:none">
+                <h2 class="cd-section-title">🎬 Onboard Video</h2>
+                <div class="cd-card cd-video-card">
+                    <div class="cd-video-wrapper" id="videoWrapper"></div>
+                    <p class="cd-video-caption" id="videoCaption"></p>
+                </div>
+            </section>
 
             <!-- Description -->
             <section class="cd-section animate-on-scroll">
@@ -175,7 +184,7 @@
         </div>
     </footer>
 
-    <script src="script.js" defer></script>
-    <script src="car-detail.js" defer></script>
+    <script src="script.js?v=2" defer></script>
+    <script src="car-detail.js?v=2" defer></script>
 </body>
 </html>

@@ -2,6 +2,40 @@
    Car Detail Page — Styles  (cd- prefix)
    ============================================ */
 
+/* ── Onboard Video ── */
+.cd-video-card {
+    padding: 0;
+    overflow: hidden;
+    border-radius: 16px;
+}
+.cd-video-wrapper {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%; /* 16:9 */
+    background: #000;
+    border-radius: 16px 16px 0 0;
+    overflow: hidden;
+}
+.cd-video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 16px 16px 0 0;
+}
+.cd-video-caption {
+    margin: 0;
+    padding: 14px 20px;
+    font-size: .92rem;
+    color: rgba(255,255,255,.6);
+    text-align: center;
+    letter-spacing: .02em;
+    background: rgba(255,255,255,.03);
+    border-top: 1px solid rgba(255,255,255,.06);
+}
+
 /* ── Hero ── */
 .cd-hero {
     position: relative;
