@@ -14,9 +14,6 @@ const CAR_DATABASE = {
         badgeColor: '#fff',
         heroGradient: 'linear-gradient(135deg, #e10600 0%, #900 100%)',
         wiki: 'Ferrari_SF-23',
-        videoId: 'Oc-5uc4GRuc',
-        videoStart: 30,
-        videoTitle: 'Ferrari SF-23 Onboard at Monaco',
         subtitle: '2023 • V6 Turbo Hybrid 1.6L • Maranello, Italy',
         description: 'The Ferrari SF-23 is Scuderia Ferrari\'s 2023 Formula One challenger, designed under the technical leadership of Enrico Cardile. Powered by a 1.6L V6 turbocharged hybrid power unit producing over 1000 HP, this car carried Charles Leclerc and Carlos Sainz through 22 Grand Prix races. It featured an innovative sidepod design and improved downforce package.',
         specs: {
@@ -70,9 +67,6 @@ const CAR_DATABASE = {
         badgeColor: '#fff',
         heroGradient: 'linear-gradient(135deg, #0600ef 0%, #001040 100%)',
         wiki: 'Red_Bull_RB19',
-        videoId: 'UI-FtkyVmJk',
-        videoStart: 45,
-        videoTitle: 'Red Bull RB19 Onboard — Bahrain Night GP 4K',
         subtitle: '2023 • V6 Turbo Hybrid 1.6L • Milton Keynes, UK',
         description: 'The Red Bull RB19 is the most dominant Formula 1 car in history. Designed by Adrian Newey and his team, it won 21 out of 22 races in the 2023 season. Max Verstappen claimed his third consecutive World Championship in commanding fashion, with teammate Sergio Pérez also claiming victories.',
         specs: {
@@ -126,9 +120,6 @@ const CAR_DATABASE = {
         badgeColor: '#000',
         heroGradient: 'linear-gradient(135deg, #00d2be 0%, #005f56 100%)',
         wiki: 'Mercedes-AMG_F1_W11_EQ_Performance',
-        videoId: 'dOTCPlmDkvs',
-        videoStart: 20,
-        videoTitle: 'Mercedes W11 Silverstone Hotlap — 4K',
         subtitle: '2020 • V6 Turbo Hybrid 1.6L • Brixworth, UK',
         description: 'The Mercedes W11 EQ Performance is widely regarded as the most dominant F1 car in history. Lewis Hamilton used it to equal Michael Schumacher\'s record of 7 World Championships. The car won 13 out of 17 races in the shortened 2020 season, setting new benchmarks for qualifying pace.',
         specs: {
@@ -182,9 +173,6 @@ const CAR_DATABASE = {
         badgeColor: '#000',
         heroGradient: 'linear-gradient(135deg, #ff8000 0%, #c76300 100%)',
         wiki: 'McLaren_MCL60',
-        videoId: '_SgDqP6hW3k',
-        videoStart: 35,
-        videoTitle: 'McLaren MCL60 Onboard — Bahrain GP 4K',
         subtitle: '2023 • V6 Turbo Hybrid 1.6L • Woking, UK',
         description: 'The McLaren MCL60 marked the team\'s dramatic resurgence in 2023. After a challenging start, mid-season upgrades transformed it into a race-winning machine. Lando Norris and Oscar Piastri delivered consistent performances and a memorable 1-2 at the season opener of 2024.',
         specs: {
@@ -238,9 +226,6 @@ const CAR_DATABASE = {
         badgeColor: '#fff',
         heroGradient: 'linear-gradient(135deg, #2293d1 0%, #0a4d7a 100%)',
         wiki: 'Alpine_A523',
-        videoId: 'EF0KEmQHPQs',
-        videoStart: 25,
-        videoTitle: 'Alpine A523 Onboard — Abu Dhabi 2023',
         subtitle: '2023 • V6 Turbo Hybrid 1.6L • Enstone, UK',
         description: 'The Alpine A523 continued the French team\'s Formula 1 campaign with a striking pink and blue livery. Pierre Gasly and Esteban Ocon piloted the Renault-powered machine through a season of steady midfield racing, showcasing Alpine\'s engineering progress.',
         specs: {
@@ -294,9 +279,6 @@ const CAR_DATABASE = {
         badgeColor: '#fff',
         heroGradient: 'linear-gradient(135deg, #358c75 0%, #1a5c49 100%)',
         wiki: 'Aston_Martin_AMR23',
-        videoId: 'PHKnDJxM-7k',
-        videoStart: 40,
-        videoTitle: 'Aston Martin AMR23 — Alonso Onboard Barcelona',
         subtitle: '2023 • V6 Turbo Hybrid 1.6L • Silverstone, UK',
         description: 'The Aston Martin AMR23 was the breakthrough car that established the team as genuine front-runners. Fernando Alonso delivered 8 podiums, including the dramatic season opener in Bahrain where he finished 3rd. The British Racing Green machine became one of the stories of the season.',
         specs: {
@@ -350,9 +332,6 @@ const CAR_DATABASE = {
         badgeColor: '#000',
         heroGradient: 'linear-gradient(135deg, #cc0000 0%, #660000 100%)',
         wiki: 'Ferrari_F2004',
-        videoId: 'oBTAHCUDGug',
-        videoStart: 15,
-        videoTitle: 'Ferrari F2004 Onboard — Suzuka 4K',
         subtitle: '2004 • V10 3.0L • Maranello, Italy',
         description: 'The Ferrari F2004 is widely considered the greatest Formula 1 car ever built. In Michael Schumacher\'s hands, it won 15 out of 18 races — a record that stood for nearly 20 years. The screaming V10 engine produced 900 HP and the car was unmatched in every aspect.',
         specs: {
@@ -406,9 +385,6 @@ const CAR_DATABASE = {
         badgeColor: '#000',
         heroGradient: 'linear-gradient(135deg, #c0c0c0 0%, #505050 100%)',
         wiki: 'McLaren_MP4/4',
-        videoId: 'tfysljfoTQc',
-        videoStart: 20,
-        videoTitle: 'McLaren MP4/4 — Senna Onboard Imola',
         subtitle: '1988 • V6 Turbo 1.5L • Woking, UK',
         description: 'The McLaren MP4/4 holds the record for the highest win percentage in F1 history: 15 victories out of 16 races (93.75%). Designed by Gordon Murray, this car was the weapon of choice for Ayrton Senna and Alain Prost — two of the greatest drivers in history racing for the same team.',
         specs: {
@@ -462,9 +438,6 @@ const CAR_DATABASE = {
         badgeColor: '#000',
         heroGradient: 'linear-gradient(135deg, #ffd700 0%, #a08000 100%)',
         wiki: 'Lotus_79',
-        videoId: '7-m5cd3mBK8',
-        videoStart: 10,
-        videoTitle: 'Lotus 79 Onboard — Pure Sound',
         subtitle: '1978 • V8 3.0L Ford DFV • Hethel, UK',
         description: 'The Lotus 79 revolutionised Formula 1 with its ground-effect aerodynamics. Designed by Colin Chapman and Peter Wright, it used inverted wing profiles under the sidepods to generate massive downforce. Mario Andretti dominated the 1978 season, winning the World Championship.',
         specs: {
@@ -518,9 +491,6 @@ const CAR_DATABASE = {
         badgeColor: '#000',
         heroGradient: 'linear-gradient(135deg, #003399 0%, #001155 100%)',
         wiki: 'Williams_FW14B',
-        videoId: 'iSZEenP3ALY',
-        videoStart: 15,
-        videoTitle: 'Williams FW14B — Mansell Onboard Silverstone 1992',
         subtitle: '1992 • V10 3.5L Renault • Grove, UK',
         description: 'The Williams FW14B is one of the most technically advanced F1 cars ever built. Designed by Adrian Newey and Patrick Head, it featured active suspension, traction control, and anti-lock brakes. Nigel Mansell dominated the 1992 season, winning the first 5 races in a row.',
         specs: {
@@ -583,7 +553,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const car = CAR_DATABASE[carId];
     renderCarDetail(car, carId);
-    loadHeroVideo(car);
+    loadDetailPhoto(car);
 
     // Animate sections on scroll (since script.js only targets card-type elements)
     const sectionObserver = new IntersectionObserver((entries) => {
@@ -749,84 +719,54 @@ function renderCarDetail(car, carId) {
     renderDriverProfile(car);
 }
 
-function loadHeroVideo(car) {
-    const heroVideo = document.getElementById('heroVideo');
-    if (!heroVideo || !car.videoId) return;
+function loadDetailPhoto(car) {
+    const heroImg = document.getElementById('heroImg');
+    if (!heroImg || !car.wiki) return;
 
-    const startSec = car.videoStart || 10;
-    const clipLen = 5;
-
-    /* Load YouTube IFrame API if not already loaded */
-    if (!window.YT || !window.YT.Player) {
-        window._heroCarData = car;
-        const tag = document.createElement('script');
-        tag.src = 'https://www.youtube.com/iframe_api';
-        document.head.appendChild(tag);
-        window.onYouTubeIframeAPIReady = function() {
-            createHeroPlayer(window._heroCarData);
-        };
-    } else {
-        createHeroPlayer(car);
-    }
-
-    function createHeroPlayer(c) {
-        const container = document.getElementById('heroVideo');
-        if (!container) return;
-        /* Create a child div for the player */
-        const playerDiv = document.createElement('div');
-        playerDiv.id = 'ytHeroPlayer';
-        container.innerHTML = '';
-        container.appendChild(playerDiv);
-
-        let loopTimer = null;
-
-        const player = new YT.Player('ytHeroPlayer', {
-            videoId: c.videoId,
-            playerVars: {
-                autoplay: 1,
-                mute: 1,
-                controls: 0,
-                showinfo: 0,
-                rel: 0,
-                modestbranding: 1,
-                playsinline: 1,
-                disablekb: 1,
-                fs: 0,
-                iv_load_policy: 3,
-                start: startSec,
-                end: startSec + clipLen,
-                loop: 0,
-                origin: window.location.origin
-            },
-            events: {
-                onReady: function(e) {
-                    e.target.setPlaybackQuality('hd2160');
-                    e.target.mute();
-                    e.target.playVideo();
-                },
-                onStateChange: function(e) {
-                    /* When video ends (state 0) or pauses, seek back and replay */
-                    if (e.data === YT.PlayerState.ENDED || e.data === YT.PlayerState.PAUSED) {
-                        e.target.seekTo(startSec, true);
-                        e.target.playVideo();
-                    }
-                    /* When playing, show the video and start loop check */
-                    if (e.data === YT.PlayerState.PLAYING) {
-                        container.classList.add('video-ready');
-                        e.target.setPlaybackQuality('hd2160');
-                        /* Safety loop: if somehow past end, seek back */
-                        if (loopTimer) clearInterval(loopTimer);
-                        loopTimer = setInterval(function() {
-                            var t = e.target.getCurrentTime();
-                            if (t >= startSec + clipLen - 0.3 || t < startSec - 1) {
-                                e.target.seekTo(startSec, true);
-                            }
-                        }, 200);
-                    }
-                }
+    fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(car.wiki)}`)
+        .then(res => res.json())
+        .then(data => {
+            /* Prefer original image (full resolution), fallback to 4K thumbnail */
+            let src4k = null;
+            if (data.originalimage && data.originalimage.source) {
+                src4k = data.originalimage.source;
+            } else if (data.thumbnail && data.thumbnail.source) {
+                src4k = data.thumbnail.source.replace(/\/\d+px-/, '/3840px-');
             }
-        });
-    }
+            if (!src4k) return;
+
+            const img = new Image();
+            img.crossOrigin = 'anonymous';
+            img.onload = () => {
+                heroImg.src = src4k;
+                requestAnimationFrame(() => heroImg.classList.add('loaded'));
+            };
+            img.onerror = () => {
+                /* Fallback: try 3840px resize of thumbnail */
+                const fallback = data.thumbnail
+                    ? data.thumbnail.source.replace(/\/\d+px-/, '/3840px-')
+                    : null;
+                if (fallback && fallback !== src4k) {
+                    const img2 = new Image();
+                    img2.crossOrigin = 'anonymous';
+                    img2.onload = () => {
+                        heroImg.src = fallback;
+                        requestAnimationFrame(() => heroImg.classList.add('loaded'));
+                    };
+                    img2.onerror = () => {
+                        /* Last resort: original thumbnail */
+                        heroImg.src = data.thumbnail.source;
+                        requestAnimationFrame(() => heroImg.classList.add('loaded'));
+                    };
+                    img2.src = fallback;
+                } else if (data.thumbnail) {
+                    heroImg.src = data.thumbnail.source;
+                    requestAnimationFrame(() => heroImg.classList.add('loaded'));
+                }
+            };
+            img.src = src4k;
+        })
+        .catch(() => {});
 }
 
 function animatePerfBars() {

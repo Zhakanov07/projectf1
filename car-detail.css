@@ -2,33 +2,6 @@
    Car Detail Page — Styles  (cd- prefix)
    ============================================ */
 
-/* ── Hero Video Background ── */
-.cd-hero-video {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    overflow: hidden;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity .6s ease;
-}
-.cd-hero-video.video-ready {
-    opacity: 1;
-}
-.cd-hero-video iframe {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 120vw;
-    height: 120vh;
-    min-width: 100%;
-    min-height: 100%;
-    transform: translate(-50%, -50%);
-    border: none;
-    object-fit: cover;
-    filter: brightness(.5) saturate(1.15);
-}
-
 /* ── Hero ── */
 .cd-hero {
     position: relative;
@@ -43,6 +16,22 @@
     inset: 0;
     z-index: 0;
     transition: opacity .6s;
+}
+.cd-hero-photo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 1s ease;
+    filter: brightness(.55) saturate(1.1);
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+}
+.cd-hero-photo.loaded {
+    opacity: 1;
 }
 .cd-hero-overlay {
     position: absolute;
