@@ -573,7 +573,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const car = CAR_DATABASE[carId];
     renderCarDetail(car, carId);
-    loadDetailPhoto(car);
+    loadHeroVideo(car);
 
     // Animate sections on scroll (since script.js only targets card-type elements)
     const sectionObserver = new IntersectionObserver((entries) => {
@@ -635,9 +635,6 @@ function renderCarDetail(car, carId) {
 
     /* Description */
     document.getElementById('carDescription').textContent = car.description;
-
-    /* Onboard Video */
-    renderVideo(car);
 
     /* Specs grid */
     const specsGrid = document.getElementById('specsGrid');
@@ -742,54 +739,17 @@ function renderCarDetail(car, carId) {
     renderDriverProfile(car);
 }
 
-function loadDetailPhoto(car) {
-    const heroImg = document.getElementById('heroImg');
-    if (!heroImg || !car.wiki) return;
+function loadHeroVideo(car) {
+    const heroVideo = document.getElementById('heroVideo');
+    if (!heroVideo || !car.videoId) return;
 
-    fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(car.wiki)}`)
-        .then(res => res.json())
-        .then(data => {
-            /* Prefer original image (full resolution), fallback to 4K thumbnail */
-            let src4k = null;
-            if (data.originalimage && data.originalimage.source) {
-                src4k = data.originalimage.source;
-            } else if (data.thumbnail && data.thumbnail.source) {
-                src4k = data.thumbnail.source.replace(/\/\d+px-/, '/3840px-');
-            }
-            if (!src4k) return;
-
-            const img = new Image();
-            img.crossOrigin = 'anonymous';
-            img.onload = () => {
-                heroImg.src = src4k;
-                requestAnimationFrame(() => heroImg.classList.add('loaded'));
-            };
-            img.onerror = () => {
-                /* Fallback: try 3840px resize of thumbnail */
-                const fallback = data.thumbnail
-                    ? data.thumbnail.source.replace(/\/\d+px-/, '/3840px-')
-                    : null;
-                if (fallback && fallback !== src4k) {
-                    const img2 = new Image();
-                    img2.crossOrigin = 'anonymous';
-                    img2.onload = () => {
-                        heroImg.src = fallback;
-                        requestAnimationFrame(() => heroImg.classList.add('loaded'));
-                    };
-                    img2.onerror = () => {
-                        /* Last resort: original thumbnail */
-                        heroImg.src = data.thumbnail.source;
-                        requestAnimationFrame(() => heroImg.classList.add('loaded'));
-                    };
-                    img2.src = fallback;
-                } else if (data.thumbnail) {
-                    heroImg.src = data.thumbnail.source;
-                    requestAnimationFrame(() => heroImg.classList.add('loaded'));
-                }
-            };
-            img.src = src4k;
-        })
-        .catch(() => {});
+    const vid = encodeURIComponent(car.videoId);
+    heroVideo.innerHTML = `<iframe
+        src="https://www.youtube.com/embed/${vid}?autoplay=1&mute=1&loop=1&playlist=${vid}&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&disablekb=1&fs=0&iv_load_policy=3&start=5"
+        title="${(car.videoTitle || car.name).replace(/"/g, '&quot;')}"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        loading="eager"></iframe>`;
 }
 
 function animatePerfBars() {
@@ -884,27 +844,6 @@ function drawRadar(car) {
         const y = cy + (R + 20) * Math.sin(angle);
         ctx.fillText(label, x, y + 4);
     });
-}
-
-/* ============================================
-   Onboard Video Renderer
-   ============================================ */
-function renderVideo(car) {
-    const section = document.getElementById('videoSection');
-    const wrapper = document.getElementById('videoWrapper');
-    const caption = document.getElementById('videoCaption');
-    if (!section || !wrapper || !car.videoId) return;
-
-    const vid = encodeURIComponent(car.videoId);
-    section.style.display = '';
-    wrapper.innerHTML = `<iframe
-        src="https://www.youtube.com/embed/${vid}?rel=0&modestbranding=1&showinfo=0&autoplay=1&mute=1&loop=1&playlist=${vid}&controls=1&playsinline=1"
-        title="${(car.videoTitle || car.name + ' Onboard').replace(/"/g, '&quot;')}"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
-        loading="lazy"></iframe>`;
-    if (caption) caption.textContent = car.videoTitle || (car.name + ' — Onboard Track Footage');
 }
 
 /* ============================================

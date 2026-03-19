@@ -2,38 +2,26 @@
    Car Detail Page — Styles  (cd- prefix)
    ============================================ */
 
-/* ── Onboard Video ── */
-.cd-video-card {
-    padding: 0;
-    overflow: hidden;
-    border-radius: 16px;
-}
-.cd-video-wrapper {
-    position: relative;
-    width: 100%;
-    padding-top: 56.25%; /* 16:9 */
-    background: #000;
-    border-radius: 16px 16px 0 0;
-    overflow: hidden;
-}
-.cd-video-wrapper iframe {
+/* ── Hero Video Background ── */
+.cd-hero-video {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border: none;
-    border-radius: 16px 16px 0 0;
+    inset: 0;
+    z-index: 1;
+    overflow: hidden;
+    pointer-events: none;
 }
-.cd-video-caption {
-    margin: 0;
-    padding: 14px 20px;
-    font-size: .92rem;
-    color: rgba(255,255,255,.6);
-    text-align: center;
-    letter-spacing: .02em;
-    background: rgba(255,255,255,.03);
-    border-top: 1px solid rgba(255,255,255,.06);
+.cd-hero-video iframe {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 120vw;
+    height: 120vh;
+    min-width: 100%;
+    min-height: 100%;
+    transform: translate(-50%, -50%);
+    border: none;
+    object-fit: cover;
+    filter: brightness(.5) saturate(1.15);
 }
 
 /* ── Hero ── */
@@ -50,22 +38,6 @@
     inset: 0;
     z-index: 0;
     transition: opacity .6s;
-}
-.cd-hero-photo {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: 1;
-    opacity: 0;
-    transition: opacity 1s ease;
-    filter: brightness(.55) saturate(1.1);
-    image-rendering: -webkit-optimize-contrast;
-    image-rendering: crisp-edges;
-}
-.cd-hero-photo.loaded {
-    opacity: 1;
 }
 .cd-hero-overlay {
     position: absolute;
