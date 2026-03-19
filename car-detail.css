@@ -9,6 +9,11 @@
     z-index: 1;
     overflow: hidden;
     pointer-events: none;
+    opacity: 0;
+    transition: opacity .6s ease;
+}
+.cd-hero-video.video-ready {
+    opacity: 1;
 }
 .cd-hero-video iframe {
     position: absolute;
