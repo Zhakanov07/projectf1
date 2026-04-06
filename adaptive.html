@@ -54,27 +54,6 @@
 
                 <div class="adaptive-overview">
                     <div class="adaptive-card">
-                        <h3>F1 telemetry analogy</h3>
-                        <p>A race engineer needs one dashboard, but telemetry arrives from different systems with different field names and formats.</p>
-                        <ul>
-                            <li><strong>Ferrari Garage Unit</strong> reports raw milliseconds, tyre codes and ERS percentage</li>
-                            <li><strong>FIA Timing Feed</strong> sends lap time as a string plus fuel in litres</li>
-                            <li><strong>Weather Radar</strong> focuses on track grip, wind and rain probability</li>
-                        </ul>
-                        <p>The client should not care about those differences. It asks every source for one normalized snapshot.</p>
-                    </div>
-
-                    <div class="adaptive-card">
-                        <h3>Key concepts</h3>
-                        <ul>
-                            <li><code>Client</code> depends on one stable interface</li>
-                            <li><code>Adaptee</code> is an existing class with an incompatible API</li>
-                            <li><code>Adapter</code> translates calls and data shapes</li>
-                            <li>The adapter can also convert units, defaults and naming conventions</li>
-                        </ul>
-                    </div>
-
-                    <div class="adaptive-card">
                         <h3>UML structure</h3>
                         <div class="uml-box-adaptive">┌────────────────────────────┐
 │         Client             │
@@ -100,6 +79,27 @@
 │ WeatherStation   │
 │ + currentTrack() │
 └──────────────────┘</div>
+                    </div>
+
+                    <div class="adaptive-card">
+                        <h3>F1 telemetry analogy</h3>
+                        <p>A race engineer needs one dashboard, but telemetry arrives from different systems with different field names and formats.</p>
+                        <ul>
+                            <li><strong>Ferrari Garage Unit</strong> reports raw milliseconds, tyre codes and ERS percentage</li>
+                            <li><strong>FIA Timing Feed</strong> sends lap time as a string plus fuel in litres</li>
+                            <li><strong>Weather Radar</strong> focuses on track grip, wind and rain probability</li>
+                        </ul>
+                        <p>The client should not care about those differences. It asks every source for one normalized snapshot.</p>
+                    </div>
+
+                    <div class="adaptive-card">
+                        <h3>Key concepts</h3>
+                        <ul>
+                            <li><code>Client</code> depends on one stable interface</li>
+                            <li><code>Adaptee</code> is an existing class with an incompatible API</li>
+                            <li><code>Adapter</code> translates calls and data shapes</li>
+                            <li>The adapter can also convert units, defaults and naming conventions</li>
+                        </ul>
                     </div>
 
                     <div class="adaptive-card">

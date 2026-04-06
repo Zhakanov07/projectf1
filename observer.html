@@ -54,30 +54,6 @@
                 </div>
 
                 <div class="pattern-overview">
-                    <!-- F1 Analogy FIRST -->
-                    <div class="pattern-card">
-                        <h3> F1 Race Analogy</h3>
-                        <p>In our demo, <strong>Race Control</strong> is the Subject. It emits events like flag changes, weather updates, and safety car deployments. The observers are:</p>
-                        <ul>
-                            <li> <strong>Team Radio</strong> &mdash; receives flags, safety &amp; messages</li>
-                            <li> <strong>Pit Wall</strong> &mdash; receives ALL events (full strategy)</li>
-                            <li> <strong>TV Broadcast</strong> &mdash; receives flags, weather &amp; safety</li>
-                            <li> <strong>Marshal Post</strong> &mdash; receives flag events only</li>
-                        </ul>
-                    </div>
-
-                    <!-- Key Concepts SECOND -->
-                    <div class="pattern-card">
-                        <h3> Key Concepts</h3>
-                        <ul>
-                            <li><code>Subject</code> &mdash; maintains a list of observers and notifies them of state changes</li>
-                            <li><code>Observer</code> &mdash; defines an <code>update()</code> interface that gets called by the Subject</li>
-                            <li><code>subscribe()</code> &mdash; registers an observer for specific events</li>
-                            <li><code>unsubscribe()</code> &mdash; removes an observer from the notification list</li>
-                            <li><code>notify()</code> &mdash; iterates over observers and calls their update method</li>
-                        </ul>
-                    </div>
-
                     <!-- UML Diagram -->
                     <div class="pattern-card">
                         <h3> UML Structure</h3>
@@ -110,6 +86,30 @@
                            ├────────────────┤
                            │ + update(t, d)  │
                            └────────────────┘</div>
+                    </div>
+
+                    <!-- F1 Analogy -->
+                    <div class="pattern-card">
+                        <h3> F1 Race Analogy</h3>
+                        <p>In our demo, <strong>Race Control</strong> is the Subject. It emits events like flag changes, weather updates, and safety car deployments. The observers are:</p>
+                        <ul>
+                            <li> <strong>Team Radio</strong> &mdash; receives flags, safety &amp; messages</li>
+                            <li> <strong>Pit Wall</strong> &mdash; receives ALL events (full strategy)</li>
+                            <li> <strong>TV Broadcast</strong> &mdash; receives flags, weather &amp; safety</li>
+                            <li> <strong>Marshal Post</strong> &mdash; receives flag events only</li>
+                        </ul>
+                    </div>
+
+                    <!-- Key Concepts -->
+                    <div class="pattern-card">
+                        <h3> Key Concepts</h3>
+                        <ul>
+                            <li><code>Subject</code> &mdash; maintains a list of observers and notifies them of state changes</li>
+                            <li><code>Observer</code> &mdash; defines an <code>update()</code> interface that gets called by the Subject</li>
+                            <li><code>subscribe()</code> &mdash; registers an observer for specific events</li>
+                            <li><code>unsubscribe()</code> &mdash; removes an observer from the notification list</li>
+                            <li><code>notify()</code> &mdash; iterates over observers and calls their update method</li>
+                        </ul>
                     </div>
 
                     <!-- Code Snippet -->

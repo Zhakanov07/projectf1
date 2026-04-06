@@ -54,30 +54,6 @@
                 </div>
 
                 <div class="fac-overview">
-                    <!-- F1 Analogy FIRST -->
-                    <div class="pattern-card-fac">
-                        <h3>F1 Manufacturing Analogy</h3>
-                        <p>Each F1 team has its own <strong>factory</strong> that produces team-specific components. The FIA regulates the interface &mdash; every component must meet certain specs &mdash; but each factory builds them differently:</p>
-                        <ul>
-                            <li><strong>Ferrari Factory</strong> &mdash; produces high-power Italian-engineered parts</li>
-                            <li><strong>Red Bull Factory</strong> &mdash; produces aero-focused components by Adrian Newey</li>
-                            <li><strong>McLaren Factory</strong> &mdash; produces balanced, reliable British components</li>
-                            <li><strong>Mercedes Factory</strong> &mdash; produces precision German-engineered parts</li>
-                        </ul>
-                    </div>
-
-                    <!-- Key Concepts SECOND -->
-                    <div class="pattern-card-fac">
-                        <h3>Key Concepts</h3>
-                        <ul>
-                            <li><code>Product</code> &mdash; defines the interface for objects the factory method creates</li>
-                            <li><code>ConcreteProduct</code> &mdash; specific implementation of the product (e.g. Ferrari Engine, Red Bull Chassis)</li>
-                            <li><code>Creator</code> &mdash; declares the factory method that returns a Product object</li>
-                            <li><code>ConcreteCreator</code> &mdash; overrides the factory method to produce a specific ConcreteProduct</li>
-                            <li>The client code works with <strong>factories and products via interfaces</strong>, staying decoupled from concrete classes</li>
-                        </ul>
-                    </div>
-
                     <!-- UML Diagram -->
                     <div class="pattern-card-fac">
                         <h3>UML Structure</h3>
@@ -106,6 +82,30 @@
 │Engine  ││ Engine   ││Engine   │
 └────────┘└──────────┘└─────────┘
     &laquo;Product&raquo; interface</div>
+                    </div>
+
+                    <!-- F1 Analogy -->
+                    <div class="pattern-card-fac">
+                        <h3>F1 Manufacturing Analogy</h3>
+                        <p>Each F1 team has its own <strong>factory</strong> that produces team-specific components. The FIA regulates the interface &mdash; every component must meet certain specs &mdash; but each factory builds them differently:</p>
+                        <ul>
+                            <li><strong>Ferrari Factory</strong> &mdash; produces high-power Italian-engineered parts</li>
+                            <li><strong>Red Bull Factory</strong> &mdash; produces aero-focused components by Adrian Newey</li>
+                            <li><strong>McLaren Factory</strong> &mdash; produces balanced, reliable British components</li>
+                            <li><strong>Mercedes Factory</strong> &mdash; produces precision German-engineered parts</li>
+                        </ul>
+                    </div>
+
+                    <!-- Key Concepts -->
+                    <div class="pattern-card-fac">
+                        <h3>Key Concepts</h3>
+                        <ul>
+                            <li><code>Product</code> &mdash; defines the interface for objects the factory method creates</li>
+                            <li><code>ConcreteProduct</code> &mdash; specific implementation of the product (e.g. Ferrari Engine, Red Bull Chassis)</li>
+                            <li><code>Creator</code> &mdash; declares the factory method that returns a Product object</li>
+                            <li><code>ConcreteCreator</code> &mdash; overrides the factory method to produce a specific ConcreteProduct</li>
+                            <li>The client code works with <strong>factories and products via interfaces</strong>, staying decoupled from concrete classes</li>
+                        </ul>
                     </div>
 
                     <!-- Code Snippet -->

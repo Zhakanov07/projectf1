@@ -54,28 +54,6 @@
 
                 <div class="facade-overview">
                     <div class="facade-card">
-                        <h3>Grand Prix Motors analogy</h3>
-                        <p>Buying an F1 car is not one action. Behind the scenes the dealership must coordinate:</p>
-                        <ul>
-                            <li><strong>Inventory</strong> to reserve the chassis</li>
-                            <li><strong>Finance</strong> to approve the payment plan</li>
-                            <li><strong>Certification</strong> to prepare FIA and provenance documents</li>
-                            <li><strong>Logistics</strong> to schedule enclosed transport</li>
-                        </ul>
-                        <p>The client should call one method such as <code>completePurchase()</code> instead of manually coordinating every subsystem.</p>
-                    </div>
-
-                    <div class="facade-card">
-                        <h3>Key concepts</h3>
-                        <ul>
-                            <li><code>Facade</code> exposes a simple workflow-oriented interface</li>
-                            <li><code>Subsystems</code> keep their specialized responsibilities</li>
-                            <li>The client may still access subsystems directly when necessary, but usually does not need to</li>
-                            <li>The main gain is reduced coupling and lower orchestration complexity</li>
-                        </ul>
-                    </div>
-
-                    <div class="facade-card">
                         <h3>UML structure</h3>
                         <div class="uml-box-facade">┌────────────────────────────┐
 │          Client            │
@@ -99,6 +77,28 @@
              │Logistics │
              │Service   │
              └──────────┘</div>
+                    </div>
+
+                    <div class="facade-card">
+                        <h3>Grand Prix Motors analogy</h3>
+                        <p>Buying an F1 car is not one action. Behind the scenes the dealership must coordinate:</p>
+                        <ul>
+                            <li><strong>Inventory</strong> to reserve the chassis</li>
+                            <li><strong>Finance</strong> to approve the payment plan</li>
+                            <li><strong>Certification</strong> to prepare FIA and provenance documents</li>
+                            <li><strong>Logistics</strong> to schedule enclosed transport</li>
+                        </ul>
+                        <p>The client should call one method such as <code>completePurchase()</code> instead of manually coordinating every subsystem.</p>
+                    </div>
+
+                    <div class="facade-card">
+                        <h3>Key concepts</h3>
+                        <ul>
+                            <li><code>Facade</code> exposes a simple workflow-oriented interface</li>
+                            <li><code>Subsystems</code> keep their specialized responsibilities</li>
+                            <li>The client may still access subsystems directly when necessary, but usually does not need to</li>
+                            <li>The main gain is reduced coupling and lower orchestration complexity</li>
+                        </ul>
                     </div>
 
                     <div class="facade-card">

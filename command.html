@@ -54,34 +54,6 @@
                 </div>
 
                 <div class="cmd-overview">
-                    <!-- F1 Analogy FIRST -->
-                    <div class="pattern-card-cmd">
-                        <h3>&#127937; F1 Pit Wall Analogy</h3>
-                        <p>During a race, the <strong>Pit Wall</strong> (invoker) sends strategic commands to the car. Each command is a distinct object that can be executed, queued, or undone:</p>
-                        <ul>
-                            <li>&#128260; <strong>&ldquo;Box Box!&rdquo;</strong> &mdash; pit stop command, can undo by aborting the stop</li>
-                            <li>&#9889; <strong>&ldquo;Deploy ERS&rdquo;</strong> &mdash; energy boost command, reversible by harvesting</li>
-                            <li>&#128168; <strong>&ldquo;DRS Open&rdquo;</strong> &mdash; drag reduction command, undo by closing DRS</li>
-                            <li>&#127793; <strong>&ldquo;Switch to Soft&rdquo;</strong> &mdash; tyre strategy command, undo reverts to previous compound</li>
-                            <li>&#128640; <strong>&ldquo;Push Mode&rdquo;</strong> &mdash; engine mode command, undo returns to normal</li>
-                            <li>&#128295; <strong>&ldquo;Adjust Front Wing&rdquo;</strong> &mdash; aero command, stores previous angle for undo</li>
-                        </ul>
-                        <p>The driver (receiver) executes the command, and the pit wall can <strong>undo</strong> any decision by reverting to the previous state &mdash; crucial in fast-paced racing.</p>
-                    </div>
-
-                    <!-- Key Concepts SECOND -->
-                    <div class="pattern-card-cmd">
-                        <h3>&#128218; Key Concepts</h3>
-                        <ul>
-                            <li><code>Command</code> &mdash; interface declaring <code>execute()</code> and <code>undo()</code></li>
-                            <li><code>ConcreteCommand</code> &mdash; implements the action (e.g. PitStopCommand, DRSCommand)</li>
-                            <li><code>Receiver</code> &mdash; the object that performs the actual work (the F1 car)</li>
-                            <li><code>Invoker</code> &mdash; triggers commands without knowing their internals (the Pit Wall)</li>
-                            <li><strong>Command history</strong> &mdash; stack of executed commands enabling undo/redo</li>
-                            <li><strong>Decoupling</strong> &mdash; invoker doesn&rsquo;t know which receiver or how work is done</li>
-                        </ul>
-                    </div>
-
                     <!-- UML Diagram -->
                     <div class="pattern-card-cmd">
                         <h3>&#128202; UML Structure</h3>
@@ -103,6 +75,34 @@
                &#9474;   F1 Car          &#9474;
                &#9474;   (Receiver)      &#9474;
                &#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;</div>
+                    </div>
+
+                    <!-- F1 Analogy -->
+                    <div class="pattern-card-cmd">
+                        <h3>&#127937; F1 Pit Wall Analogy</h3>
+                        <p>During a race, the <strong>Pit Wall</strong> (invoker) sends strategic commands to the car. Each command is a distinct object that can be executed, queued, or undone:</p>
+                        <ul>
+                            <li>&#128260; <strong>&ldquo;Box Box!&rdquo;</strong> &mdash; pit stop command, can undo by aborting the stop</li>
+                            <li>&#9889; <strong>&ldquo;Deploy ERS&rdquo;</strong> &mdash; energy boost command, reversible by harvesting</li>
+                            <li>&#128168; <strong>&ldquo;DRS Open&rdquo;</strong> &mdash; drag reduction command, undo by closing DRS</li>
+                            <li>&#127793; <strong>&ldquo;Switch to Soft&rdquo;</strong> &mdash; tyre strategy command, undo reverts to previous compound</li>
+                            <li>&#128640; <strong>&ldquo;Push Mode&rdquo;</strong> &mdash; engine mode command, undo returns to normal</li>
+                            <li>&#128295; <strong>&ldquo;Adjust Front Wing&rdquo;</strong> &mdash; aero command, stores previous angle for undo</li>
+                        </ul>
+                        <p>The driver (receiver) executes the command, and the pit wall can <strong>undo</strong> any decision by reverting to the previous state &mdash; crucial in fast-paced racing.</p>
+                    </div>
+
+                    <!-- Key Concepts -->
+                    <div class="pattern-card-cmd">
+                        <h3>&#128218; Key Concepts</h3>
+                        <ul>
+                            <li><code>Command</code> &mdash; interface declaring <code>execute()</code> and <code>undo()</code></li>
+                            <li><code>ConcreteCommand</code> &mdash; implements the action (e.g. PitStopCommand, DRSCommand)</li>
+                            <li><code>Receiver</code> &mdash; the object that performs the actual work (the F1 car)</li>
+                            <li><code>Invoker</code> &mdash; triggers commands without knowing their internals (the Pit Wall)</li>
+                            <li><strong>Command history</strong> &mdash; stack of executed commands enabling undo/redo</li>
+                            <li><strong>Decoupling</strong> &mdash; invoker doesn&rsquo;t know which receiver or how work is done</li>
+                        </ul>
                     </div>
 
                     <!-- Code Snippet LAST -->

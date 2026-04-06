@@ -54,32 +54,6 @@
                 </div>
 
                 <div class="dec-overview">
-                    <!-- F1 Analogy FIRST -->
-                    <div class="pattern-card-dec">
-                        <h3> F1 Upgrade Analogy</h3>
-                        <p>In our demo, a <strong>base F1 car</strong> is the Component. Each upgrade is a Decorator that wraps the car and modifies its specs:</p>
-                        <ul>
-                            <li> <strong>DRS System</strong> &mdash; +15 km/h top speed</li>
-                            <li> <strong>Hybrid Boost</strong> &mdash; +50 HP, +12 kg</li>
-                            <li> <strong>Lightweight Chassis</strong> &mdash; &minus;30 kg</li>
-                            <li> <strong>Aero Package</strong> &mdash; +8 km/h downforce</li>
-                            <li> <strong>Slick Tyres</strong> &mdash; +5 km/h grip</li>
-                            <li> <strong>KERS Recovery</strong> &mdash; +30 HP, +8 kg</li>
-                        </ul>
-                    </div>
-
-                    <!-- Key Concepts SECOND -->
-                    <div class="pattern-card-dec">
-                        <h3> Key Concepts</h3>
-                        <ul>
-                            <li><code>Component</code> &mdash; defines the interface for objects that can have responsibilities added dynamically</li>
-                            <li><code>ConcreteComponent</code> &mdash; the original object being decorated (e.g. base F1 car)</li>
-                            <li><code>Decorator</code> &mdash; abstract wrapper that holds a reference to a Component and delegates calls</li>
-                            <li><code>ConcreteDecorator</code> &mdash; adds specific behaviour (e.g. DRS, Hybrid Boost, Aero Package)</li>
-                            <li>Decorators are <strong>stackable</strong> &mdash; multiple can wrap the same object</li>
-                        </ul>
-                    </div>
-
                     <!-- UML Diagram -->
                     <div class="pattern-card-dec">
                         <h3> UML Structure</h3>
@@ -111,6 +85,32 @@
       │DRSUpgrd │  │HybridBst │  │AeroPackage│
       │+15 km/h │  │+50 HP    │  │+8 km/h    │
       └─────────┘  └──────────┘  └───────────┘</div>
+                    </div>
+
+                    <!-- F1 Analogy -->
+                    <div class="pattern-card-dec">
+                        <h3> F1 Upgrade Analogy</h3>
+                        <p>In our demo, a <strong>base F1 car</strong> is the Component. Each upgrade is a Decorator that wraps the car and modifies its specs:</p>
+                        <ul>
+                            <li> <strong>DRS System</strong> &mdash; +15 km/h top speed</li>
+                            <li> <strong>Hybrid Boost</strong> &mdash; +50 HP, +12 kg</li>
+                            <li> <strong>Lightweight Chassis</strong> &mdash; &minus;30 kg</li>
+                            <li> <strong>Aero Package</strong> &mdash; +8 km/h downforce</li>
+                            <li> <strong>Slick Tyres</strong> &mdash; +5 km/h grip</li>
+                            <li> <strong>KERS Recovery</strong> &mdash; +30 HP, +8 kg</li>
+                        </ul>
+                    </div>
+
+                    <!-- Key Concepts -->
+                    <div class="pattern-card-dec">
+                        <h3> Key Concepts</h3>
+                        <ul>
+                            <li><code>Component</code> &mdash; defines the interface for objects that can have responsibilities added dynamically</li>
+                            <li><code>ConcreteComponent</code> &mdash; the original object being decorated (e.g. base F1 car)</li>
+                            <li><code>Decorator</code> &mdash; abstract wrapper that holds a reference to a Component and delegates calls</li>
+                            <li><code>ConcreteDecorator</code> &mdash; adds specific behaviour (e.g. DRS, Hybrid Boost, Aero Package)</li>
+                            <li>Decorators are <strong>stackable</strong> &mdash; multiple can wrap the same object</li>
+                        </ul>
                     </div>
 
                     <!-- Code Snippet -->

@@ -54,31 +54,6 @@
                 </div>
 
                 <div class="sin-overview">
-                    <!-- F1 Analogy FIRST -->
-                    <div class="pattern-card-sin">
-                        <h3>&#127937; F1 Race Director Analogy</h3>
-                        <p>In Formula 1, there is exactly <strong>one Race Director</strong> per Grand Prix. Every team, marshal, and broadcast refers to the same person. If two directors existed, conflicting flags and penalties would cause chaos.</p>
-                        <ul>
-                            <li>&#128308; <strong>Race Director</strong> &mdash; decides flags, safety cars, penalties</li>
-                            <li>&#128225; <strong>Timing System</strong> &mdash; one master clock for all teams</li>
-                            <li>&#127897;&#65039; <strong>Radio Channel</strong> &mdash; single broadcast frequency for race control</li>
-                            <li>&#9729;&#65039; <strong>Weather Station</strong> &mdash; one official feed for the entire circuit</li>
-                        </ul>
-                        <p>Each of these is a real-world Singleton &mdash; only one instance makes sense, and everyone shares it.</p>
-                    </div>
-
-                    <!-- Key Concepts SECOND -->
-                    <div class="pattern-card-sin">
-                        <h3>&#128218; Key Concepts</h3>
-                        <ul>
-                            <li><code>Singleton</code> &mdash; the class itself, which stores its sole instance in a static field</li>
-                            <li><code>getInstance()</code> &mdash; the public static method that returns the one instance (creating it on first call)</li>
-                            <li><code>Private constructor</code> &mdash; prevents external code from using <code>new</code></li>
-                            <li><strong>Lazy initialisation</strong> &mdash; the instance is created only when first requested</li>
-                            <li><strong>Global access point</strong> &mdash; any part of the application can reach the singleton</li>
-                        </ul>
-                    </div>
-
                     <!-- UML Diagram -->
                     <div class="pattern-card-sin">
                         <h3>&#128202; UML Structure</h3>
@@ -97,6 +72,31 @@
   Client A &#9472;&#9472;&#9472;&#9488;
                 &#9500;&#9472;&#9472;&#9654; getInstance() &#9472;&#9654; same object
   Client B &#9472;&#9472;&#9472;&#9496;</div>
+                    </div>
+
+                    <!-- F1 Analogy -->
+                    <div class="pattern-card-sin">
+                        <h3>&#127937; F1 Race Director Analogy</h3>
+                        <p>In Formula 1, there is exactly <strong>one Race Director</strong> per Grand Prix. Every team, marshal, and broadcast refers to the same person. If two directors existed, conflicting flags and penalties would cause chaos.</p>
+                        <ul>
+                            <li>&#128308; <strong>Race Director</strong> &mdash; decides flags, safety cars, penalties</li>
+                            <li>&#128225; <strong>Timing System</strong> &mdash; one master clock for all teams</li>
+                            <li>&#127897;&#65039; <strong>Radio Channel</strong> &mdash; single broadcast frequency for race control</li>
+                            <li>&#9729;&#65039; <strong>Weather Station</strong> &mdash; one official feed for the entire circuit</li>
+                        </ul>
+                        <p>Each of these is a real-world Singleton &mdash; only one instance makes sense, and everyone shares it.</p>
+                    </div>
+
+                    <!-- Key Concepts -->
+                    <div class="pattern-card-sin">
+                        <h3>&#128218; Key Concepts</h3>
+                        <ul>
+                            <li><code>Singleton</code> &mdash; the class itself, which stores its sole instance in a static field</li>
+                            <li><code>getInstance()</code> &mdash; the public static method that returns the one instance (creating it on first call)</li>
+                            <li><code>Private constructor</code> &mdash; prevents external code from using <code>new</code></li>
+                            <li><strong>Lazy initialisation</strong> &mdash; the instance is created only when first requested</li>
+                            <li><strong>Global access point</strong> &mdash; any part of the application can reach the singleton</li>
+                        </ul>
                     </div>
 
                     <!-- Code Snippet LAST -->
