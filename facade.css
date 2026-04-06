@@ -1,0 +1,165 @@
+/* ============================================
+   Facade Pattern Page - Styles
+   ============================================ */
+
+.facade-overview,
+.facade-config-grid,
+.facade-demo-grid {
+    display: grid;
+    gap: 20px;
+}
+
+.facade-overview {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.facade-config-grid,
+.facade-demo-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.facade-panel,
+.facade-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 18px;
+    padding: 24px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+}
+
+.facade-card h3,
+.facade-panel-title {
+    margin: 0 0 14px;
+    color: #fff;
+    font-size: 1.05rem;
+    font-weight: 700;
+}
+
+.facade-card p,
+.facade-card li {
+    color: rgba(255,255,255,0.76);
+}
+
+.facade-card ul {
+    margin: 12px 0 0;
+    padding-left: 18px;
+}
+
+.uml-box-facade {
+    margin: 0;
+    border-radius: 14px;
+    background: rgba(6, 10, 22, 0.92);
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    color: #dbeafe;
+    padding: 18px;
+    overflow-x: auto;
+    font-family: Consolas, monospace;
+    line-height: 1.5;
+    white-space: pre-wrap;
+}
+
+.facade-options,
+.facade-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.facade-option {
+    padding: 12px 16px;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.025);
+    color: #fff;
+    cursor: pointer;
+    transition: transform 0.22s ease, border-color 0.22s ease, background 0.22s ease;
+    font-family: inherit;
+    font-weight: 600;
+}
+
+.facade-option:hover,
+.facade-option.active {
+    transform: translateY(-2px);
+    background: rgba(37, 99, 235, 0.14);
+    border-color: rgba(96, 165, 250, 0.5);
+}
+
+.facade-actions {
+    margin-top: 18px;
+}
+
+.facade-log {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 420px;
+    overflow-y: auto;
+}
+
+.facade-log-entry {
+    padding: 14px 16px;
+    border-radius: 14px;
+    background: linear-gradient(180deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.94));
+    border: 1px solid rgba(148, 163, 184, 0.16);
+}
+
+.facade-log-step {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: rgba(191,219,254,0.62);
+    margin-bottom: 6px;
+}
+
+.facade-log-text {
+    color: rgba(255,255,255,0.86);
+    line-height: 1.5;
+}
+
+.facade-receipt {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.facade-receipt-item {
+    padding: 14px;
+    border-radius: 14px;
+    background: rgba(15, 23, 42, 0.82);
+    border: 1px solid rgba(148, 163, 184, 0.14);
+}
+
+.facade-receipt-label {
+    font-size: 0.74rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: rgba(191,219,254,0.6);
+    margin-bottom: 6px;
+}
+
+.facade-receipt-value {
+    font-size: 1rem;
+    color: #fff;
+    font-weight: 700;
+}
+
+.facade-empty {
+    padding: 34px 18px;
+    border-radius: 14px;
+    border: 1px dashed rgba(148, 163, 184, 0.2);
+    color: rgba(255,255,255,0.42);
+    text-align: center;
+}
+
+.facade-code-panel {
+    margin-top: 20px;
+}
+
+@media (max-width: 920px) {
+    .facade-config-grid,
+    .facade-demo-grid,
+    .facade-receipt {
+        grid-template-columns: 1fr;
+    }
+}

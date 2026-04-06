@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facade Pattern &mdash; Grand Prix Motors</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="facade.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>if(sessionStorage.getItem('pt-navigating')){document.documentElement.classList.add('pt-arriving');setTimeout(function(){document.documentElement.classList.remove('pt-arriving')},2000)}</script>
+</head>
+<body>
+    <div class="page-transition" id="pageTransition"><div class="pt-bg"></div><div class="pt-fg"></div><div class="pt-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M4 4v16" stroke="#fff" stroke-width="2" stroke-linecap="round"/><path d="M4 4c3 0 4 2 8 2s5-2 8-2v10c-3 0-4 2-8 2s-5-2-8-2" fill="url(#ptG)" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/><defs><linearGradient id="ptG" x1="4" y1="4" x2="20" y2="14"><stop offset="0%" stop-color="#6366f1"/><stop offset="100%" stop-color="#3b82f6"/></linearGradient></defs></svg></div></div>
+    <nav class="topnav" id="topnav">
+        <div class="topnav-inner">
+            <a href="index.html" class="topnav-logo">
+                <img src="logo-opt.webp" alt="F1 Motors" class="logo-img" width="48" height="48">
+            </a>
+            <div class="topnav-search">
+                <div class="search-box">
+                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    <input type="text" id="searchInput" class="search-input" placeholder="Find a car, team or year..." autocomplete="off">
+                    <div class="search-results" id="searchResults"></div>
+                </div>
+            </div>
+            <div class="topnav-links" id="topnavLinks">
+                <a href="index.html" class="topnav-link">Home</a>
+                <a href="products.html" class="topnav-link">Catalog</a>
+                <a href="charter.html" class="topnav-link">About</a>
+                <a href="patterns.html" class="topnav-link active">Patterns</a>
+                <a href="planning.html" class="topnav-link">Planning</a>
+                <a href="risk.html" class="topnav-link">Risks</a>
+            </div>
+            <button class="topnav-toggle" id="topnavToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+        </div>
+    </nav>
+
+    <div class="scroll-progress" id="scrollProgress"></div>
+    <button class="back-to-top" id="backToTop" aria-label="Back to top"></button>
+
+    <div class="page-hero">
+        <h1>Facade Pattern</h1>
+        <p>Structural Design Pattern &mdash; One-click F1 car delivery workflow</p>
+    </div>
+
+    <main>
+        <section class="section" id="pattern-explanation">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">01</span>
+                    <h2>What is the Facade Pattern?</h2>
+                    <p class="section-desc">A facade provides one high-level entry point to a complex subsystem. The client avoids orchestrating dozens of low-level services on its own.</p>
+                </div>
+
+                <div class="facade-overview">
+                    <div class="facade-card">
+                        <h3>Grand Prix Motors analogy</h3>
+                        <p>Buying an F1 car is not one action. Behind the scenes the dealership must coordinate:</p>
+                        <ul>
+                            <li><strong>Inventory</strong> to reserve the chassis</li>
+                            <li><strong>Finance</strong> to approve the payment plan</li>
+                            <li><strong>Certification</strong> to prepare FIA and provenance documents</li>
+                            <li><strong>Logistics</strong> to schedule enclosed transport</li>
+                        </ul>
+                        <p>The client should call one method such as <code>completePurchase()</code> instead of manually coordinating every subsystem.</p>
+                    </div>
+
+                    <div class="facade-card">
+                        <h3>Key concepts</h3>
+                        <ul>
+                            <li><code>Facade</code> exposes a simple workflow-oriented interface</li>
+                            <li><code>Subsystems</code> keep their specialized responsibilities</li>
+                            <li>The client may still access subsystems directly when necessary, but usually does not need to</li>
+                            <li>The main gain is reduced coupling and lower orchestration complexity</li>
+                        </ul>
+                    </div>
+
+                    <div class="facade-card">
+                        <h3>UML structure</h3>
+                        <div class="uml-box-facade">┌────────────────────────────┐
+│          Client            │
+│    Sales Desk UI           │
+└─────────────┬──────────────┘
+              │ calls
+┌─────────────▼──────────────┐
+│       PurchaseFacade       │
+├────────────────────────────┤
+│ + completePurchase(order)  │
+└─────┬────────┬───────┬─────┘
+      │        │       │
+      ▼        ▼       ▼
+┌──────────┐┌───────────┐┌──────────────┐
+│Inventory ││ Finance   ││ Certification│
+│Service   ││Service    ││Service       │
+└──────────┘└───────────┘└──────────────┘
+                  │
+                  ▼
+             ┌──────────┐
+             │Logistics │
+             │Service   │
+             └──────────┘</div>
+                    </div>
+
+                    <div class="facade-card">
+                        <h3>Core implementation</h3>
+                        <div class="code-block"><pre><span class="kw">class</span> <span class="fn">PurchaseFacade</span> {
+  <span class="fn">constructor</span>(inventory, finance, docs, logistics) {
+    <span class="kw">this</span>.inventory = inventory;
+    <span class="kw">this</span>.finance = finance;
+    <span class="kw">this</span>.docs = docs;
+    <span class="kw">this</span>.logistics = logistics;
+  }
+
+  <span class="kw">async</span> <span class="fn">completePurchase</span>(order) {
+    <span class="kw">const</span> reservation = <span class="kw">this</span>.inventory.<span class="fn">reserve</span>(order.car);
+    <span class="kw">const</span> payment = <span class="kw">this</span>.finance.<span class="fn">approve</span>(order.plan);
+    <span class="kw">const</span> paperwork = <span class="kw">this</span>.docs.<span class="fn">prepare</span>(order.car);
+    <span class="kw">const</span> shipment = <span class="kw">this</span>.logistics.<span class="fn">schedule</span>(order.destination);
+    <span class="kw">return</span> { reservation, payment, paperwork, shipment };
+  }
+}</pre></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section-alt" id="interactive-demo">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">02</span>
+                    <h2>Interactive delivery facade demo</h2>
+                    <p class="section-desc">Configure a deal, then let one facade orchestrate the entire workflow. The log shows the underlying subsystems the client no longer has to call directly.</p>
+                </div>
+
+                <div class="facade-config-grid">
+                    <div class="facade-panel">
+                        <div class="facade-panel-title">1. Choose a car</div>
+                        <div class="facade-options" id="carOptions">
+                            <button class="facade-option active" data-car="Ferrari SF-23" data-price="8500000">Ferrari SF-23</button>
+                            <button class="facade-option" data-car="Red Bull RB19" data-price="12000000">Red Bull RB19</button>
+                            <button class="facade-option" data-car="Mercedes W11" data-price="15000000">Mercedes W11</button>
+                        </div>
+                    </div>
+                    <div class="facade-panel">
+                        <div class="facade-panel-title">2. Financing plan</div>
+                        <div class="facade-options" id="planOptions">
+                            <button class="facade-option active" data-plan="Full payment" data-fee="0">Full payment</button>
+                            <button class="facade-option" data-plan="Collector lease" data-fee="180000">Collector lease</button>
+                            <button class="facade-option" data-plan="Track partner financing" data-fee="320000">Track partner financing</button>
+                        </div>
+                    </div>
+                    <div class="facade-panel">
+                        <div class="facade-panel-title">3. Delivery destination</div>
+                        <div class="facade-options" id="destinationOptions">
+                            <button class="facade-option active" data-destination="Monaco" data-days="4">Monaco</button>
+                            <button class="facade-option" data-destination="Abu Dhabi" data-days="8">Abu Dhabi</button>
+                            <button class="facade-option" data-destination="Austin" data-days="10">Austin</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="facade-actions">
+                    <button class="demo-action-btn" id="runFacade">Process with Facade</button>
+                    <button class="demo-action-btn" id="runManual">Show Manual Calls</button>
+                    <button class="demo-action-btn" id="clearFacadeLog">Clear Output</button>
+                </div>
+
+                <div class="facade-demo-grid">
+                    <div class="facade-panel">
+                        <div class="facade-panel-title">Subsystem timeline</div>
+                        <div class="facade-log" id="facadeLog">
+                            <div class="facade-empty">No workflow started.</div>
+                        </div>
+                    </div>
+                    <div class="facade-panel">
+                        <div class="facade-panel-title">Facade result</div>
+                        <div id="facadeReceipt">
+                            <div class="facade-empty">Run the facade to see the summarized result.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="facade-panel facade-code-panel">
+                    <div class="facade-panel-title">Client code comparison</div>
+                    <pre class="uml-box-facade" id="facadeCodePreview">// Manual orchestration requires multiple subsystem calls.</pre>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="benefits">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">03</span>
+                    <h2>Why facade helps here</h2>
+                    <p class="section-desc">The facade simplifies business workflows without removing subsystem specialization.</p>
+                </div>
+
+                <div class="facade-overview">
+                    <div class="facade-card">
+                        <h3>One entry point for the UI</h3>
+                        <p>The sales screen can trigger a single method and receive one summary object, instead of handling four service APIs and their ordering rules.</p>
+                    </div>
+                    <div class="facade-card">
+                        <h3>Subsystems stay independent</h3>
+                        <p>Inventory, finance and logistics continue evolving on their own. The facade composes them without merging all responsibilities into one giant class.</p>
+                    </div>
+                    <div class="facade-card">
+                        <h3>Fewer integration mistakes</h3>
+                        <p>Centralizing orchestration inside the facade makes it harder for the UI to forget a critical step such as documentation or transport booking.</p>
+                    </div>
+                    <div class="facade-card">
+                        <h3>Better onboarding</h3>
+                        <p>New developers learn one workflow API first. They only need subsystem details when working deeper in the platform.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <h3>Grand Prix Motors</h3>
+                    <p>Exclusive Formula 1 Car Dealer</p>
+                    <p>&#169; 2026 Grand Prix Motors. All rights reserved.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="products.html">Catalog</a>
+                    <a href="charter.html">About</a>
+                    <a href="patterns.html">Patterns</a>
+                    <a href="planning.html">Planning</a>
+                    <a href="risk.html">Risks</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Grand Prix Motors &mdash; Feel the Speed. Own the Legend.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js" defer></script>
+    <script src="facade.js" defer></script>
+</body>
+</html>

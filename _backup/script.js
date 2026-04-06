@@ -35,8 +35,6 @@ const f1Database = [
     { name: "Pit Stop Strategy", team: "Racing Tactics", year: 2024, price: "", emoji: "\u23F1\uFE0F", page: "strategy.html", type: "strategy" },
     { name: "Tire Compounds", team: "Pirelli", year: 2024, price: "", emoji: "\uD83D\uDFE1", page: "strategy.html", type: "strategy" },
     { name: "Aerodynamics", team: "Technical", year: 2024, price: "", emoji: "\uD83D\uDCA8", page: "strategy.html", type: "strategy" },
-    { name: "Adaptive Pattern", team: "Design Patterns", year: 2026, price: "", emoji: "\uD83D\DD04", page: "adaptive.html", type: "pattern" },
-    { name: "Facade Pattern", team: "Design Patterns", year: 2026, price: "", emoji: "\uD83E\DDF1", page: "facade.html", type: "pattern" },
     { name: "Company History", team: "Grand Prix Motors", year: 2024, price: "", emoji: "\uD83C\uDFDB\uFE0F", page: "charter.html", type: "info" },
     { name: "Our Team", team: "Grand Prix Motors", year: 2024, price: "", emoji: "\uD83D\uDC65", page: "charter.html", type: "info" }
 ];

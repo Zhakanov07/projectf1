@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adaptive Pattern &mdash; Grand Prix Motors</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="adaptive.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>if(sessionStorage.getItem('pt-navigating')){document.documentElement.classList.add('pt-arriving');setTimeout(function(){document.documentElement.classList.remove('pt-arriving')},2000)}</script>
+</head>
+<body>
+    <div class="page-transition" id="pageTransition"><div class="pt-bg"></div><div class="pt-fg"></div><div class="pt-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M4 4v16" stroke="#fff" stroke-width="2" stroke-linecap="round"/><path d="M4 4c3 0 4 2 8 2s5-2 8-2v10c-3 0-4 2-8 2s-5-2-8-2" fill="url(#ptG)" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/><defs><linearGradient id="ptG" x1="4" y1="4" x2="20" y2="14"><stop offset="0%" stop-color="#6366f1"/><stop offset="100%" stop-color="#3b82f6"/></linearGradient></defs></svg></div></div>
+    <nav class="topnav" id="topnav">
+        <div class="topnav-inner">
+            <a href="index.html" class="topnav-logo">
+                <img src="logo-opt.webp" alt="F1 Motors" class="logo-img" width="48" height="48">
+            </a>
+            <div class="topnav-search">
+                <div class="search-box">
+                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    <input type="text" id="searchInput" class="search-input" placeholder="Find a car, team or year..." autocomplete="off">
+                    <div class="search-results" id="searchResults"></div>
+                </div>
+            </div>
+            <div class="topnav-links" id="topnavLinks">
+                <a href="index.html" class="topnav-link">Home</a>
+                <a href="products.html" class="topnav-link">Catalog</a>
+                <a href="charter.html" class="topnav-link">About</a>
+                <a href="patterns.html" class="topnav-link active">Patterns</a>
+                <a href="planning.html" class="topnav-link">Planning</a>
+                <a href="risk.html" class="topnav-link">Risks</a>
+            </div>
+            <button class="topnav-toggle" id="topnavToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+        </div>
+    </nav>
+
+    <div class="scroll-progress" id="scrollProgress"></div>
+    <button class="back-to-top" id="backToTop" aria-label="Back to top"></button>
+
+    <div class="page-hero">
+        <h1>Adaptive Pattern</h1>
+        <p>Structural Design Pattern &mdash; Unifying F1 telemetry feeds</p>
+    </div>
+
+    <main>
+        <section class="section" id="pattern-explanation">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">01</span>
+                    <h2>What is the Adaptive Pattern?</h2>
+                    <p class="section-desc">This demo uses the term Adaptive for a pattern that adapts incompatible interfaces into one client-friendly API. In classic GoF terminology, this is the Adapter pattern.</p>
+                </div>
+
+                <div class="adaptive-overview">
+                    <div class="adaptive-card">
+                        <h3>F1 telemetry analogy</h3>
+                        <p>A race engineer needs one dashboard, but telemetry arrives from different systems with different field names and formats.</p>
+                        <ul>
+                            <li><strong>Ferrari Garage Unit</strong> reports raw milliseconds, tyre codes and ERS percentage</li>
+                            <li><strong>FIA Timing Feed</strong> sends lap time as a string plus fuel in litres</li>
+                            <li><strong>Weather Radar</strong> focuses on track grip, wind and rain probability</li>
+                        </ul>
+                        <p>The client should not care about those differences. It asks every source for one normalized snapshot.</p>
+                    </div>
+
+                    <div class="adaptive-card">
+                        <h3>Key concepts</h3>
+                        <ul>
+                            <li><code>Client</code> depends on one stable interface</li>
+                            <li><code>Adaptee</code> is an existing class with an incompatible API</li>
+                            <li><code>Adapter</code> translates calls and data shapes</li>
+                            <li>The adapter can also convert units, defaults and naming conventions</li>
+                        </ul>
+                    </div>
+
+                    <div class="adaptive-card">
+                        <h3>UML structure</h3>
+                        <div class="uml-box-adaptive">┌────────────────────────────┐
+│         Client             │
+│   Strategy Dashboard       │
+├────────────────────────────┤
+│ + render(snapshot)         │
+└─────────────┬──────────────┘
+              │ uses
+┌─────────────▼──────────────┐
+│     TelemetryAdapter       │
+├────────────────────────────┤
+│ + getSnapshot()            │
+└───────┬─────────┬──────────┘
+        │         │
+        │ adapts  │ adapts
+┌───────▼──────┐ ┌▼─────────────────┐
+│ FerrariUnit  │ │   FiaTimingFeed   │
+│ + sample()   │ │ + read()          │
+└──────────────┘ └───────────────────┘
+        │
+        │ adapts
+┌───────▼──────────┐
+│ WeatherStation   │
+│ + currentTrack() │
+└──────────────────┘</div>
+                    </div>
+
+                    <div class="adaptive-card">
+                        <h3>Core implementation</h3>
+                        <div class="code-block"><pre><span class="kw">class</span> <span class="fn">FiaTimingAdapter</span> {
+  <span class="fn">constructor</span>(feed) {
+    <span class="kw">this</span>.feed = feed;
+  }
+
+  <span class="fn">getSnapshot</span>() {
+    <span class="kw">const</span> raw = <span class="kw">this</span>.feed.<span class="fn">read</span>();
+    <span class="kw">return</span> {
+      source: <span class="str">'FIA Timing Feed'</span>,
+      driver: raw.driverNumber,
+      lapTime: raw.lap_time,
+      tyre: raw.stint,
+      energy: raw.battery,
+      fuel: <span class="str">`${raw.fuel_remaining_l} L`</span>
+    };
+  }
+}</pre></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section-alt" id="interactive-demo">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">02</span>
+                    <h2>Interactive telemetry adapter demo</h2>
+                    <p class="section-desc">Pick a legacy source and normalize it through a shared adapter interface. The dashboard below always receives the same output shape.</p>
+                </div>
+
+                <div class="adaptive-toolbar" id="adapterSourceList">
+                    <button class="adaptive-source active" data-source="ferrari" style="--accent:#e10600;">
+                        <strong>Ferrari Garage Unit</strong>
+                        <span>sample()</span>
+                    </button>
+                    <button class="adaptive-source" data-source="fia" style="--accent:#2563eb;">
+                        <strong>FIA Timing Feed</strong>
+                        <span>read()</span>
+                    </button>
+                    <button class="adaptive-source" data-source="weather" style="--accent:#14b8a6;">
+                        <strong>Weather Radar</strong>
+                        <span>currentTrack()</span>
+                    </button>
+                </div>
+
+                <div class="adaptive-actions">
+                    <button class="demo-action-btn" id="normalizeSelected">Normalize Selected Feed</button>
+                    <button class="demo-action-btn" id="normalizeAll">Normalize All Feeds</button>
+                    <button class="demo-action-btn" id="clearAdaptiveLog">Clear Log</button>
+                </div>
+
+                <div class="adaptive-demo-grid">
+                    <div class="adaptive-panel">
+                        <div class="adaptive-panel-title">Raw legacy payload</div>
+                        <pre class="adaptive-json" id="rawPayload">Select a source to inspect its original API format.</pre>
+                    </div>
+                    <div class="adaptive-panel">
+                        <div class="adaptive-panel-title">Normalized dashboard snapshot</div>
+                        <div class="adaptive-metrics" id="normalizedMetrics">
+                            <div class="adaptive-empty">Run an adapter to build a normalized snapshot.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="adaptive-secondary-grid">
+                    <div class="adaptive-panel">
+                        <div class="adaptive-panel-title">Adaptation log</div>
+                        <div class="adaptive-log" id="adaptiveLog">
+                            <div class="adaptive-empty-log">No transformations yet.</div>
+                        </div>
+                    </div>
+                    <div class="adaptive-panel">
+                        <div class="adaptive-panel-title">Client code preview</div>
+                        <pre class="adaptive-json" id="adapterCodePreview">// The client only knows about getSnapshot()</pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="how-it-works">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">03</span>
+                    <h2>How the adaptation flow works</h2>
+                    <p class="section-desc">The adapter isolates legacy complexity and gives client code a stable contract.</p>
+                </div>
+
+                <div class="adaptive-overview">
+                    <div class="adaptive-card">
+                        <h3>1. Legacy provider keeps its own API</h3>
+                        <p>No existing telemetry system has to be rewritten. Each source keeps its original method names and payload shape.</p>
+                    </div>
+                    <div class="adaptive-card">
+                        <h3>2. Adapter translates shape and units</h3>
+                        <p>The adapter converts milliseconds to formatted lap times, tyre codes to human-readable values and different field names into one contract.</p>
+                    </div>
+                    <div class="adaptive-card">
+                        <h3>3. Client depends on one interface</h3>
+                        <p>The dashboard always calls <code>getSnapshot()</code>, so it stays decoupled from Ferrari, FIA or weather-specific details.</p>
+                    </div>
+                    <div class="adaptive-card">
+                        <h3>4. New feeds are cheap to add</h3>
+                        <p>When a new partner system appears, you add one more adapter instead of changing the client or rewriting the legacy service.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <h3>Grand Prix Motors</h3>
+                    <p>Exclusive Formula 1 Car Dealer</p>
+                    <p>&#169; 2026 Grand Prix Motors. All rights reserved.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="products.html">Catalog</a>
+                    <a href="charter.html">About</a>
+                    <a href="patterns.html">Patterns</a>
+                    <a href="planning.html">Planning</a>
+                    <a href="risk.html">Risks</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Grand Prix Motors &mdash; Feel the Speed. Own the Legend.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js" defer></script>
+    <script src="adaptive.js" defer></script>
+</body>
+</html>

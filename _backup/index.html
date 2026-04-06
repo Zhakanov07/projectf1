@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grand Prix Motors  Formula 1 Cars</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preload" as="image" href="hero-bg.webp" type="image/webp">
+    <script>if(sessionStorage.getItem('pt-navigating')){document.documentElement.classList.add('pt-arriving');setTimeout(function(){document.documentElement.classList.remove('pt-arriving')},2000)}</script>
+    <link rel="stylesheet" href="redesign.css">
+</head>
+<body>
+    <div class="page-transition" id="pageTransition"><div class="pt-bg"></div><div class="pt-fg"></div><div class="pt-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M4 4v16" stroke="#fff" stroke-width="2" stroke-linecap="round"/><path d="M4 4c3 0 4 2 8 2s5-2 8-2v10c-3 0-4 2-8 2s-5-2-8-2" fill="url(#ptG)" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/><defs><linearGradient id="ptG" x1="4" y1="4" x2="20" y2="14"><stop offset="0%" stop-color="#6366f1"/><stop offset="100%" stop-color="#3b82f6"/></linearGradient></defs></svg></div></div>
+    <nav class="topnav" id="topnav">
+        <div class="topnav-inner">
+            <a href="index.html" class="topnav-logo">
+                <img src="logo-opt.webp" alt="F1 Motors" class="logo-img" width="48" height="48">
+            </a>
+            <div class="topnav-search">
+                <div class="search-box">
+                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    <input type="text" id="searchInput" class="search-input" placeholder="Find a car, team or year..." autocomplete="off">
+                    <div class="search-results" id="searchResults"></div>
+                </div>
+            </div>
+            <div class="topnav-links" id="topnavLinks">
+                <a href="index.html" class="topnav-link active">Home</a>
+                <a href="products.html" class="topnav-link">Catalog</a>
+                <a href="charter.html" class="topnav-link">About</a>
+                <a href="patterns.html" class="topnav-link">Patterns</a>
+                <a href="planning.html" class="topnav-link">Planning</a>
+                <a href="risk.html" class="topnav-link">Risks</a>
+            </div>
+            <button class="topnav-toggle" id="topnavToggle" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="scroll-progress" id="scrollProgress"></div>
+    <button class="back-to-top" id="backToTop" aria-label="Back to top"></button>
+
+    <header class="f1-hero" id="hero">
+        <div class="f1-hero-bg"></div>
+        <div class="f1-hero-overlay"></div>
+        <div class="f1-hero-red-stripe"></div>
+        <div class="f1-hero-content">
+            <div class="f1-hero-main">
+                <h1 class="f1-hero-title">
+                    <span class="f1-hero-title-line">GRAND PRIX</span>
+                    <span class="f1-hero-title-line f1-hero-title-accent">MOTORS</span>
+                </h1>
+                <p class="f1-hero-subtitle">Exclusive Formula 1 Car Dealership &mdash; From Legendary Classics to Modern Championship-Winning Machines</p>
+                <div class="f1-hero-actions">
+                    <a href="products.html" class="f1-hero-btn f1-hero-btn-primary">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+                        View Catalog
+                    </a>
+                    <a href="charter.html" class="f1-hero-btn f1-hero-btn-outline">About Us &#8594;</a>
+                </div>
+            </div>
+            <div class="f1-hero-stats-bar">
+                <div class="f1-hero-stat">
+                    <span class="f1-hero-stat-val">50+</span>
+                    <span class="f1-hero-stat-label">Cars in Stock</span>
+                </div>
+                <div class="f1-hero-stat">
+                    <span class="f1-hero-stat-val">10</span>
+                    <span class="f1-hero-stat-label">Partner Teams</span>
+                </div>
+                <div class="f1-hero-stat">
+                    <span class="f1-hero-stat-val">1970&ndash;2025</span>
+                    <span class="f1-hero-stat-label">Eras Covered</span>
+                </div>
+                <div class="f1-hero-stat">
+                    <span class="f1-hero-stat-val">30+</span>
+                    <span class="f1-hero-stat-label">Countries</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- UP NEXT news cards -->
+        <div class="f1-hero-news">
+            <div class="f1-news-label">UP NEXT</div>
+            <div class="f1-news-cards">
+                <a href="products.html" class="f1-news-card">
+                    <div class="f1-news-card-img" style="background: linear-gradient(135deg, #e10600, #900);"></div>
+                    <div class="f1-news-card-body">
+                        <span class="f1-news-card-tag">Catalog</span>
+                        <h3>Browse Championship-Winning F1 Cars</h3>
+                        <p>Ferrari, Red Bull, Mercedes, McLaren &mdash; explore our complete lineup of iconic machines.</p>
+                    </div>
+                </a>
+                <a href="strategy.html" class="f1-news-card">
+                    <div class="f1-news-card-img" style="background: linear-gradient(135deg, #0600ef, #001040);"></div>
+                    <div class="f1-news-card-body">
+                        <span class="f1-news-card-tag">Strategy</span>
+                        <h3>Racing Strategies &amp; Track Analysis</h3>
+                        <p>Pit stops, tire compounds, aerodynamics &mdash; delve into the science of F1 winning.</p>
+                    </div>
+                </a>
+                <a href="charter.html" class="f1-news-card">
+                    <div class="f1-news-card-img" style="background: linear-gradient(135deg, #00d2be, #005f56);"></div>
+                    <div class="f1-news-card-body">
+                        <span class="f1-news-card-tag">About</span>
+                        <h3>Our Story: 55 Years of F1 Excellence</h3>
+                        <p>The history, team and mission behind the world's premier Formula 1 car dealership.</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="section" id="features">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">01</span>
+                    <h2>Why Grand Prix Motors?</h2>
+                    <p class="section-desc">We are the only authorized F1 car dealer with a full range of services.</p>
+                </div>
+                <div class="features-grid">
+                    <div class="card feature-card animate-on-scroll">
+                        <div class="feature-icon"></div>
+                        <h3>Authentic Cars</h3>
+                        <p>Every car has passed full FIA verification with original documentation, chassis and engine.</p>
+                    </div>
+                    <div class="card feature-card animate-on-scroll">
+                        <div class="feature-icon"></div>
+                        <h3>Full Service</h3>
+                        <p>In-house service center with engineers from F1 teams. Maintenance, restoration and track day preparation.</p>
+                    </div>
+                    <div class="card feature-card animate-on-scroll">
+                        <div class="feature-icon"></div>
+                        <h3>Worldwide Delivery</h3>
+                        <p>Safe transportation in enclosed climate-controlled containers to anywhere in the world.</p>
+                    </div>
+                    <div class="card feature-card animate-on-scroll">
+                        <div class="feature-icon"></div>
+                        <h3>Complete History</h3>
+                        <p>Detailed provenance of every car: races, drivers, results, ownership history.</p>
+                    </div>
+                    <div class="card feature-card animate-on-scroll">
+                        <div class="feature-icon"></div>
+                        <h3>Investment Value</h3>
+                        <p>F1 cars are a steadily growing asset. Average value growth of 15-25% per year.</p>
+                    </div>
+                    <div class="card feature-card animate-on-scroll">
+                        <div class="feature-icon"></div>
+                        <h3>Track Days</h3>
+                        <p>We organize exclusive track days at the best circuits &mdash; drive your own F1 car.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section-alt" id="stats">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">02</span>
+                    <h2>Facts &amp; Figures</h2>
+                    <p class="section-desc">Grand Prix Motors in numbers.</p>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card animate-on-scroll">
+                        <div class="stat-number">50+</div>
+                        <div class="stat-label">Cars In Stock</div>
+                    </div>
+                    <div class="stat-card animate-on-scroll">
+                        <div class="stat-number">200+</div>
+                        <div class="stat-label">Cars Sold</div>
+                    </div>
+                    <div class="stat-card animate-on-scroll">
+                        <div class="stat-number">10</div>
+                        <div class="stat-label">Partner Teams</div>
+                    </div>
+                    <div class="stat-card animate-on-scroll">
+                        <div class="stat-number">55</div>
+                        <div class="stat-label">Years on Market</div>
+                    </div>
+                    <div class="stat-card animate-on-scroll">
+                        <div class="stat-number">30+</div>
+                        <div class="stat-label">Delivery Countries</div>
+                    </div>
+                    <div class="stat-card animate-on-scroll">
+                        <div class="stat-number">98%</div>
+                        <div class="stat-label">Satisfied Clients</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="featured">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">03</span>
+                    <h2>Featured Cars</h2>
+                    <p class="section-desc">Top offers this month.</p>
+                </div>
+                <div class="f1-featured-grid">
+                    <div class="card f1-car-card">
+                        <div class="f1-car-image" style="background: linear-gradient(135deg, #e10600 0%, #900 100%);">
+                            <img class="car-photo" data-wiki="Ferrari_SF-23" alt="Ferrari SF-23">
+                            <span class="f1-car-badge">Ferrari</span>
+                        </div>
+                        <div class="f1-car-info">
+                            <h3>Ferrari SF-23</h3>
+                            <p class="f1-car-year">2023  Chassis #01</p>
+                            <p class="f1-car-desc">Charles Leclerc's car. V6 Turbo Hybrid, 1000+ HP. Competed in 22 Grand Prix races.</p>
+                            <div class="f1-car-specs">
+                                <span>1000+ HP</span>
+                                <span>350+ km/h</span>
+                                <span>798 kg</span>
+                            </div>
+                            <div class="f1-car-price">$8,500,000</div>
+                            <a href="products.html" class="f1-car-btn">Details &#8594;</a>
+                        </div>
+                    </div>
+                    <div class="card f1-car-card">
+                        <div class="f1-car-image" style="background: linear-gradient(135deg, #0600ef 0%, #001040 100%);">
+                            <img class="car-photo" data-wiki="Red_Bull_RB19" alt="Red Bull RB19">
+                            <span class="f1-car-badge">Red Bull</span>
+                        </div>
+                        <div class="f1-car-info">
+                            <h3>Red Bull RB19</h3>
+                            <p class="f1-car-year">2023  Chassis #03</p>
+                            <p class="f1-car-desc">Max Verstappen's unbeatable car. 21 wins out of 22 races. A legend.</p>
+                            <div class="f1-car-specs">
+                                <span>1000+ HP</span>
+                                <span>360+ km/h</span>
+                                <span>798 kg</span>
+                            </div>
+                            <div class="f1-car-price">$12,000,000</div>
+                            <a href="products.html" class="f1-car-btn">Details &#8594;</a>
+                        </div>
+                    </div>
+                    <div class="card f1-car-card">
+                        <div class="f1-car-image" style="background: linear-gradient(135deg, #00d2be 0%, #005f56 100%);">
+                            <img class="car-photo" data-wiki="Mercedes-AMG_F1_W11_EQ_Performance" alt="Mercedes W11">
+                            <span class="f1-car-badge">Mercedes</span>
+                        </div>
+                        <div class="f1-car-info">
+                            <h3>Mercedes W11</h3>
+                            <p class="f1-car-year">2020  Chassis #44</p>
+                            <p class="f1-car-desc">The most dominant car in F1 history. Lewis Hamilton's 7th title car.</p>
+                            <div class="f1-car-specs">
+                                <span>950+ HP</span>
+                                <span>355+ km/h</span>
+                                <span>746 kg</span>
+                            </div>
+                            <div class="f1-car-price">$15,000,000</div>
+                            <a href="products.html" class="f1-car-btn">Details &#8594;</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section-alt" id="pages-overview">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">04</span>
+                    <h2>Site Sections</h2>
+                    <p class="section-desc">Explore our world of Formula 1 cars.</p>
+                </div>
+                <div class="nav-cards-grid">
+                    <a href="products.html" class="nav-card animate-on-scroll">
+                        <div class="nav-card-icon"></div>
+                        <h3>Car Catalog</h3>
+                        <p>Full catalog of F1 cars for sale &mdash; Ferrari, Red Bull, Mercedes, McLaren and more.</p>
+                        <span class="nav-card-arrow">&#8594;</span>
+                    </a>
+                    <a href="charter.html" class="nav-card animate-on-scroll">
+                        <div class="nav-card-icon"></div>
+                        <h3>About Us</h3>
+                        <p>Grand Prix Motors history, our team, mission and F1 team partnerships.</p>
+                        <span class="nav-card-arrow">&#8594;</span>
+                    </a>
+                    <a href="patterns.html" class="nav-card animate-on-scroll">
+                        <div class="nav-card-icon"></div>
+                        <h3>Design Patterns</h3>
+                        <p>Strategies, Observer Pattern &amp; Decorator Pattern &mdash; interactive F1 demos.</p>
+                        <span class="nav-card-arrow">&#8594;</span>
+                    </a>
+                    <a href="planning.html" class="nav-card animate-on-scroll">
+                        <div class="nav-card-icon"></div>
+                        <h3>Project Planning</h3>
+                        <p>WBS Diagram and Gantt Chart for the Grand Prix Motors project timeline.</p>
+                        <span class="nav-card-arrow">&#8594;</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <h3>Grand Prix Motors</h3>
+                    <p>Exclusive Formula 1 Car Dealer</p>
+                    <p>&#169; 2026 Grand Prix Motors. All rights reserved.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="products.html">Catalog</a>
+                    <a href="charter.html">About</a>
+                    <a href="patterns.html">Patterns</a>
+                    <a href="planning.html">Planning</a>
+                    <a href="risk.html">Risks</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p> Grand Prix Motors  Feel the Speed. Own the Legend.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js" defer></script>
+    <script src="redesign.js" defer></script>
+</body>
+</html>
+
