@@ -57,13 +57,13 @@
         </div>
         <div class="subtab-container">
             <iframe class="subtab-frame active" id="frame-strategy" src="strategy.html" title="Racing Strategies"></iframe>
-            <iframe class="subtab-frame" id="frame-observer" src="observer.html" title="Observer Pattern"></iframe>
-            <iframe class="subtab-frame" id="frame-decorator" src="decorator.html" title="Decorator Pattern"></iframe>
-            <iframe class="subtab-frame" id="frame-factory" src="factory.html" title="Factory Pattern"></iframe>
-            <iframe class="subtab-frame" id="frame-singleton" src="singleton.html" title="Singleton Pattern"></iframe>
-            <iframe class="subtab-frame" id="frame-command" src="command.html" title="Command Pattern"></iframe>
-            <iframe class="subtab-frame" id="frame-adaptive" src="adaptive.html" title="Adapter Pattern"></iframe>
-            <iframe class="subtab-frame" id="frame-facade" src="facade.html" title="Facade Pattern"></iframe>
+            <iframe class="subtab-frame" id="frame-observer" data-src="observer.html" title="Observer Pattern" loading="lazy"></iframe>
+            <iframe class="subtab-frame" id="frame-decorator" data-src="decorator.html" title="Decorator Pattern" loading="lazy"></iframe>
+            <iframe class="subtab-frame" id="frame-factory" data-src="factory.html" title="Factory Pattern" loading="lazy"></iframe>
+            <iframe class="subtab-frame" id="frame-singleton" data-src="singleton.html" title="Singleton Pattern" loading="lazy"></iframe>
+            <iframe class="subtab-frame" id="frame-command" data-src="command.html" title="Command Pattern" loading="lazy"></iframe>
+            <iframe class="subtab-frame" id="frame-adaptive" data-src="adaptive.html" title="Adapter Pattern" loading="lazy"></iframe>
+            <iframe class="subtab-frame" id="frame-facade" data-src="facade.html" title="Facade Pattern" loading="lazy"></iframe>
         </div>
     </main>
 
@@ -100,7 +100,13 @@
                 tabs.forEach(t => t.classList.remove('active'));
                 frames.forEach(f => f.classList.remove('active'));
                 tab.classList.add('active');
-                document.getElementById(tab.dataset.target).classList.add('active');
+                const frame = document.getElementById(tab.dataset.target);
+                // Lazy-load: set src from data-src on first activation
+                if (!frame.src || frame.src === 'about:blank' || frame.getAttribute('src') === null) {
+                    const lazySrc = frame.getAttribute('data-src');
+                    if (lazySrc) { frame.src = lazySrc; }
+                }
+                frame.classList.add('active');
             });
         });
         // Auto-resize iframes

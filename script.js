@@ -179,40 +179,33 @@ function loadCarPhotos() {
         fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(article)}`)
             .then(res => res.json())
             .then(data => {
-                /* Prefer original image (full res / 4K), fallback to 3840px thumbnail */
-                let src4k = null;
-                if (data.originalimage && data.originalimage.source) {
-                    src4k = data.originalimage.source;
-                } else if (data.thumbnail && data.thumbnail.source) {
-                    src4k = data.thumbnail.source.replace(/\/\d+px-/, '/3840px-');
+                /* Prefer 1024px thumbnail for web perf; fallback to original only if needed */
+                let src = null;
+                if (data.thumbnail && data.thumbnail.source) {
+                    src = data.thumbnail.source.replace(/\/\d+px-/, '/1024px-');
+                } else if (data.originalimage && data.originalimage.source) {
+                    src = data.originalimage.source;
                 }
-                if (!src4k) return;
+                if (!src) return;
 
                 const preload = new Image();
                 preload.crossOrigin = 'anonymous';
                 preload.decoding = 'async';
                 preload.onload = () => {
-                    imgEl.src = src4k;
+                    imgEl.src = src;
                     imgEl.onload = () => imgEl.classList.add('loaded');
                 };
                 preload.onerror = () => {
-                    /* Fallback: 3840px thumbnail resize */
+                    /* Fallback: original thumbnail size */
                     if (data.thumbnail && data.thumbnail.source) {
-                        const fallback = data.thumbnail.source.replace(/\/\d+px-/, '/3840px-');
-                        if (fallback !== src4k) {
-                            imgEl.src = fallback;
-                            imgEl.onload = () => imgEl.classList.add('loaded');
-                            imgEl.onerror = () => { imgEl.style.display = 'none'; };
-                        } else {
-                            imgEl.src = data.thumbnail.source;
-                            imgEl.onload = () => imgEl.classList.add('loaded');
-                            imgEl.onerror = () => { imgEl.style.display = 'none'; };
-                        }
+                        imgEl.src = data.thumbnail.source;
+                        imgEl.onload = () => imgEl.classList.add('loaded');
+                        imgEl.onerror = () => { imgEl.style.display = 'none'; };
                     } else {
                         imgEl.style.display = 'none';
                     }
                 };
-                preload.src = src4k;
+                preload.src = src;
             })
             .catch(() => { imgEl.style.display = 'none'; });
     }
