@@ -168,6 +168,25 @@
     text-align: center;
 }
 
+.demo-action-btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+    background: rgba(255,255,255,0.05);
+    color: #fff;
+    font-size: .82rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+.demo-action-btn:hover {
+    background: rgba(255,255,255,0.1);
+    transform: translateY(-1px);
+}
+
 @media (max-width: 920px) {
     .adaptive-demo-grid,
     .adaptive-secondary-grid,

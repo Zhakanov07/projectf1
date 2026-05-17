@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -32,6 +32,8 @@
                 <a href="patterns.html" class="topnav-link active">Patterns</a>
                 <a href="planning.html" class="topnav-link">Planning</a>
                 <a href="risk.html" class="topnav-link">Risks</a>
+                <a href="stakeholder.html" class="topnav-link">Stakeholders</a>
+                <a href="solid.html" class="topnav-link">SOLID</a>
             </div>
             <button class="topnav-toggle" id="topnavToggle" aria-label="Menu"><span></span><span></span><span></span></button>
         </div>
@@ -237,6 +239,28 @@
             </div>
         </section>
 
+        <!-- Section GPU: WebGL Race Visualization -->
+        <section class="section section-alt" id="gpu-race-viz">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number gpu-badge">GPU</span>
+                    <h2>Live Circuit &mdash; WebGL GPU Rendering</h2>
+                    <p class="section-desc">
+                        All circuit geometry, lighting, car glow and weather effects are computed per-pixel on your GPU inside a WebGL fragment shader.
+                        Each of the ~350,000 pixels independently measures its distance to the Monaco-inspired track — true parallel GPU computation.
+                        Interact with Race Control above to see the visualisation react.
+                    </p>
+                </div>
+                <div class="gpu-wrap">
+                    <canvas id="gpuRaceCanvas" width="880" height="400"></canvas>
+                    <div class="gpu-bar">
+                        <span id="gpuInfo">&#9654; Initialising WebGL&hellip;</span>
+                        <span id="gpuFps">-- FPS</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Section 3: How It Works -->
         <section class="section" id="how-it-works">
             <div class="container">
@@ -312,6 +336,8 @@
                     <a href="patterns.html">Patterns</a>
                     <a href="planning.html">Planning</a>
                     <a href="risk.html">Risks</a>
+                    <a href="stakeholder.html">Stakeholders</a>
+                    <a href="solid.html">SOLID</a>
                 </div>
             </div>
             <div class="footer-bottom">

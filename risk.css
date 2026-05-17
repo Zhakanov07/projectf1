@@ -23,11 +23,31 @@ body.risk-page {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: #0d1224;
-    border: 1px solid #1b2340;
-    border-radius: 12px;
+    background: rgba(13,18,36,0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 14px;
     padding: 18px 30px;
     min-width: 120px;
+    transition: all 0.4s cubic-bezier(.23,1,.32,1);
+    position: relative;
+    overflow: hidden;
+}
+.overview-stat::after {
+    content: '';
+    position: absolute; inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(99,102,241,0.06), transparent 60%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+.overview-stat:hover::after { opacity: 1; }
+.overview-stat:hover {
+    border-color: rgba(99,102,241,0.2);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.3);
 }
 .stat-val { font-size: 2.4rem; font-weight: 800; line-height: 1; }
 .stat-lbl { font-size: .78rem; margin-top: 6px; color: #8a8fa8; text-transform: uppercase; letter-spacing: .5px; }
@@ -54,9 +74,12 @@ body.risk-page {
 /* ---------- REGISTER TABLE ---------- */
 .register-wrap {
     overflow-x: auto;
-    border-radius: 12px;
-    border: 1px solid #1b2340;
-    background: #0d1224;
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.06);
+    background: rgba(13,18,36,0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 4px 30px rgba(0,0,0,0.2);
 }
 .register-wrap table {
     width: 100%;
@@ -124,10 +147,13 @@ body.risk-page {
 /* ===== 5x5 RISK MATRIX ===== */
 .matrix-wrap {
     overflow-x: auto;
-    border-radius: 12px;
-    border: 1px solid #1b2340;
-    background: #0d1224;
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.06);
+    background: rgba(13,18,36,0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     padding: 20px 24px 24px;
+    box-shadow: 0 4px 30px rgba(0,0,0,0.2);
 }
 .risk-matrix-table {
     border-collapse: collapse;
@@ -269,10 +295,30 @@ body.risk-page {
     gap: 20px;
 }
 .analysis-card {
-    background: #0d1224;
-    border: 1px solid #1b2340;
-    border-radius: 12px;
+    background: rgba(13,18,36,0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 16px;
     padding: 22px 20px;
+    transition: all 0.4s cubic-bezier(.23,1,.32,1);
+    position: relative;
+    overflow: hidden;
+}
+.analysis-card::after {
+    content: '';
+    position: absolute; inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(99,102,241,0.06), transparent 60%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+.analysis-card:hover::after { opacity: 1; }
+.analysis-card:hover {
+    border-color: rgba(99,102,241,0.15);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.3);
 }
 .analysis-card h3 {
     font-size: 1rem;

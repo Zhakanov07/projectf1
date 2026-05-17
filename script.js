@@ -38,7 +38,15 @@ const f1Database = [
     { name: "Adapter Pattern", team: "Design Patterns", year: 2026, price: "", emoji: "\uD83D\uDD04", page: "adaptive.html", type: "pattern" },
     { name: "Facade Pattern", team: "Design Patterns", year: 2026, price: "", emoji: "\uD83E\DDF1", page: "facade.html", type: "pattern" },
     { name: "Company History", team: "Grand Prix Motors", year: 2024, price: "", emoji: "\uD83C\uDFDB\uFE0F", page: "charter.html", type: "info" },
-    { name: "Our Team", team: "Grand Prix Motors", year: 2024, price: "", emoji: "\uD83D\uDC65", page: "charter.html", type: "info" }
+    { name: "Our Team", team: "Grand Prix Motors", year: 2024, price: "", emoji: "\uD83D\uDC65", page: "charter.html", type: "info" },
+    { name: "Stakeholder Analysis", team: "Project Management", year: 2026, price: "", emoji: "\uD83D\uDC65", page: "stakeholder.html", type: "info" },
+    { name: "Power Interest Matrix", team: "Project Management", year: 2026, price: "", emoji: "\uD83D\uDCCA", page: "stakeholder.html", type: "info" },
+    { name: "SOLID Principles", team: "Software Engineering", year: 2026, price: "", emoji: "\uD83E\uDDF1", page: "solid.html", type: "pattern" },
+    { name: "Single Responsibility", team: "SOLID", year: 2026, price: "", emoji: "\uD83C\uDFAF", page: "solid.html", type: "pattern" },
+    { name: "Open Closed Principle", team: "SOLID", year: 2026, price: "", emoji: "\uD83D\uDD13", page: "solid.html", type: "pattern" },
+    { name: "Liskov Substitution", team: "SOLID", year: 2026, price: "", emoji: "\uD83D\uDD04", page: "solid.html", type: "pattern" },
+    { name: "Interface Segregation", team: "SOLID", year: 2026, price: "", emoji: "✂️", page: "solid.html", type: "pattern" },
+    { name: "Dependency Inversion", team: "SOLID", year: 2026, price: "", emoji: "⬆️", page: "solid.html", type: "pattern" }
 ];
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -57,6 +65,8 @@ document.addEventListener('DOMContentLoaded', () => {
     initCatalogSort();
     loadCarPhotos();
     initAIChat();
+    initMouseTrackingGlow();
+    initGlobalParticles();
 });
 
 // ===== UNIFIED SCROLL HANDLER (single rAF-throttled listener) =====
@@ -237,11 +247,67 @@ function initNavToggle() {
     });
 }
 
+// ===== MOUSE TRACKING GLOW (21st.dev style) =====
+function initMouseTrackingGlow() {
+    const glowSelectors = '.card, .feature-card, .stat-card, .f1-car-card, .nav-card, .partner-card, .meta-item, .f1-news-card, .relationship-card, .addon-card, .track-map-card, .track-data-card, .overview-stat, .analysis-card, .justification-card, .description-card, .pattern-card, [class*="pattern-card-"]';
+    const cards = document.querySelectorAll(glowSelectors);
+    if (!cards.length) return;
+
+    cards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = ((e.clientX - rect.left) / rect.width * 100).toFixed(1);
+            const y = ((e.clientY - rect.top) / rect.height * 100).toFixed(1);
+            card.style.setProperty('--mouse-x', x + '%');
+            card.style.setProperty('--mouse-y', y + '%');
+        });
+    });
+}
+
+// ===== GLOBAL FLOATING PARTICLES =====
+function initGlobalParticles() {
+    // Add particles to all page-hero and f1-hero sections
+    const heroes = document.querySelectorAll('.page-hero, .f1-hero, .hero');
+    heroes.forEach(hero => {
+        // Skip if already has particles
+        if (hero.querySelector('.global-particles')) return;
+
+        const container = document.createElement('div');
+        container.className = 'global-particles';
+
+        const count = 20;
+        for (let i = 0; i < count; i++) {
+            const particle = document.createElement('span');
+            particle.className = 'global-particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = (100 + Math.random() * 20) + '%';
+            particle.style.animationDuration = (6 + Math.random() * 10) + 's';
+            particle.style.animationDelay = Math.random() * 8 + 's';
+            const size = (2 + Math.random() * 3) + 'px';
+            particle.style.width = size;
+            particle.style.height = size;
+            container.appendChild(particle);
+        }
+
+        hero.appendChild(container);
+    });
+
+    // Add grid-lines background to page-hero sections
+    document.querySelectorAll('.page-hero').forEach(hero => {
+        if (hero.querySelector('.hero-grid-bg')) return;
+        const grid = document.createElement('div');
+        grid.className = 'hero-grid-bg';
+        hero.insertBefore(grid, hero.firstChild);
+    });
+}
+
 // ===== ANIMATE ON SCROLL =====
 function initAnimateOnScroll() {
-    const elements = document.querySelectorAll('.card, .stat-card, .f1-car-card, .timeline-item, .partner-card, .relationship-card');
+    const elements = document.querySelectorAll('.card, .stat-card, .f1-car-card, .timeline-item, .partner-card, .relationship-card, .nav-card, .addon-card, .feature-card, .meta-item, .f1-news-card, .section-header');
     if (!elements.length) return;
-    elements.forEach(el => el.classList.add('animate-on-scroll'));
+    elements.forEach(el => {
+        if (!el.classList.contains('animate-on-scroll')) el.classList.add('animate-on-scroll');
+    });
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -249,7 +315,7 @@ function initAnimateOnScroll() {
                 observer.unobserve(entry.target);
             }
         });
-    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
     elements.forEach(el => observer.observe(el));
 }
 

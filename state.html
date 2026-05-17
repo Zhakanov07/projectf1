@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>State Pattern &mdash; F1 Motors</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="state.css">
+</head>
+<body>
+    <div class="page-transition" id="pageTransition"><div class="pt-bg"></div><div class="pt-fg"></div><div class="pt-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M4 4v16" stroke="#fff" stroke-width="2" stroke-linecap="round"/><path d="M4 4c3 0 4 2 8 2s5-2 8-2v10c-3 0-4 2-8 2s-5-2-8-2" fill="url(#ptG)" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/><defs><linearGradient id="ptG" x1="4" y1="4" x2="20" y2="14"><stop offset="0%" stop-color="#6366f1"/><stop offset="100%" stop-color="#3b82f6"/></linearGradient></defs></svg></div></div>
+    <nav class="topnav" id="topnav">
+        <div class="topnav-inner">
+            <a href="index.html" class="topnav-logo">
+                <img src="logo-opt.webp" alt="F1 Motors" class="logo-img" width="48" height="48">
+            </a>
+            <div class="topnav-search">
+                <div class="search-box">
+                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    <input type="text" id="searchInput" class="search-input" placeholder="Find a car, team or year..." autocomplete="off">
+                    <div class="search-results" id="searchResults"></div>
+                </div>
+            </div>
+            <div class="topnav-links" id="topnavLinks">
+                <a href="index.html" class="topnav-link">Home</a>
+                <a href="products.html" class="topnav-link">Catalog</a>
+                <a href="charter.html" class="topnav-link">About</a>
+                <a href="patterns.html" class="topnav-link active">Patterns</a>
+                <a href="planning.html" class="topnav-link">Planning</a>
+                <a href="risk.html" class="topnav-link">Risks</a>
+                <a href="stakeholder.html" class="topnav-link">Stakeholders</a>
+                <a href="solid.html" class="topnav-link">SOLID</a>
+            </div>
+            <button class="topnav-toggle" id="topnavToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-badge">Behavioral Design Pattern</div>
+        <h1>State Pattern</h1>
+        <p>Let an F1 race session change its behavior automatically when it moves between Practice, Qualifying, Race, Safety Car, and Finished states.</p>
+    </header>
+
+    <main>
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">01</span>
+                    <h2>What is the State Pattern?</h2>
+                    <p>
+                        The State Pattern lets an object change behavior when its internal state changes.
+                        Instead of writing one huge <strong>if / else</strong> block, each state is represented
+                        by a separate class with its own rules.
+                    </p>
+                </div>
+
+                <div class="overview-grid">
+                    <article class="glass-card">
+                        <h3>UML Structure</h3>
+                        <pre class="uml">RaceSession (Context)
+- state
++ setState(state)
++ accelerate()
++ pitStop()
++ nextPhase()
+
+delegates to
+
+RaceState (State Interface)
++ accelerate(context)
++ pitStop(context)
++ nextPhase(context)
+
+Concrete states:
+- PracticeState
+- QualifyingState
+- RaceState
+- SafetyCarState
+- FinishedState</pre>
+                    </article>
+
+                    <article class="glass-card">
+                        <h3>F1 Analogy</h3>
+                        <p>
+                            A Formula 1 car behaves differently depending on the session state. In practice,
+                            it gathers data. In qualifying, it pushes for one fast lap. During a safety car,
+                            it must slow down and cannot race at full speed.
+                        </p>
+                        <div class="analogy-row">
+                            <span>&#x1F9E0;</span>
+                            <div>
+                                <strong>Context</strong>
+                                <small>RaceSession delegates actions to the current state</small>
+                            </div>
+                        </div>
+                        <div class="analogy-row">
+                            <span>&#x1F3C1;</span>
+                            <div>
+                                <strong>State</strong>
+                                <small>Practice, Qualifying, Race, Safety Car, Finished</small>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">02</span>
+                    <h2>Interactive State Demo</h2>
+                    <p>Run the same actions in different states and notice how the behavior changes.</p>
+                </div>
+
+                <div class="demo-grid">
+                    <article class="session-card glass-card" id="sessionCard">
+                        <span class="state-pill" id="statePill">Practice State</span>
+                        <div class="session-icon" id="sessionIcon">&#x1F527;</div>
+                        <h3 id="stateTitle">Practice Session</h3>
+                        <p id="stateDescription">Teams collect data, test setups, and avoid unnecessary risk.</p>
+                        <div class="metrics">
+                            <div>
+                                <span class="label">Speed mode</span>
+                                <strong id="speedMode">Controlled</strong>
+                            </div>
+                            <div>
+                                <span class="label">Pit stop</span>
+                                <strong id="pitMode">Setup changes</strong>
+                            </div>
+                            <div>
+                                <span class="label">Risk</span>
+                                <strong id="riskMode">Low</strong>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="control-panel glass-card">
+                        <h3>Race Session Controls</h3>
+                        <div class="button-grid">
+                            <button class="action-btn primary" id="accelerateBtn">Accelerate</button>
+                            <button class="action-btn" id="pitBtn">Pit Stop</button>
+                            <button class="action-btn" id="safetyBtn">Toggle Safety Car</button>
+                            <button class="action-btn" id="nextBtn">Next Phase</button>
+                            <button class="action-btn danger" id="resetBtn">Reset</button>
+                        </div>
+                        <div class="current-response" id="currentResponse">
+                            Choose an action to see how the current state responds.
+                        </div>
+                    </article>
+                </div>
+
+                <div class="timeline glass-card">
+                    <h3>Race State Timeline</h3>
+                    <div class="states" id="statesList"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">03</span>
+                    <h2>JavaScript Example</h2>
+                    <p>The context stays the same, but each state object changes how actions work.</p>
+                </div>
+                <pre class="code-block"><code>class RaceSession {
+  constructor() {
+    this.state = new PracticeState();
+  }
+
+  setState(state) {
+    this.state = state;
+  }
+
+  accelerate() {
+    return this.state.accelerate(this);
+  }
+}
+
+class PracticeState {
+  accelerate() {
+    return "Collect telemetry at controlled speed.";
+  }
+}
+
+class RaceState {
+  accelerate() {
+    return "Use full race power and attack.";
+  }
+}</code></pre>
+            </div>
+        </section>
+    </main>
+
+    <div class="scroll-progress" id="scrollProgress"></div>
+    <button class="back-to-top" id="backToTop" aria-label="Back to top"></button>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <h3>Grand Prix Motors</h3>
+                    <p>Exclusive Formula 1 Car Dealer</p>
+                    <p>&#169; 2026 Grand Prix Motors. All rights reserved.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="products.html">Catalog</a>
+                    <a href="charter.html">About</a>
+                    <a href="patterns.html">Patterns</a>
+                    <a href="planning.html">Planning</a>
+                    <a href="risk.html">Risks</a>
+                    <a href="stakeholder.html">Stakeholders</a>
+                    <a href="solid.html">SOLID</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Grand Prix Motors &mdash; Feel the Speed. Own the Legend.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js" defer></script>
+    <script src="state.js" defer></script>
+</body>
+</html>

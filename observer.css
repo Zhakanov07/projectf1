@@ -2,6 +2,46 @@
    Observer Pattern Page — Styles
    ============================================ */
 
+/* ── GPU WebGL Visualisation ── */
+.section-number.gpu-badge {
+    background: linear-gradient(135deg, #6366f1, #22d3ee);
+    color: #fff;
+    border: none;
+    letter-spacing: 0.18em;
+}
+
+.gpu-wrap {
+    margin-top: 28px;
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid rgba(99, 102, 241, 0.35);
+    box-shadow: 0 0 60px rgba(99, 102, 241, 0.12),
+                0 0 0 1px rgba(255, 255, 255, 0.04);
+}
+
+#gpuRaceCanvas {
+    width: 100%;
+    height: auto;
+    display: block;
+    background: #08090f;
+}
+
+.gpu-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background: rgba(6, 7, 16, 0.92);
+    border-top: 1px solid rgba(99, 102, 241, 0.18);
+}
+
+.gpu-bar span {
+    font-size: 0.73rem;
+    font-family: 'Inter', ui-monospace, monospace;
+    letter-spacing: 0.05em;
+    color: rgba(99, 102, 241, 0.85);
+}
+
 /* ── Pattern Explanation Section ── */
 .pattern-overview {
     display: grid;
@@ -20,19 +60,32 @@
     border: 1px solid rgba(255,255,255,0.07);
     border-radius: 18px;
     padding: 30px;
-    transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+    transition: transform 0.4s cubic-bezier(.23,1,.32,1), box-shadow 0.4s ease, border-color 0.4s ease;
     position: relative;
     overflow: hidden;
 }
 .pattern-card::before {
     content: '';
     position: absolute; top: 0; left: 0; right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(99,102,241,0.3), rgba(59,130,246,0.3), transparent);
+    opacity: 0;
+    transition: opacity 0.35s ease;
 }
+.pattern-card::after {
+    content: '';
+    position: absolute; inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(99,102,241,0.06), transparent 60%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+.pattern-card:hover::before { opacity: 1; }
+.pattern-card:hover::after { opacity: 1; }
 .pattern-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 16px 48px rgba(0,0,0,0.35), 0 0 0 1px rgba(99,102,241,0.08);
+    transform: translateY(-6px);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.35), 0 0 60px rgba(99,102,241,0.06);
     border-color: rgba(99,102,241,0.2);
 }
 .pattern-card h3 {

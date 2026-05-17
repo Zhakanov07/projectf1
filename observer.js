@@ -410,4 +410,343 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initial lap display
     updateLap(raceControl.lap);
     updateCountBadges();
+
+    // ── WebGL GPU Race Visualisation ─────────────────────────────────────
+    (function initGPURace() {
+        const canvas = document.getElementById('gpuRaceCanvas');
+        const infoEl = document.getElementById('gpuInfo');
+        const fpsEl  = document.getElementById('gpuFps');
+        if (!canvas) return;
+
+        const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+        if (!gl) {
+            if (infoEl) infoEl.textContent = '⚠ WebGL not supported in this browser';
+            return;
+        }
+
+        // Show GPU renderer name
+        const dbgExt = gl.getExtension('WEBGL_debug_renderer_info');
+        if (dbgExt && infoEl) {
+            const renderer = gl.getParameter(dbgExt.UNMASKED_RENDERER_WEBGL);
+            infoEl.textContent = '▶ GPU: ' + renderer;
+        }
+
+        // ── Monaco-inspired circuit — 24 waypoints ──────────────────────
+        // Coordinate space (in shader): p = (2·fragCoord − res) / res.y
+        // Canvas 880×400 → x ∈ [−2.2, 2.2], y ∈ [−1, 1]
+        const TRACK = [
+            [ 1.30,  0.65], //  0  Start / Finish
+            [ 1.80,  0.45], //  1  Ste Devote approach
+            [ 1.95,  0.10], //  2  Ste Devote apex
+            [ 1.85, -0.10], //  3  Beau Rivage
+            [ 1.60, -0.20], //  4  Massenet
+            [ 1.25, -0.10], //  5  Casino entry
+            [ 0.95, -0.30], //  6  Casino exit
+            [ 0.70, -0.50], //  7  Mirabeau
+            [ 0.50, -0.75], //  8  Hairpin (Loews)
+            [ 0.20, -0.55], //  9  Portier entry
+            [-0.10, -0.45], // 10  Portier
+            [-0.50, -0.40], // 11  Tunnel entrance
+            [-1.00, -0.35], // 12  Tunnel mid
+            [-1.50, -0.40], // 13  Tunnel exit
+            [-1.80, -0.50], // 14  Chicane 1
+            [-1.90, -0.65], // 15  Chicane 2
+            [-1.75, -0.80], // 16  Swimming Pool 1
+            [-1.40, -0.82], // 17  Swimming Pool 2
+            [-0.90, -0.78], // 18  La Rascasse
+            [-0.55, -0.58], // 19  Anthony Noghes
+            [-0.20, -0.30], // 20  Uphill
+            [ 0.40,  0.10], // 21  Return
+            [ 0.85,  0.45], // 22  S/F approach
+            [ 1.30,  0.65], // 23  back to Start (closes loop)
+        ];
+
+        // ── Car configs (5 F1 cars + 1 Safety Car) ─────────────────────
+        const CARS = [
+            { t: 0.00, spd: 0.00150, col: [0.91, 0.00, 0.18] }, // Ferrari red
+            { t: 0.14, spd: 0.00158, col: [1.00, 0.50, 0.00] }, // McLaren papaya
+            { t: 0.28, spd: 0.00155, col: [0.21, 0.44, 0.78] }, // Red Bull blue
+            { t: 0.42, spd: 0.00148, col: [0.15, 0.96, 0.82] }, // Mercedes teal
+            { t: 0.56, spd: 0.00143, col: [0.45, 0.03, 0.68] }, // Alpine purple
+            { t: 0.95, spd: 0.00120, col: [1.00, 0.55, 0.00] }, // Safety Car orange
+        ];
+
+        // ── GPU state — updated via Observer pattern ─────────────────────
+        const gpuState = { flag: 'green', weather: 'dry', safetyCar: false };
+
+        class GpuObserver {
+            update(eventType, data) {
+                if (eventType === 'flag')    gpuState.flag      = data.flag;
+                if (eventType === 'weather') gpuState.weather   = data.weather;
+                if (eventType === 'safety')  gpuState.safetyCar = data.active;
+            }
+        }
+        const gpuObs = new GpuObserver();
+        raceControl.subscribe('flag',    gpuObs);
+        raceControl.subscribe('weather', gpuObs);
+        raceControl.subscribe('safety',  gpuObs);
+
+        // ── Shaders ─────────────────────────────────────────────────────
+        const VS = `
+attribute vec2 a_pos;
+void main() {
+    gl_Position = vec4(a_pos, 0.0, 1.0);
+}`;
+
+        const FS = `
+precision mediump float;
+uniform vec2  u_res;
+uniform float u_time;
+uniform float u_flag;    /* 0=green 1=yellow 2=red 3=checkered */
+uniform float u_weather; /* 0=dry 1=rain 2=mixed */
+uniform float u_sc;      /* 0=off 1=on */
+uniform vec2  u_track[24];
+uniform vec2  u_cars[6];
+uniform vec3  u_colors[6];
+
+/* Distance from point p to segment [a,b] */
+float segDist(vec2 p, vec2 a, vec2 b) {
+    vec2 ab = b - a;
+    vec2 ap = p - a;
+    float t = clamp(dot(ap, ab) / dot(ab, ab), 0.0, 1.0);
+    return length(ap - t * ab);
+}
+
+/* Minimum distance to the track centreline */
+float trackDist(vec2 p) {
+    float d = 99.0;
+    for (int i = 0; i < 23; i++) {
+        d = min(d, segDist(p, u_track[i], u_track[i + 1]));
+    }
+    return d;
+}
+
+float rand(vec2 c) {
+    return fract(sin(dot(c, vec2(12.9898, 78.233))) * 43758.5453);
+}
+
+float noise(vec2 p) {
+    vec2 i = floor(p); vec2 f = fract(p);
+    f = f * f * (3.0 - 2.0 * f);
+    float a = rand(i);
+    float b = rand(i + vec2(1.0, 0.0));
+    float c = rand(i + vec2(0.0, 1.0));
+    float d = rand(i + vec2(1.0, 1.0));
+    return mix(mix(a, b, f.x), mix(c, d, f.x), f.y);
+}
+
+void main() {
+    vec2 p = (2.0 * gl_FragCoord.xy - u_res) / u_res.y;
+    float d  = trackDist(p);
+    float TW = 0.11;   /* track half-width */
+    float CW = 0.017;  /* curb width */
+
+    /* Backdrop gradient */
+    vec3 col = mix(vec3(0.02, 0.03, 0.08), vec3(0.04, 0.07, 0.16),
+                   smoothstep(-0.5, 0.5, p.y));
+
+    /* Subtle dot grid on backdrop */
+    vec2 gp  = fract(p * 5.0);
+    float dot = 1.0 - smoothstep(0.04, 0.08, length(gp - 0.5));
+    col += dot * 0.04;
+
+    /* Grass */
+    float grassMix = smoothstep(TW + CW + 0.05, TW + CW, d);
+    vec3  grass    = vec3(0.06, 0.20, 0.04) + (noise(p * 9.0) - 0.5) * 0.03;
+    col = mix(col, grass, grassMix);
+
+    /* Curbs — alternating red / white stripes */
+    float curbMix = smoothstep(TW + CW, TW + CW * 0.5, d)
+                  * smoothstep(TW - CW * 0.3, TW, d);
+    float stripe  = mod(p.x * 4.5 + p.y * 2.8, 0.55);
+    vec3  curbCol = (stripe > 0.275) ? vec3(0.88, 0.10, 0.08) : vec3(0.95, 0.95, 0.95);
+    col = mix(col, curbCol, curbMix * 0.9);
+
+    /* Asphalt */
+    float trackMix = smoothstep(TW, TW - 0.012, d);
+    vec3  asphalt  = vec3(0.19, 0.19, 0.21) + (noise(p * 18.0) - 0.5) * 0.018;
+    col = mix(col, asphalt, trackMix);
+
+    /* Centre dashes */
+    float dash = mod(p.x * 7.0 + p.y * 4.5, 1.0);
+    float cl   = smoothstep(0.007, 0.003, d) * step(0.45, dash);
+    col = mix(col, vec3(0.92), cl);
+
+    /* Cars — glow + body rendered on GPU */
+    for (int i = 0; i < 6; i++) {
+        float visible = (i == 5) ? u_sc : 1.0;
+        float dc   = length(p - u_cars[i]);
+        float glow = smoothstep(0.20, 0.0,   dc) * 0.55;
+        float body = smoothstep(0.038, 0.018, dc);
+        float core = smoothstep(0.012, 0.004, dc);
+        col += u_colors[i] * (glow + body + core * 0.5) * visible;
+    }
+
+    /* Flag overlays */
+    float pulse = 0.5 + 0.5 * sin(u_time * 2.8);
+    if (u_flag < 0.5) {          /* green */
+        col += vec3(0.0, 0.07, 0.0) * trackMix * pulse;
+    } else if (u_flag < 1.5) {   /* yellow */
+        col = mix(col, col * vec3(2.2, 1.8, 0.1),
+                  trackMix * 0.40 * (0.5 + 0.5 * pulse));
+    } else if (u_flag < 2.5) {   /* red */
+        col = mix(col, col * vec3(2.8, 0.2, 0.2),
+                  trackMix * 0.45 * (0.5 + 0.5 * pulse));
+    } else {                      /* checkered */
+        float sq = mod(floor(p.x * 5.5) + floor(p.y * 5.5), 2.0);
+        col = mix(col, vec3(sq), 0.32 * pulse * trackMix);
+    }
+
+    /* Safety-car orange halo */
+    if (u_sc > 0.5) {
+        float scd = length(p - u_cars[5]);
+        col += vec3(1.0, 0.5, 0.0) * (0.006 / (scd + 0.01)) * 0.4;
+    }
+
+    /* Weather — animated rain streaks */
+    if (u_weather > 0.5) {
+        float intensity = (u_weather > 1.5) ? 0.5 : 1.0;
+        vec2  rc     = p * vec2(28.0, 6.0) + vec2(u_time * 0.8, u_time * 14.0);
+        float rn     = rand(floor(rc));
+        vec2  rl     = fract(rc);
+        float streak = smoothstep(0.82, 1.0, rn)
+                     * smoothstep(1.0,  0.5, rl.y)
+                     * smoothstep(0.25, 0.08, rl.x);
+        col += streak * 0.28 * intensity;
+        col  = mix(col, col * 0.8 + vec3(0.04, 0.07, 0.16),
+                   trackMix * 0.45 * intensity);
+    }
+
+    /* Vignette */
+    float vig = 1.0 - smoothstep(0.4, 1.1, length(p * vec2(0.45, 0.78)));
+    col *= vig;
+
+    /* Tone map + gamma */
+    col = col / (col + vec3(0.85));
+    col = pow(max(col, vec3(0.0)), vec3(0.4545));
+
+    gl_FragColor = vec4(col, 1.0);
+}`;
+
+        // ── Compile & link shaders ───────────────────────────────────────
+        function mkShader(type, src) {
+            const s = gl.createShader(type);
+            gl.shaderSource(s, src);
+            gl.compileShader(s);
+            if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) {
+                console.error('Shader compile error:', gl.getShaderInfoLog(s));
+                return null;
+            }
+            return s;
+        }
+
+        const vs = mkShader(gl.VERTEX_SHADER,   VS);
+        const fs = mkShader(gl.FRAGMENT_SHADER, FS);
+        if (!vs || !fs) { if (infoEl) infoEl.textContent = '⚠ Shader compile failed'; return; }
+
+        const prog = gl.createProgram();
+        gl.attachShader(prog, vs);
+        gl.attachShader(prog, fs);
+        gl.linkProgram(prog);
+        if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) {
+            console.error('Program link error:', gl.getProgramInfoLog(prog));
+            if (infoEl) infoEl.textContent = '⚠ Shader link failed';
+            return;
+        }
+        gl.useProgram(prog);
+
+        // Full-screen quad (triangle strip)
+        const buf = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+        gl.bufferData(gl.ARRAY_BUFFER,
+            new Float32Array([-1, -1,  1, -1,  -1, 1,  1, 1]),
+            gl.STATIC_DRAW);
+        const aPos = gl.getAttribLocation(prog, 'a_pos');
+        gl.enableVertexAttribArray(aPos);
+        gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
+
+        // Uniform locations
+        const uRes     = gl.getUniformLocation(prog, 'u_res');
+        const uTime    = gl.getUniformLocation(prog, 'u_time');
+        const uFlag    = gl.getUniformLocation(prog, 'u_flag');
+        const uWeather = gl.getUniformLocation(prog, 'u_weather');
+        const uSC      = gl.getUniformLocation(prog, 'u_sc');
+        const uTrack   = gl.getUniformLocation(prog, 'u_track');
+        const uCars    = gl.getUniformLocation(prog, 'u_cars');
+        const uColors  = gl.getUniformLocation(prog, 'u_colors');
+
+        // Upload static uniforms
+        gl.uniform2fv(uTrack,  TRACK.flat());
+        gl.uniform3fv(uColors, CARS.flatMap(c => c.col));
+        gl.uniform2f(uRes, canvas.width, canvas.height);
+
+        // ── Arc-length parameterisation of track ────────────────────────
+        const SEG_LENS = [];
+        let totalLen = 0;
+        for (let i = 0; i < TRACK.length - 1; i++) {
+            const dx = TRACK[i + 1][0] - TRACK[i][0];
+            const dy = TRACK[i + 1][1] - TRACK[i][1];
+            const len = Math.sqrt(dx * dx + dy * dy);
+            SEG_LENS.push({ start: totalLen, len, i });
+            totalLen += len;
+        }
+
+        function getTrackPos(t) {
+            t = ((t % 1) + 1) % 1;
+            const target = t * totalLen;
+            for (const seg of SEG_LENS) {
+                if (target <= seg.start + seg.len) {
+                    const f = (target - seg.start) / seg.len;
+                    const a = TRACK[seg.i], b = TRACK[seg.i + 1];
+                    return [a[0] + (b[0] - a[0]) * f, a[1] + (b[1] - a[1]) * f];
+                }
+            }
+            return TRACK[0].slice();
+        }
+
+        // ── Animation loop ───────────────────────────────────────────────
+        const FLAG_MAP    = { green: 0, yellow: 1, red: 2, checkered: 3 };
+        const WEATHER_MAP = { dry: 0, rain: 1, mixed: 2 };
+
+        let lastTime = 0, fpsFrames = 0, fpsAccum = 0;
+
+        function animate(now) {
+            const dt = Math.min((now - lastTime) / 1000, 0.05);
+            lastTime  = now;
+            fpsAccum += dt;
+            fpsFrames++;
+            if (fpsAccum >= 0.5) {
+                if (fpsEl) fpsEl.textContent = Math.round(fpsFrames / fpsAccum) + ' FPS';
+                fpsAccum = 0; fpsFrames = 0;
+            }
+
+            // Speed multiplier based on race state
+            let speedMul = 1.0;
+            if      (gpuState.flag === 'yellow')     speedMul = 0.30;
+            else if (gpuState.flag === 'red')         speedMul = 0.05;
+            else if (gpuState.flag === 'checkered')   speedMul = 1.30;
+            else if (gpuState.safetyCar)              speedMul = 0.50;
+
+            // Update car t values
+            CARS.forEach((car, i) => {
+                let s = (i === 5)              ? (gpuState.safetyCar ? 0.85 : 0)
+                      : gpuState.safetyCar     ? 0.50
+                      : speedMul;
+                car.t = ((car.t + car.spd * s * 60 * dt) % 1 + 1) % 1;
+            });
+
+            // Upload per-frame uniforms
+            gl.uniform2fv(uCars, CARS.flatMap(c => getTrackPos(c.t)));
+            gl.uniform1f(uTime,    now / 1000);
+            gl.uniform1f(uFlag,    FLAG_MAP[gpuState.flag]    ?? 0);
+            gl.uniform1f(uWeather, WEATHER_MAP[gpuState.weather] ?? 0);
+            gl.uniform1f(uSC,      gpuState.safetyCar ? 1.0 : 0.0);
+
+            gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+            requestAnimationFrame(animate);
+        }
+
+        requestAnimationFrame(ts => { lastTime = ts; requestAnimationFrame(animate); });
+    })();
+    // ── End WebGL GPU Race Visualisation ─────────────────────────────────
 });
