@@ -1,0 +1,8 @@
+_backup/
+.venv/
+node_modules/
+*.log
+*.psd
+*.ai
+/.git
+.gitignore
